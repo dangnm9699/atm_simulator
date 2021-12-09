@@ -1,0 +1,13 @@
+{
+    "numpad": {
+        "cancel": {
+            "title": "Cancel"
+        },
+        "delete": {
+            "title": "Delete"
+        },
+        "submit": {
+            "title": "Submit"
+        }
+    }
+}

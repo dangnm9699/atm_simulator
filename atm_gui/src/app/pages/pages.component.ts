@@ -3,13 +3,17 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-pages',
   template: `
-  <app-header></app-header>
-  <div id="body">
-    <router-outlet></router-outlet>
+  <div id="motherBox">
+    <app-header></app-header>
+    <div id="body">
+      <router-outlet></router-outlet>
+    </div>
+    <div id="footer">
+      <app-footer></app-footer>
+    </div>
   </div>
-  <app-footer></app-footer>
   `,
-  styles:[":host ::ng-deep #body {margin: 0;box-sizing: border-box; height: calc(100% - 115px); overflow: hidden; background: #b0bec5"]
+  styles:["#motherBox{height: calc(100% - 40px) } #body {margin: 0;box-sizing: border-box; height: 100%; overflow: hidden; background: #b0bec5} #footer{ background: #b0bec5}"]
 })
 export class PagesComponent implements OnInit {
 

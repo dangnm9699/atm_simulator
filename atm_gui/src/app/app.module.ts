@@ -36,7 +36,6 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     SidebarComponent,
     UsersComponent,
     CreateUserComponent,

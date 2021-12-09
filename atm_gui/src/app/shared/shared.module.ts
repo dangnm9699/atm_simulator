@@ -9,13 +9,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { NumpadComponent } from './components/numpad/numpad.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { BlinkEllipsisComponent } from './components/blink-ellipsis/blink-ellipsis.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    NumpadComponent],
+    NumpadComponent,
+    BlinkEllipsisComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -26,7 +28,8 @@ import { TranslateModule } from '@ngx-translate/core';
   exports:[
     HeaderComponent,
     FooterComponent,
-    NumpadComponent
+    NumpadComponent,
+    BlinkEllipsisComponent
   ]
 })
 export class SharedModule { }

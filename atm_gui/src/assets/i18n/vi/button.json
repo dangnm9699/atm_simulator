@@ -1,0 +1,13 @@
+{
+    "numpad": {
+        "cancel": {
+            "title": "Hủy bỏ"
+        },
+        "delete": {
+            "title": "Xóa"
+        },
+        "submit": {
+            "title": "Xác nhận"
+        }
+    }
+}

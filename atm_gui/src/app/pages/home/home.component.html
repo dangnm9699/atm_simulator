@@ -1,11 +1,8 @@
-<p>home works!</p>
-<p>home works!</p>
-
-<p>home works!</p>
-
-<p>home works!</p>
-
-<p>home works!</p>
-<button (click)="selectLang()" >Language</button>
-<app-numpad></app-numpad>
-
+<div>
+    <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replace" #replaceComponent></app-pending>
+    <div #reff [hidden]="replace">
+        <p>LOADING<app-blink-ellipsis></app-blink-ellipsis>
+        </p>
+        <app-numpad (numpadSignal)="numpadTrigger($event)" (cancelSignal)="cancelTrigger($event)"></app-numpad>
+    </div>
+</div>

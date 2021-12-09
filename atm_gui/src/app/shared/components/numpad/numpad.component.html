@@ -1,17 +1,17 @@
 <div id="container">  
     <ul id="keyboard" class="noselect">   
-        <li class="letter">1</li>  
-        <li class="letter">2</li>  
-        <li class="letter">3</li>  
-        <li class="letter clearl">4</li>  
-        <li class="letter">5</li>  
-        <li class="letter">6</li> 
-        <li class="letter clearl">7</li>  
-        <li class="letter ">8</li>  
-        <li class="letter">9</li>  
-        <li class="letter">0</li>
-        <li class="switch">abc</li>  
-        <li class="return">retur</li>
-        <li class="delete lastitem"></li>  
+        <li class="letter" (click) = "emitBtn('1')">1</li>  
+        <li class="letter" (click) = "emitBtn('2')">2</li>  
+        <li class="letter" (click) = "emitBtn('3')">3</li>  
+        <li class="letter clearl" (click) = "emitBtn('4')">4</li>  
+        <li class="letter" (click) = "emitBtn('5')">5</li>  
+        <li class="letter" (click) = "emitBtn('6')">6</li> 
+        <li class="letter clearl" (click) = "emitBtn('7')">7</li>  
+        <li class="letter " (click) = "emitBtn('8')">8</li>  
+        <li class="letter" (click) = "emitBtn('9')">9</li>  
+        <li class="cancel submitPart" (click) = "emitBtn('cancel')">{{'numpad.cancel.title' | translate}}</li>
+        <li class="letter submitPart" (click) = "emitBtn('0')">0</li>  
+        <li class="delete submitPart" (click) = "emitBtn('delete')">{{'numpad.delete.title' | translate}}</li>
+        <li class="clearl submitPart submitBtn" (click) = "emitBtn('submit')">{{'numpad.submit.title' | translate}}</li>  
     </ul>  
 </div>  

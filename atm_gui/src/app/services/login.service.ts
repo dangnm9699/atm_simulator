@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
+import { concatMap, timeout, catchError, delay } from 'rxjs/operators';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import { LoginProgramModel } from '../models/login-program.model';
+import * as EventEmitter from 'events';
 
 type EntityResponseType = HttpResponse<LoginProgramModel>;
 
@@ -40,5 +42,10 @@ export class LoginService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<any>(`${environment.apiUrl}/config-menu-items/allInfo/${id}`, { observe: 'response' });
+  }
+  fakeApiPending(ms: number):Observable<any>{
+    return of(ms).pipe(
+      delay(ms)
+    )
   }
 }
