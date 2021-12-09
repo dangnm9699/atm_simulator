@@ -28,22 +28,22 @@ export class MainGuard implements CanActivate {
         state.url.indexOf('assets/i18n/') > -1) {
         return true;
       }
-      for (let i = 0; i < obj?.length; i++) {
-        const path = state.url.substring(0, obj[i].link?.length);
-        if (path !== '' && path !== undefined && obj[i].link === path) {
-          console.log("role", obj[i]);
+      // for (let i = 0; i < obj?.length; i++) {
+      //   const path = state.url.substring(0, obj[i].link?.length);
+      //   if (path !== '' && path !== undefined && obj[i].link === path) {
+      //     console.log("role", obj[i]);
 
-          // role.slice(0, role.length);
-          // role.push(obj[i]);
-          checkRole = true;
-        }
-      }
-      if (!checkRole) {
-        console.log('checkRole:', checkRole)
-        // this.router.navigate(['/pages/report/manager']);
-        this.router.navigate(['/404']);
-        return false;
-      }
+      //     role.slice(0, role.length);
+      //     role.push(obj[i]);
+      //     checkRole = true;
+      //   }
+      // }
+      // if (!checkRole) {
+      //   console.log('checkRole:', checkRole)
+      //   // this.router.navigate(['/pages/report/manager']);
+      //   this.router.navigate(['/404']);
+      //   return false;
+      // }
     } catch (e) {
       console.log('exception:', checkRole)
       console.log('4.auth-guard');

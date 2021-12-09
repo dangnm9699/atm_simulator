@@ -89,7 +89,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('users', res.body.customUserDetails.fullName);
           localStorage.setItem('userDetails', JSON.stringify(res.body.customUserDetails));
           this.isLoad = false;
-          this.getTenantId();
+          // this.getTenantId();
+          this.router.navigate(['/pages/home']);
         }
       }, err => {
         let body: any;

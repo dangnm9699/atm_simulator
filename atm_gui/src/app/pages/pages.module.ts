@@ -3,13 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
+import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [PagesComponent],
   imports: [
     CommonModule,
-    PagesRoutingModule
-  ]
+    PagesRoutingModule,
+    MatButtonModule,
+    SharedModule
+  ],
+  entryComponents:[PagesComponent]
 })
 export class PagesModule { }
