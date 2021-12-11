@@ -4,9 +4,9 @@ html { height: 100vh; margin: 0; padding: 0; }
 body { margin: 0; 
     padding: 0;
     height: 100%;
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    // font-family: Roboto, "Helvetica Neue", sans-serif; 
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif !important;
     overflow-y: hidden;
-    font-size: 5px;
 }
 
 .span-spacer {

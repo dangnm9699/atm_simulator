@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +9,32 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  replace: boolean = false;
+  constructor(
+    private router: Router,
+    private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  navigateSelectMoney(){
-    this.router.navigate(["/pages/select-money"])
+  selectMoney(amount: Number){
+    this.replace = true;
+    this.loginService.fakeApiPending(5000).subscribe(e => {
+      localStorage.clear();
+      this.router.navigate(['/pages/transaction-result']);
+    })
   }
 
-  select(){
+  selectOtherAmount(amount: Number){
+    this.replace = true;
+    this.loginService.fakeApiPending(5000).subscribe(e => {
+      localStorage.clear();
+      this.router.navigate(['/pages/input-money']);
+    })
+  }
 
+  cancelTrigger(value) {
+    
   }
 }

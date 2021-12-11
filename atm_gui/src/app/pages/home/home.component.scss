@@ -4,13 +4,12 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    font-size: 50px;
 }
 
 #container > div{
     height: 75%;
-    display: flex;
     width: 100%;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-content: space-between;
@@ -18,9 +17,12 @@
 }
 
 #container > div > div{
-    width: 320px;
-    height: 110px;
+    width: 25%;
+    height: 20%;
     margin: 10px 20px 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 5px solid;
     border-radius: 5px;
     padding: 15px 0 15px 0;
@@ -42,6 +44,7 @@
 }
 
 pre{
+    margin: 0;
     text-align: center;
     white-space: pre-line;
 }

@@ -7,5 +7,7 @@
     "footerTitle": "HPG - Chung niềm tin vững tương lai",
     "selectServiceTitle" : "Hãy chọn dịch vụ bạn muốn sử dụng",
     "selectMoneyTitle": "Hãy chọn số tiền cần rút\nĐơn vị tiền tệ : VND",
-    "cardOut": "Bạn đã hủy bỏ giao dịch\nVui lòng nhận lại thẻ"
+    "cardOut": "Bạn đã hủy bỏ giao dịch\nVui lòng nhận lại thẻ",
+    "transactionSuccess" : "Giao dịch rút tiền thành công.\nHệ thống đang xử lý giao dịch",
+    "getCardFirst": "Vui lòng nhận thẻ trước khi nhận tiền"
 }

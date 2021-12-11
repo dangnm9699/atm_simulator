@@ -8,6 +8,7 @@ import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { UsersComponent } from './users/users.component';
 import { InputMoneyComponent } from './withdraw/input-money/input-money.component';
 import { SelectMoneyComponent } from './withdraw/select-money/select-money.component';
+import { TransactionResultComponent } from './withdraw/transaction-result/transaction-result.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
     children:[
       {
         path:'home',
-        component: HomeComponent
+        component: SelectServiceComponent
       },
       {
         path:'select-service',
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path:'input-money',
         component: InputMoneyComponent
+      },
+      {
+        path:'transaction-result',
+        component: TransactionResultComponent
       },
       {
         path:'users',

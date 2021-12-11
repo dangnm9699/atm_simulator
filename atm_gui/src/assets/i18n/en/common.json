@@ -7,5 +7,7 @@
     "footerTitle": "HPG - Shared belief in the future",
     "selectServiceTitle": "Please select the service you want to use",
     "selectMoneyTitle": "Please select the amount to withdraw\nCurrency : VND",
-    "cardOut": "You canceled the transaction\nPlease get your card back"
+    "cardOut": "You canceled the transaction\nPlease get your card back",
+    "transactionSuccess" : "Withdrawal is successful.\nThe system is processing the transaction",
+    "getCardFirst": "Please receive the card before receiving the money"
 }

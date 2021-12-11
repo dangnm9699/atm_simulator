@@ -1,0 +1,9 @@
+<div id="container" class="h-100 w-100">
+    <div>
+        <p>{{'getCardFirst' | translate}}</p>
+    </div>
+    <div class="w-100 h-100">
+        <img *ngFor="let item of animation; let i = index" [src]="'../../../../assets/images/' + item + '.jpg'" [ngStyle]="{'top': (25 + 3*i) + 'vh' , 'left': 'calc(25vh + ' + 2*i + 'vw)'}">
+    </div>
+    <div #pop></div>
+</div>
