@@ -1,0 +1,11 @@
+{
+    "welcomeMessage": "Thanks for joining, {{ firstName }}! It's great to have you!",
+    "login": {
+      "username": "Enter your user name",
+      "password": "Password here"
+    },
+    "footerTitle": "HPG - 对未来的共同信念",
+    "selectServiceTitle": "请选择您要使用的服务",
+    "selectMoneyTitle": "请选择提款金额\n货币 : VND",
+    "cardOut": "您取消了交易\n请取回您的卡"
+}

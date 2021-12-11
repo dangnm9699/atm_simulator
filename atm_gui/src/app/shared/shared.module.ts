@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NumpadComponent } from './components/numpad/numpad.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { BlinkEllipsisComponent } from './components/blink-ellipsis/blink-ellipsis.component';
+import { PendingComponent } from './components/pending/pending.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { BlinkEllipsisComponent } from './components/blink-ellipsis/blink-ellips
     HeaderComponent,
     FooterComponent,
     NumpadComponent,
+    PendingComponent,
     BlinkEllipsisComponent],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { BlinkEllipsisComponent } from './components/blink-ellipsis/blink-ellips
     HeaderComponent,
     FooterComponent,
     NumpadComponent,
+    PendingComponent,
     BlinkEllipsisComponent
   ]
 })

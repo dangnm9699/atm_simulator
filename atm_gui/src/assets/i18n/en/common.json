@@ -4,5 +4,8 @@
       "username": "Enter your user name",
       "password": "Password here"
     },
-    "footerTitle": "HPG - Shared belief in the future"
+    "footerTitle": "HPG - Shared belief in the future",
+    "selectServiceTitle": "Please select the service you want to use",
+    "selectMoneyTitle": "Please select the amount to withdraw\nCurrency : VND",
+    "cardOut": "You canceled the transaction\nPlease get your card back"
 }

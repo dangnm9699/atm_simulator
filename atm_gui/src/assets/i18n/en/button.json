@@ -1,13 +1,16 @@
 {
     "numpad": {
-        "cancel": {
-            "title": "Cancel"
-        },
-        "delete": {
-            "title": "Delete"
-        },
-        "submit": {
-            "title": "Submit"
-        }
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "submit": "Submit"
+    },
+    "selectService":{
+        "withdrawMoney": "Withdrawal",
+        "viewBalance": "View Balance",
+        "changePassword":"Change PIN"
+    },
+    "selectMoney":{
+        "otherAmount":"Other Amount"
     }
+    
 }

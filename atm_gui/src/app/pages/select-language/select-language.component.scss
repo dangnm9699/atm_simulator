@@ -8,22 +8,18 @@
 }
 
 #container > div{
-    height: 75%;
     display: flex;
     width: 100%;
     flex-direction: column;
-    justify-content: flex-end;
-    align-content: space-between;
-    flex-wrap: wrap;
+    align-items: flex-end;
 }
 
 #container > div > div{
     width: 320px;
-    height: 110px;
-    margin: 10px 20px 10px 20px;
+    margin: 0 20px 20px 0;
     border: 5px solid;
     border-radius: 5px;
-    padding: 15px 0 15px 0;
+    padding: 15px;
     box-shadow: 5px 5px black;
 }
 
@@ -34,14 +30,8 @@
     cursor: pointer;
 }
 
-#title{
-    height: 25%;
-    margin: 10px 0 0 0 ;
-    text-align: center;
-    white-space: pre-line;
-}
-
 pre{
+    margin: 10px 0 0 0 ;
     text-align: center;
     white-space: pre-line;
 }

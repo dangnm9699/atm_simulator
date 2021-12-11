@@ -1,8 +1,29 @@
-<div>
-    <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replace" #replaceComponent></app-pending>
-    <div #reff [hidden]="replace">
-        <p>LOADING<app-blink-ellipsis></app-blink-ellipsis>
-        </p>
-        <app-numpad (numpadSignal)="numpadTrigger($event)" (cancelSignal)="cancelTrigger($event)"></app-numpad>
+<div id="container">
+    <pre id="title" >{{'selectMoneyTitle' | translate}}</pre>
+    <div>
+        <div (click) = "navigateSelectMoney()">
+            <pre>100,000</pre>
+        </div>
+        <div (click) = "select()">
+            <pre>200,000</pre>
+        </div>
+        <div>
+            <pre>500,000</pre>
+        </div>
+        <div (click) = "select()">
+            <pre>1,000,000</pre>
+        </div>
+        <div>
+            <pre>2,000,000</pre>
+        </div>
+        <div>
+            <pre>3,000,000</pre>
+        </div>
+        <div>
+            <pre>5,000,000</pre>
+        </div>
+        <div>
+            <pre>{{'selectMoney.otherAmount' | translate}}</pre>
+        </div>
     </div>
 </div>

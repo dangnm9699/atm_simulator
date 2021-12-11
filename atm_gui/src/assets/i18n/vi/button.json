@@ -1,13 +1,15 @@
 {
     "numpad": {
-        "cancel": {
-            "title": "Hủy bỏ"
-        },
-        "delete": {
-            "title": "Xóa"
-        },
-        "submit": {
-            "title": "Xác nhận"
-        }
+        "cancel": "Hủy bỏ",
+        "delete": "Xóa",
+        "submit": "Xác nhận"
+    },
+    "selectService":{
+        "withdrawMoney": "Rút tiền",
+        "viewBalance": "Xem số dư",
+        "changePassword":"Đổi mã PIN"
+    },
+    "selectMoney":{
+        "otherAmount":"Số khác"
     }
 }
