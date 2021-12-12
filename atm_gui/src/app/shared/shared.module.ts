@@ -11,6 +11,7 @@ import { NumpadComponent } from './components/numpad/numpad.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { BlinkEllipsisComponent } from './components/blink-ellipsis/blink-ellipsis.component';
 import { PendingComponent } from './components/pending/pending.component';
+import { NotificationScreenComponent } from './components/notification-screen/notification-screen.component';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { PendingComponent } from './components/pending/pending.component';
     FooterComponent,
     NumpadComponent,
     PendingComponent,
-    BlinkEllipsisComponent],
+    BlinkEllipsisComponent,
+    NotificationScreenComponent
+  ],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -32,7 +35,8 @@ import { PendingComponent } from './components/pending/pending.component';
     FooterComponent,
     NumpadComponent,
     PendingComponent,
-    BlinkEllipsisComponent
+    BlinkEllipsisComponent,
+    NotificationScreenComponent
   ]
 })
 export class SharedModule { }

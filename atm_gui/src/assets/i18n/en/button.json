@@ -12,6 +12,9 @@
     "selectMoney":{
         "otherAmount":"Other Amount"
     },
+    "transactionFail":{
+        "anotherService":"Another service"
+    },
     "confirm":{
         "yes": "Yes",
         "no": "No"

@@ -45,11 +45,20 @@ export class InputMoneyComponent implements OnInit {
   submitTrigger(value) {
     this.replaceSuccess = true;
     this.loginService.fakeApiPending(5000).subscribe(e => {
-      this.router.navigate(['/pages/confirm-transaction']);
+      if (this.amount > 1000000) {
+        this.navigateToFailScreen();
+      } else {
+        this.router.navigate(['/pages/confirm-transaction']);
+      }
     })
+
   }
 
   getLength(number) {
     return number.toString().length;
+  }
+
+  navigateToFailScreen() {
+    this.router.navigate(['/pages/transaction-fail']);
   }
 }

@@ -12,6 +12,9 @@
     "selectMoney":{
         "otherAmount":"其他金额"
     },
+    "transactionFail":{
+        "anotherService":"另一项服务"
+    },
     "confirm":{
         "yes": "是的",
         "no": "不"

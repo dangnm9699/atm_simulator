@@ -17,6 +17,10 @@ export class SelectServiceComponent implements OnInit {
     this.router.navigate(["/pages/select-money"])
   }
 
+  navigateCheckAccountBalance(){
+    this.router.navigate(["/pages/check-account-balance"])
+  }
+
   select(){
 
   }

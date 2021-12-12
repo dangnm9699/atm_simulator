@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-result',
@@ -17,7 +18,9 @@ export class TransactionResultComponent implements OnInit {
   }
   money: Array<string> = []
   animation: Array<string> = []
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     for (let i of Object.keys(this.amount)) {
@@ -50,5 +53,9 @@ export class TransactionResultComponent implements OnInit {
         this.animation.push(obj)
       }, 1000 * (index + 1));
     });
+  }
+
+  getOut(){
+    this.router.navigate(["/pages/another-service"])
   }
 }

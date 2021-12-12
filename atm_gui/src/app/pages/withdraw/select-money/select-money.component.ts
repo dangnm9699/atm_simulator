@@ -21,20 +21,26 @@ export class SelectMoneyComponent implements OnInit {
   selectMoney(amount: Number){
     this.replace = true;
     this.loginService.fakeApiPending(5000).subscribe(e => {
-      localStorage.clear();
-      this.router.navigate(['/pages/transaction-result']);
+      if(amount > 1000000){
+        this.navigateToFailScreen();
+      }else{
+        this.router.navigate(['/pages/confirm-transaction']);
+      }
     })
   }
 
   selectOtherAmount(){
     this.replace = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
-      localStorage.clear();
+    this.loginService.fakeApiPending(2000).subscribe(e => {
       this.router.navigate(['/pages/input-money']);
     })
   }
 
   cancelTrigger(value) {
     
+  }
+
+  navigateToFailScreen(){
+    this.router.navigate(['/pages/transaction-fail']);
   }
 }

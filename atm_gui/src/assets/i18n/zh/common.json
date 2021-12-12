@@ -8,7 +8,13 @@
     "selectServiceTitle": "请选择您要使用的服务",
     "selectMoneyTitle": "请选择提款金额\n货币 : VND",
     "cardOut": "您取消了交易\n请取回您的卡",
+    "accBalance": "检查帐户余额\n账户余额:",
     "inputMoney": "输入要提取的金额\n输入的金额必须是",
+    "failedTransaction": "交易失败\n您的账户余额不足",
+    "transactionConfirm" : "交易确认\n交易金额: {{withdrawAmount}}\n账户余额: {{leftAmount}}\n你要继续吗 ?",
     "transactionProcessing" : "系统正在处理交易",
+    "printInvoice": "您要打印发票吗 ?",
+    "anotherService": "您想制作其他服务吗 ?",
+    "thankYou": "感谢您使用银行的服务 IT5005.",
     "getCardFirst": "提现成功\n收款前请先收到卡"
 }

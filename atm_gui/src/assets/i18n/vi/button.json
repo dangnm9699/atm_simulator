@@ -12,6 +12,9 @@
     "selectMoney":{
         "otherAmount":"Số khác"
     },
+    "transactionFail":{
+        "anotherService":"Giao dịch khác"
+    },
     "confirm":{
         "yes": "Có",
         "no": "Không"
