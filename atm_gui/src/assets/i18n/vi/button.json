@@ -11,5 +11,9 @@
     },
     "selectMoney":{
         "otherAmount":"Số khác"
+    },
+    "confirm":{
+        "yes": "Có",
+        "no": "Không"
     }
 }

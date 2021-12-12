@@ -8,16 +8,24 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class NumpadComponent implements OnInit {
   @Output() numpadSignal = new EventEmitter<any>();
   @Output() cancelSignal = new EventEmitter<any>();
+  @Output() deleteSignal = new EventEmitter<any>();
+  @Output() submitSignal = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  emitBtn( btn : string){
+  emitBtn(btn: string) {
     console.log(btn);
-    switch(btn){
+    switch (btn) {
       case 'cancel':
         this.cancelSignal.emit();
+        break;
+      case 'delete':
+        this.deleteSignal.emit();
+        break;
+      case 'submit':
+        this.submitSignal.emit();
         break;
       default:
         this.numpadSignal.emit(btn);

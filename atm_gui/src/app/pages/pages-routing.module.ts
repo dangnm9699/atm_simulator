@@ -6,6 +6,7 @@ import { SelectServiceComponent } from './select-service/select-service.componen
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { UsersComponent } from './users/users.component';
+import { ConfirmTransactionComponent } from './withdraw/confirm-transaction/confirm-transaction.component';
 import { InputMoneyComponent } from './withdraw/input-money/input-money.component';
 import { SelectMoneyComponent } from './withdraw/select-money/select-money.component';
 import { TransactionResultComponent } from './withdraw/transaction-result/transaction-result.component';
@@ -18,7 +19,7 @@ const routes: Routes = [
     children:[
       {
         path:'home',
-        component: SelectServiceComponent
+        component: ConfirmTransactionComponent
       },
       {
         path:'select-service',
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path:'input-money',
         component: InputMoneyComponent
+      },
+      {
+        path:'confirm-transaction',
+        component: ConfirmTransactionComponent
       },
       {
         path:'transaction-result',

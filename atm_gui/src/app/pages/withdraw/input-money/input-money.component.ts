@@ -10,9 +10,10 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class InputMoneyComponent implements OnInit {
 
-  @ViewChild('reff') reff: ElementRef;
-  @ViewChild('replaceComponent') replaceComponent: ElementRef;
-  replace: boolean = false;
+  amount: Number = 0;
+  minAmount: Number = 50000;
+  replaceFail: boolean = false;
+  replaceSuccess: boolean = false;
   constructor(
     private router: Router,
     private loginService: LoginService
@@ -22,14 +23,33 @@ export class InputMoneyComponent implements OnInit {
   }
 
   numpadTrigger(value) {
+    if (Number(value) != value || this.getLength(Number(String(this.amount) + String(value))) > 8) {
+      return;
+    }
+    this.amount = Number(String(this.amount) + String(value))
     return;
   }
 
+  deleteTrigger(value) {
+    this.amount = Number(String(this.amount).slice(1))
+  }
+
   cancelTrigger(value) {
-    this.replace = true;
+    this.replaceFail = true;
     this.loginService.fakeApiPending(5000).subscribe(e => {
       localStorage.clear();
       this.router.navigate(['auth/login']);
     })
+  }
+
+  submitTrigger(value) {
+    this.replaceSuccess = true;
+    this.loginService.fakeApiPending(5000).subscribe(e => {
+      this.router.navigate(['/pages/confirm-transaction']);
+    })
+  }
+
+  getLength(number) {
+    return number.toString().length;
   }
 }

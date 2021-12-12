@@ -11,5 +11,9 @@
     },
     "selectMoney":{
         "otherAmount":"其他金额"
+    },
+    "confirm":{
+        "yes": "是的",
+        "no": "不"
     }
 }

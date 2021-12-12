@@ -26,7 +26,7 @@ export class SelectMoneyComponent implements OnInit {
     })
   }
 
-  selectOtherAmount(amount: Number){
+  selectOtherAmount(){
     this.replace = true;
     this.loginService.fakeApiPending(5000).subscribe(e => {
       localStorage.clear();

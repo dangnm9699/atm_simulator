@@ -8,6 +8,7 @@
     "selectServiceTitle": "请选择您要使用的服务",
     "selectMoneyTitle": "请选择提款金额\n货币 : VND",
     "cardOut": "您取消了交易\n请取回您的卡",
-    "transactionSuccess" : "提现成功\n系统正在处理交易",
-    "getCardFirst": "收款前请先收到卡"
+    "inputMoney": "输入要提取的金额\n输入的金额必须是",
+    "transactionProcessing" : "系统正在处理交易",
+    "getCardFirst": "提现成功\n收款前请先收到卡"
 }

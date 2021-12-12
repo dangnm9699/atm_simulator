@@ -12,10 +12,11 @@ import { SelectLanguageComponent } from './select-language/select-language.compo
 import { SelectServiceComponent } from './select-service/select-service.component';
 import { SelectMoneyComponent } from './withdraw/select-money/select-money.component';
 import { TransactionResultComponent } from './withdraw/transaction-result/transaction-result.component';
+import { ConfirmTransactionComponent } from './withdraw/confirm-transaction/confirm-transaction.component';
 
 
 @NgModule({
-  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent],
+  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent, ConfirmTransactionComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

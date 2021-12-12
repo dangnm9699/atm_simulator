@@ -8,6 +8,8 @@
     "selectServiceTitle": "Please select the service you want to use",
     "selectMoneyTitle": "Please select the amount to withdraw\nCurrency : VND",
     "cardOut": "You canceled the transaction\nPlease get your card back",
-    "transactionSuccess" : "Withdrawal is successful.\nThe system is processing the transaction",
-    "getCardFirst": "Please receive the card before receiving the money"
+    "inputMoney": "Enter the amount to withdraw\nThe amount entered must be a multiple of",
+    "transactionProcessing" : "The system is processing the transaction",
+    "transactionConfirm" : "交易确认\n交易金额: {{withdrawAmount}}\n账户余额: {{leftAmount}}\n你要继续吗 ?",
+    "getCardFirst": "Withdrawal is successful\nPlease receive the card before receiving the money"
 }

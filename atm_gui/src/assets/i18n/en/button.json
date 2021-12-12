@@ -11,6 +11,9 @@
     },
     "selectMoney":{
         "otherAmount":"Other Amount"
+    },
+    "confirm":{
+        "yes": "Yes",
+        "no": "No"
     }
-    
 }

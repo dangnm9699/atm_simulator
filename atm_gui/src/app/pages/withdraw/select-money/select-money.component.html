@@ -22,9 +22,9 @@
         <div (click) = "selectMoney(5000000)">
             <p>5,000,000</p>
         </div>
-        <div>
+        <div (click) = "selectOtherAmount()">
             <p>{{'selectMoney.otherAmount' | translate}}</p>
         </div>
     </div>
-    <app-pending class="h-100" [textInput]="'transactionSuccess' | translate" [hidden]="!replace" #replaceComponent></app-pending>
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replace" #replaceComponent></app-pending>
 </div>
