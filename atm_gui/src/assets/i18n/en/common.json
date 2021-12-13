@@ -1,5 +1,5 @@
 {
-    "welcomeMessage": "Thanks for joining, {{ firstName }}! It's great to have you!",
+    "welcomeMessage": "Welcome to IT 5005 bank",
     "login": {
       "username": "Enter your user name",
       "password": "Password here"

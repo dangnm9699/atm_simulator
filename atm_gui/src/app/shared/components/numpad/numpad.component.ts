@@ -16,7 +16,6 @@ export class NumpadComponent implements OnInit {
   }
 
   emitBtn(btn: string) {
-    console.log(btn);
     switch (btn) {
       case 'cancel':
         this.cancelSignal.emit();

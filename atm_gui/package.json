@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,8 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^4.5.0",
     "merge-jsons-webpack-plugin": "^2.0.1",
+    "ngx-dropzone": "^3.0.0",
+    "ngx-file-drop": "^13.0.0",
     "ngx-webstorage": "^5.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

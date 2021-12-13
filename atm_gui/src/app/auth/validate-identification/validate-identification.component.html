@@ -1,0 +1,12 @@
+<div id="container">
+    <p>{{dateTime}}</p>
+    <p>{{'welcomeMessage' | translate}}</p>
+    <div>
+        <ngx-dropzone class="w-25 h-75" (change)="onSelect($event)" [multiple]="false">
+            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngIf="file" [removable]="true" (removed)="onRemove(file)" class="w-100 h-100">
+                <ngx-dropzone-label >{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+        </ngx-dropzone>
+    </div>
+</div>
