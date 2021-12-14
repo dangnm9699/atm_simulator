@@ -19,7 +19,7 @@ public class Cards implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name="number")
+    @Column(name="number", unique = true)
     private String number;
 
     @NotNull

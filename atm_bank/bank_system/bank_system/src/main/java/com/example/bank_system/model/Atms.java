@@ -32,6 +32,18 @@ public class Atms implements Serializable {
     @Column(name="location")
     private String location;
 
+    @NotNull
+    @Column(name="description")
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setLocation(String location) {
         this.location = location;
     }
