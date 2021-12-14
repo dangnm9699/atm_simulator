@@ -12,7 +12,6 @@ export class MainGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const token = localStorage.getItem('httpHeaders');
-    console.log("token",token);
     
     if (token === undefined || token === null || token === 'null' || token === '') {
       console.log('3.auth-guard');
@@ -45,7 +44,7 @@ export class MainGuard implements CanActivate {
       //   return false;
       // }
     } catch (e) {
-      console.log('exception:', checkRole)
+      // console.log('exception:', checkRole)
       console.log('4.auth-guard');
       localStorage.clear();
       this.router.navigate(['/auths/login']);

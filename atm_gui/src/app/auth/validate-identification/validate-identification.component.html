@@ -1,7 +1,9 @@
 <div id="container">
-    <p>{{dateTime}}</p>
-    <p>{{'welcomeMessage' | translate}}</p>
-    <div>
+    <app-notification-screen class="h-100 w-100" [hidden]="!replaceFail" [textInput]="'thankYou' | translate" [colorCode]="1" ></app-notification-screen>
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replace" ></app-pending>
+    <p [hidden]="replace">{{dateTime}}</p>
+    <p [hidden]="replace">{{'welcomeMessage' | translate}}</p>
+    <div [hidden]="replace">
         <ngx-dropzone class="w-25 h-75" (change)="onSelect($event)" [multiple]="false">
             <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
             <ngx-dropzone-preview *ngIf="file" [removable]="true" (removed)="onRemove(file)" class="w-100 h-100">

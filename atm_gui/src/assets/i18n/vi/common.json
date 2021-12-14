@@ -6,6 +6,7 @@
     },
     "footerTitle": "HPG - Chung niềm tin vững tương lai",
     "validatePin":"Xin chào, {{userName}}\nHãy nhập mã PIN",
+    "wrongPin":"Bạn đã nhập sai mật khẩu {{wrongTimes}} lần",
     "selectServiceTitle" : "Hãy chọn dịch vụ bạn muốn sử dụng",
     "selectMoneyTitle": "Hãy chọn số tiền cần rút\nĐơn vị tiền tệ : VND",
     "cardOut": "Bạn đã hủy bỏ giao dịch\nVui lòng nhận lại thẻ",

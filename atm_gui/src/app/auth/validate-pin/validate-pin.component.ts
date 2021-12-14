@@ -63,7 +63,7 @@ export class ValidatePinComponent implements OnInit {
   submitTrigger(value) {
     if (this.amount.length != 6) {
       return;
-    } else {
+    } else if(this.amount.trim() == "123456"){
       this.replaceSuccess = true;
       this.loginService.fakeApiPending(5000).subscribe(e => {
         this.router.navigate(['/pages/select-service']);

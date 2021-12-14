@@ -13,7 +13,7 @@ const routes: Routes = [
     children:[
       {
         path:'login',
-        component:ValidatePinComponent
+        component:ValidateIdentificationComponent
       },
       {
         path:'pin',
