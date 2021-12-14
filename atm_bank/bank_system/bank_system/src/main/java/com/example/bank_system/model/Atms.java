@@ -24,9 +24,17 @@ public class Atms implements Serializable {
     @Column(name="ip")
     private BigDecimal ip;
 
+    public String getLocation() {
+        return location;
+    }
+
     @NotNull
     @Column(name="location")
-    private String description;
+    private String location;
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     @OneToMany(mappedBy = "atms" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
@@ -64,11 +72,5 @@ public class Atms implements Serializable {
         this.ip = ip;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

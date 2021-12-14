@@ -40,7 +40,7 @@ public class Cards implements Serializable {
 
     @NotNull
     @Column(name="status")
-    private Integer status;
+    private Boolean status;
 
     @JsonIgnore
     @ManyToOne
@@ -100,11 +100,11 @@ public class Cards implements Serializable {
         this.balance = balance;
     }
 
-    public Integer getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
