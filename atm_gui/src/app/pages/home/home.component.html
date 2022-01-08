@@ -1,0 +1,30 @@
+<div id="container">
+    <pre id="title" [hidden]="replace" >{{'selectMoneyTitle' | translate}}</pre>
+    <div class="noselect" [hidden]="replace">
+        <div (click) = "selectMoney(100000)">
+            <pre>100,000</pre>
+        </div>
+        <div (click) = "selectMoney(200000)">
+            <pre>200,000</pre>
+        </div>
+        <div (click) = "selectMoney(500000)">
+            <pre>500,000</pre>
+        </div>
+        <div (click) = "selectMoney(1000000)">
+            <pre>1,000,000</pre>
+        </div>
+        <div (click) = "selectMoney(2000000)">
+            <pre>2,000,000</pre>
+        </div>
+        <div (click) = "selectMoney(3000000)">
+            <pre>3,000,000</pre>
+        </div>
+        <div (click) = "selectMoney(5000000)">
+            <pre>5,000,000</pre>
+        </div>
+        <div>
+            <pre>{{'selectMoney.otherAmount' | translate}}</pre>
+        </div>
+    </div>
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replace" #replaceComponent></app-pending>
+</div>

@@ -1,0 +1,20 @@
+{
+    "welcomeMessage": "Welcome to IT 5005 bank",
+    "login": {
+      "username": "Enter your user name",
+      "password": "Password here"
+    },
+    "footerTitle": "HPG - Shared belief in the future",
+    "selectServiceTitle": "Please select service you want to use",
+    "selectMoneyTitle": "Please select amount to withdraw\nCurrency : VND",
+    "cardOut": "You canceled the transaction\nPlease get your card back",
+    "accBalance": "Checking account balance\nAccount balance:",
+    "inputMoney": "Enter amount to withdraw\nThe amount entered must be a multiple of",
+    "failedTransaction": "Transaction failed\nYour account does not have enough balance",
+    "transactionProcessing" : "System is processing the transaction",
+    "transactionConfirm" : "Confirm transaction\nTransaction amount: {{withdrawAmount}}\nAccount remaining: {{leftAmount}}\nDo you want to continue ?",
+    "printInvoice": "Do you want to print invoices ?",
+    "anotherService": "Do you want to use another services ?",
+    "thankYou": "Thank you for using services of bank IT5005.",
+    "getCardFirst": "Withdrawal is successful\nPlease receive card before receiving money"
+}

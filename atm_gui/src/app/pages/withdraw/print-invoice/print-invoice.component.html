@@ -1,0 +1,12 @@
+<div id="container">
+    <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replaceFail" ></app-pending>
+    <p id="title" [hidden]="replaceFail">{{'printInvoice' | translate}}</p>
+    <div [hidden]="replaceFail">
+        <div (click) = "select(true)" class="background-green noselect">
+            <p>{{'confirm.yes' |translate}}</p>
+        </div>
+        <div (click) = "select(false)" class="background-red noselect">
+            <p>{{'confirm.no' |translate}}</p>
+        </div>
+    </div>
+</div>

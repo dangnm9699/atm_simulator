@@ -1,0 +1,22 @@
+{
+    "numpad": {
+        "cancel": "Hủy bỏ",
+        "delete": "Xóa",
+        "submit": "Xác nhận"
+    },
+    "selectService":{
+        "withdrawMoney": "Rút tiền",
+        "viewBalance": "Xem số dư",
+        "changePassword":"Đổi mã PIN"
+    },
+    "selectMoney":{
+        "otherAmount":"Số khác"
+    },
+    "transactionFail":{
+        "anotherService":"Giao dịch khác"
+    },
+    "confirm":{
+        "yes": "Có",
+        "no": "Không"
+    }
+}

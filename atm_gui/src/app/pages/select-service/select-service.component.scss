@@ -1,0 +1,54 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+#container > div{
+    height: 75%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: space-between;
+    flex-wrap: wrap;
+}
+
+#container > div > div{
+    width: 25%;
+    height: 25%;
+    margin: 10px 20px 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid;
+    border-radius: 5px;
+    padding: 15px 0 15px 0;
+    box-shadow: 5px 5px black;
+}
+
+#container > div > div:hover {
+    position: relative;
+    top: 2px;
+    left: 2px;
+    cursor: pointer;
+}
+
+#title{
+    height: 25%;
+    margin: 10px 0 0 0 ;
+    text-align: center;
+    white-space: pre-line;
+}
+
+#container > p{
+    padding: 2.5% 0 2.5% 0;
+    text-align: center;
+    white-space: pre-line;
+}
+
+#container div p{
+    font-size: 0.85em;
+}

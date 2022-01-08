@@ -1,0 +1,22 @@
+{
+    "numpad": {
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "submit": "Submit"
+    },
+    "selectService":{
+        "withdrawMoney": "Withdrawal",
+        "viewBalance": "View Balance",
+        "changePassword":"Change PIN"
+    },
+    "selectMoney":{
+        "otherAmount":"Other Amount"
+    },
+    "transactionFail":{
+        "anotherService":"Another service"
+    },
+    "confirm":{
+        "yes": "Yes",
+        "no": "No"
+    }
+}

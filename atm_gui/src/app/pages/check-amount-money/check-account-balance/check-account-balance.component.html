@@ -1,0 +1,13 @@
+<div id="container">
+    <app-notification-screen class="h-100 w-100" [hidden]="!replaceFail" [textInput]="'thankYou' | translate" [colorCode]="1" ></app-notification-screen>
+    <p id="title" [hidden]="replaceFail">{{'accBalance' | translate}} {{accountBalance | currency:'VND'}}</p>
+    <div [hidden]="replaceFail">
+        <p>{{'anotherService' | translate}}</p>
+        <div (click) = "select(true)" class="background-green noselect">
+            <p>{{'confirm.yes' |translate}}</p>
+        </div>
+        <div (click) = "select(false)" class="background-red noselect">
+            <p>{{'confirm.no' |translate}}</p>
+        </div>
+    </div>
+</div>

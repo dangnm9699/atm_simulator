@@ -1,0 +1,13 @@
+<div id="container">
+    <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replaceFail" ></app-pending>
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
+    <div [hidden]="replaceFail || replaceSuccess">
+        <pre>{{'validatePin' | translate:user}}</pre>
+        <div id="inputBox">
+            <div>
+                <p>{{show}}<span>{{blink}}</span><span>{{blank}}</span></p>
+            </div>
+            <app-numpad (numpadSignal)="numpadTrigger($event)" (deleteSignal)="deleteTrigger($event)" (cancelSignal)="cancelTrigger($event)" (submitSignal)="submitTrigger($event)"></app-numpad>
+        </div>
+    </div>
+</div>

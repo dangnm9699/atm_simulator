@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div class="container">
+        <h1>Login to Admin Panel</h1>
+
+        <mat-card class="form">
+            <form [formGroup]="inputUser" (ngSubmit)="onSubmit()">
+                <mat-form-field class="form-field">
+                    <input matInput placeholder="Username" autocomplete="off" type="text" name="userName"
+                        formControlName="userName" />
+                    <mat-error>Invalid email address</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <input matInput placeholder="Password" type="password" name="passwordHash"
+                        formControlName="passwordHash" (keyup.enter)="onSubmit()" />
+                    <mat-error>Please input password</mat-error>
+                </mat-form-field>
+
+                <button mat-button color="accent" class="btn-login" (click)="onSubmit()">
+                    <span> Login</span>
+                </button>
+            </form>
+        </mat-card>
+    </div>
+</div>
