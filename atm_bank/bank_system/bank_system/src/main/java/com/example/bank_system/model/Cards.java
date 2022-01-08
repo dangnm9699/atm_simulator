@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Table
 @Entity
+@Table(name="cards")
 public class Cards implements Serializable {
 
     @Id
@@ -114,5 +114,13 @@ public class Cards implements Serializable {
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public Cards(){
+
+    }
+    public Cards(String number, String pinHash){
+        this.setNumber(number);
+        this.setPinHash(pinHash);
     }
 }
