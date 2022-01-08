@@ -41,5 +41,5 @@ pip install -r requirements.txt
 - Execute below command:
 
 ```bash
-uvicorn main:app --reload
+python main.py
 ```
