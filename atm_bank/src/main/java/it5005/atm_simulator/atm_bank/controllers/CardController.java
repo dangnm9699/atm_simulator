@@ -1,11 +1,11 @@
 package it5005.atm_simulator.atm_bank.controllers;
 
 import it5005.atm_simulator.atm_bank.jwt.JwtTokenProvider;
-import it5005.atm_simulator.atm_bank.models.CardDetails;
-import it5005.atm_simulator.atm_bank.models.LoginRequest;
-import it5005.atm_simulator.atm_bank.models.LoginResponse;
-import it5005.atm_simulator.atm_bank.models.RandomStuff;
+import it5005.atm_simulator.atm_bank.models.*;
+import it5005.atm_simulator.atm_bank.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +22,9 @@ public class CardController {
 
     @Autowired
     private JwtTokenProvider tokenProvider;
+
+    @Autowired
+    private CardService cardService;
 
     @PostMapping("/login")
     public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -40,7 +43,30 @@ public class CardController {
     }
 
     @GetMapping("/random")
-    public RandomStuff randomStuff(){
+    public RandomStuff randomStuff() {
         return new RandomStuff("JWT Hợp lệ mới có thể thấy được message này");
     }
+
+    @PostMapping("/create/{id}")
+    public ResponseEntity<String> createCard(@PathVariable("id") long id, @RequestBody Card card) {
+        if (cardService.createCard(id, card)) {
+            Card card_new = cardService.loadCardByNumber(card.getNumber());
+            return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/deposit/{number}")
+    public ResponseEntity<Card> depositCard(@PathVariable("number") String number, String amount){
+        Double money = Double.parseDouble(amount);
+        try{
+            Card card_new = cardService.depositCardBalance(number, money);
+            return new ResponseEntity<>(card_new, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
