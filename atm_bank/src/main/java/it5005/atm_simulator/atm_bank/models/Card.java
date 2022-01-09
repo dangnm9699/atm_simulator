@@ -8,13 +8,13 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-@EnableAutoConfiguration
 @Entity
-@Table(name="cards")
+@Table(name = "cards")
+@Data
 public class Card implements Serializable {
 
     @Id

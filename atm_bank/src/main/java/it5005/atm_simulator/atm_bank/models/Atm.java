@@ -7,13 +7,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-@EnableAutoConfiguration
 @Entity
 @Table(name = "atms")
+@Data
 public class Atm implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

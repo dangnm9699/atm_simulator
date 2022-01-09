@@ -7,13 +7,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-@EnableAutoConfiguration
 @Entity
-@Table(name="transactions")
+@Table(name = "transactions")
+@Data
 public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

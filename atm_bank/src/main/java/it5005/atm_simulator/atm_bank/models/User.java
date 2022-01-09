@@ -6,13 +6,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-@EnableAutoConfiguration
 @Entity
-@Table(name="users")
+@Table(name = "users")
+@Data
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
