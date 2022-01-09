@@ -1,41 +1,28 @@
 package it5005.atm_simulator.atm_bank;
 
-import it5005.atm_simulator.atm_bank.models.Card;
-import it5005.atm_simulator.atm_bank.models.User;
-import it5005.atm_simulator.atm_bank.repositories.CardRepository;
-import it5005.atm_simulator.atm_bank.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @SpringBootApplication
 @Configuration
-public class AtmBankApplication implements CommandLineRunner {
+public class AtmBankApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AtmBankApplication.class, args);
     }
 
-    @Autowired
-    UserRepository userRepository;
+//    @Autowired
+//    UserRepository userRepository;
+//
+//    @Autowired
+//    CardRepository cardRepository;
+//
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
 
-    @Autowired
-    CardRepository cardRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Override
-    public void run(String... args) throws Exception {
+//    @Override
+//    public void run(String... args) throws Exception {
 //        User user = new User();
 //        user.setId(3L);
 //        user.setDescription("test user");
@@ -61,5 +48,5 @@ public class AtmBankApplication implements CommandLineRunner {
 //
 //        cardRepository.save(card);
 //        System.out.println(user);
-    }
+//    }
 }

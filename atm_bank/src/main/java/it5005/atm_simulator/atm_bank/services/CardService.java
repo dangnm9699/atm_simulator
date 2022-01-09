@@ -86,6 +86,13 @@ public class CardService implements UserDetailsService {
         }catch (Exception e){
             return null;
         }
-
     }
+
+    public Card saveCard(Card card){
+        card.setPinHash(passwordEncoder().encode(card.getPinHash()));
+        cardRepository.save(card);
+        return card;
+    }
+
+
 }

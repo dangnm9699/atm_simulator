@@ -68,5 +68,15 @@ public class CardController {
         }
     }
 
+    @PostMapping("/reset/pinHash/{number}")
+    public ResponseEntity<Card> resetPinHashCard(@PathVariable("number") String number, String pinHash){
+        try{
+            Card card_new = cardService.loadCardByNumber(number);
+            card_new.setPinHash(pinHash);
+            return new ResponseEntity<>(cardService.saveCard(card_new), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 
 }
