@@ -1,16 +1,15 @@
 package it5005.atm_simulator.atm_bank.models;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "cards")
@@ -19,35 +18,35 @@ public class Card implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private long id;
 
     @NotNull
-    @Column(name="number", unique = true)
+    @Column(name = "number", unique = true)
     private String number;
 
     @NotNull
-    @Column(name="valid_from")
+    @Column(name = "valid_from")
     private Date validFrom;
 
     @NotNull
-    @Column(name="good_thru")
+    @Column(name = "good_thru")
     private Date goodThru;
 
     @NotNull
-    @Column(name="pin_hash")
+    @Column(name = "pin_hash")
     private String pinHash;
 
     @NotNull
-    @Column(name="balance")
+    @Column(name = "balance")
     private BigDecimal balance;
 
     @NotNull
-    @Column(name="status")
+    @Column(name = "status")
     private Boolean status;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NotNull
@@ -58,10 +57,11 @@ public class Card implements Serializable {
     @ToString.Exclude
     private Collection<Transaction> transactions;
 
-    public Card () {
+    public Card() {
 
     }
-    public Card(String number, String pinHash){
+
+    public Card(String number, String pinHash) {
         this.setNumber(number);
         this.setPinHash(pinHash);
     }

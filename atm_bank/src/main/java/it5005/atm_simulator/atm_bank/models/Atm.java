@@ -1,15 +1,14 @@
 package it5005.atm_simulator.atm_bank.models;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "atms")
@@ -17,23 +16,23 @@ import lombok.ToString;
 public class Atm implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private long id;
 
     @NotNull
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @NotNull
-    @Column(name="ip")
+    @Column(name = "ip")
     private BigDecimal ip;
 
     @NotNull
-    @Column(name="location")
+    @Column(name = "location")
     private String location;
 
     @NotNull
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
     public Long getId() {
@@ -76,7 +75,7 @@ public class Atm implements Serializable {
         this.location = location;
     }
 
-    @OneToMany(mappedBy = "atm" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "atm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Collection<Transaction> transactions;

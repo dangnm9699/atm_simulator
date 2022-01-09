@@ -1,16 +1,14 @@
 package it5005.atm_simulator.atm_bank.models;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 @Entity
 @Table(name = "transactions")
@@ -18,23 +16,23 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private long id;
 
     @NotNull
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @NotNull
-    @Column(name="amount")
+    @Column(name = "amount")
     private BigDecimal amount;
 
     @NotNull
-    @Column(name="created_at")
+    @Column(name = "created_at")
     private Date created_at;
 
     @NotNull
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
     public Long getId() {
@@ -78,7 +76,7 @@ public class Transaction implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name="card_id")
+    @JoinColumn(name = "card_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NotNull
@@ -93,7 +91,7 @@ public class Transaction implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name="atm_id")
+    @JoinColumn(name = "atm_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @NotNull
