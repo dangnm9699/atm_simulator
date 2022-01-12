@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/card")
@@ -78,5 +79,21 @@ public class CardController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+    // check Balance card
+    @GetMapping("/balance/information/{number}")
+    public ResponseEntity<BigDecimal> checkBalance(@PathVariable("number") String number){
+        BigDecimal amount = new BigDecimal("0");
+        try{
+            Card card_new = cardService.loadCardByNumber(number);
+            BigDecimal balance = card_new.getBalance();
+            System.out.println(balance);
+            return new ResponseEntity<>(balance, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(amount, HttpStatus.NOT_FOUND);
+        }
+
+    }
+
 
 }

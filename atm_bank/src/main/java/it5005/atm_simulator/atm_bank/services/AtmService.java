@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AtmService {
@@ -27,5 +28,34 @@ public class AtmService {
         return atm;
     }
 
+    public Atm findById(long id){
+        Optional<Atm> atm_new = atmRepository.findById(id);
+        return atm_new.get();
+    }
+
+    public Atm updateAtm(Atm atm, long id){
+        Optional<Atm> atm_new = atmRepository.findById(id);
+
+        if (atm_new.isPresent()){
+            Atm _atm = atm_new.get();
+            _atm.setName(atm.getName());
+            _atm.setDescription(atm.getDescription());
+            _atm.setLocation(atm.getLocation());
+            _atm.setIp(new BigDecimal(String.valueOf(atm.getIp())));
+            atmRepository.save(_atm);
+            return _atm;
+        }else {
+            return null;
+        }
+    }
+
+    public Boolean deleteAtm(long id){
+        try{
+            atmRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
 }

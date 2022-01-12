@@ -1,6 +1,5 @@
 package it5005.atm_simulator.atm_bank.controllers;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import it5005.atm_simulator.atm_bank.models.Atm;
 import it5005.atm_simulator.atm_bank.services.AtmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +44,24 @@ public class AtmController {
             return new ResponseEntity<>(atm_new, HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/informationAtm/{id}")
+    public ResponseEntity<Atm> updateAtm(@PathVariable("id") long id, @RequestBody Atm atm){
+        try{
+            return new ResponseEntity<>(atmService.updateAtm(atm, id), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteAtm(@PathVariable("id") long id){
+        if (atmService.deleteAtm(id)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
