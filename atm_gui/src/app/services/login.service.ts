@@ -45,9 +45,27 @@ export class LoginService {
   }
   fakeApiPending(ms: number): Observable<any> {
     if (ms <= 5000) {
-      return of(ms).pipe(delay(ms))
+      return this.getUserInfo().pipe(delay(ms))
     }
     return of(ms).pipe(delay(ms)).pipe(()=>throwError('123'))
+  }
+
+  fakeApi(ms: number): Observable<any> {
+    return of(ms).pipe(() =>{
+      if(ms <= 5000){
+        return of(ms)
+      }
+      return of(ms).pipe(() => throwError("ERROR"))
+    })
+  }
+
+  getUserInfo(){
+    // let formData: FormData = new FormData()
+    // formData.append('uploadFile', file, file.name)
+    // return this.http.post<any>(`${environment.apiUrl}/read_card/decode`, formData, { observe: 'response' })
+    let fakeObj = { token : "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImNhcmROdW1iZXIiOiIxNzUwNTEyOTc1NzMyOTA3NTMyNDAwMyIsIm5hbWUiOiJQSEFNIFZBTiBDSFVORyIsImdlbmRlciI6Im1hbGUiLCJjaXRpemVuSWQiOiIxNjQ2NDU3NzQifSwiaWF0IjoxNjQwMDk0MDE3LCJleHAiOjQ3OTU4NTQwMTd9.9f6x7wjIYYs5dbRyDm_cwiWYFknjGgyeYbzkpV_hnc21mv_HDrKpfEHBv9JlphdciW5pdrZ27OrUdm-SNCFyIA" }
+    console.log(JSON.stringify( fakeObj ))
+    return this.http.post<any>(`${environment.apiUrl}/read_card/decode`, fakeObj, { observe: 'response' })
   }
 }
 

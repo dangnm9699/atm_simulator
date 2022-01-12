@@ -9,6 +9,7 @@ import { timeout } from 'rxjs/operators';
 export class PendingComponent implements OnInit {
   
   @Input() textInput: string ; 
+  @Input() colorCode: Number = 1; //1 ma xanh, 0 ma do  
   constructor() { }
 
   ngOnInit(): void {

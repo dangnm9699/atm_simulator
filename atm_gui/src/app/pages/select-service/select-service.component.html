@@ -1,6 +1,7 @@
 <div id="container">
-    <p id="title" >{{'selectServiceTitle' | translate}}</p>
-    <div>
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replace" ></app-pending>
+    <p id="title" [hidden]="replace">{{'selectServiceTitle' | translate}}</p>
+    <div [hidden]="replace">
         <div (click) = "navigateSelectMoney()">
             <p>{{'selectService.withdrawMoney' |translate}}</p>
         </div>

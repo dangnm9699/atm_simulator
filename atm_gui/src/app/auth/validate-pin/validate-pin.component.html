@@ -1,5 +1,5 @@
 <div id="container">
-    <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replaceFail" ></app-pending>
+    <app-pending class="h-100" [textInput]="'wrongPin' | translate:wrong" [hidden]="!replaceFail" (click)="navigateToLogin()" [colorCode]="0" ></app-pending>
     <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
     <div [hidden]="replaceFail || replaceSuccess">
         <pre>{{'validatePin' | translate:user}}</pre>

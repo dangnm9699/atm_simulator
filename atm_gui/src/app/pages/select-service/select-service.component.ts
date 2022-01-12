@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-select-service',
@@ -8,21 +9,29 @@ import { Router } from '@angular/router';
 })
 export class SelectServiceComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  replace: boolean = false
+  constructor(
+    private router: Router,
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
 
-  navigateSelectMoney(){
+  navigateSelectMoney() {
+
     this.router.navigate(["/pages/select-money"])
   }
 
-  navigateCheckAccountBalance(){
-    this.router.navigate(["/pages/check-account-balance"])
+  navigateCheckAccountBalance() {
+    this.replace = true;
+    this.loginService.fakeApiPending(5000).subscribe(e => {
+      this.router.navigate(['/pages/check-account-balance']);
+    })
   }
 
-  select(){
+  select() {
 
   }
+
 
 }

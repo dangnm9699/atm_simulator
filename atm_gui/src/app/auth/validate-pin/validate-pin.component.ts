@@ -9,6 +9,9 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class ValidatePinComponent implements OnInit {
 
+  wrong={
+    wrongTimes: 1
+  }
   amount: String = "";
   show: String = ""
   blink: String = "_"
@@ -64,11 +67,22 @@ export class ValidatePinComponent implements OnInit {
     if (this.amount.length != 6) {
       return;
     } else if(this.amount.trim() == "123456"){
+      localStorage.setItem('httpHeaders', "123");
       this.replaceSuccess = true;
       this.loginService.fakeApiPending(5000).subscribe(e => {
         this.router.navigate(['/pages/select-service']);
       })
+    }else{
+      this.replaceSuccess = true;
+      this.loginService.fakeApiPending(5000).subscribe(() =>{
+        this.replaceSuccess = false;
+        this.replaceFail = true;
+      })
     }
+  }
+
+  navigateToLogin(){
+    this.router.navigate(["/auth/login"]);
   }
 
   timeout(ms){

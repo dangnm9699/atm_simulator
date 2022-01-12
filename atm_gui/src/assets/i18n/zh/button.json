@@ -13,7 +13,8 @@
         "otherAmount":"其他金额"
     },
     "transactionFail":{
-        "anotherService":"另一项服务"
+        "anotherService":"另一项服务",
+        "getOut":"停止交易"
     },
     "confirm":{
         "yes": "是的",

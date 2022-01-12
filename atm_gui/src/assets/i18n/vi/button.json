@@ -13,7 +13,8 @@
         "otherAmount":"Số khác"
     },
     "transactionFail":{
-        "anotherService":"Giao dịch khác"
+        "anotherService":"Giao dịch khác",
+        "getOut":"Ngừng giao dịch"
     },
     "confirm":{
         "yes": "Có",

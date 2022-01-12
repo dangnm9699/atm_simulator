@@ -13,7 +13,8 @@
         "otherAmount":"Other Amount"
     },
     "transactionFail":{
-        "anotherService":"Another service"
+        "anotherService":"Another service",
+        "getOut":"Stop transaction"
     },
     "confirm":{
         "yes": "Yes",
