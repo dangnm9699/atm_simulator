@@ -16,51 +16,51 @@ public class AtmController {
     @Autowired
     private AtmService atmService;
 
-    @GetMapping("/listAtm")
-    public ResponseEntity<List<Atm>> getListAtms(@RequestParam(required = false) String location){
-        try{
+    @GetMapping("/list")
+    public ResponseEntity<List<Atm>> getListAtms(@RequestParam(required = false) String location) {
+        try {
             List<Atm> atms = new ArrayList<>();
 
-            if (location == null){
+            if (location == null) {
                 atmService.findListAtm().forEach(atms::add);
-            }else {
+            } else {
                 atmService.findByAtmFollowLocation(location).forEach(atms::add);
             }
 
-            if(atms.isEmpty()){
+            if (atms.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(atms, HttpStatus.OK);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/createAtm")
-    public ResponseEntity<Atm> createDataAtm(@RequestBody Atm atm){
-        try{
+    @PostMapping("/create")
+    public ResponseEntity<Atm> createDataAtm(@RequestBody Atm atm) {
+        try {
             Atm atm_new = atmService.createAtm(atm);
             return new ResponseEntity<>(atm_new, HttpStatus.CREATED);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/update/informationAtm/{id}")
-    public ResponseEntity<Atm> updateAtm(@PathVariable("id") long id, @RequestBody Atm atm){
-        try{
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Atm> updateAtm(@PathVariable("id") long id, @RequestBody Atm atm) {
+        try {
             return new ResponseEntity<>(atmService.updateAtm(atm, id), HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteAtm(@PathVariable("id") long id){
-        if (atmService.deleteAtm(id)){
+    public ResponseEntity<HttpStatus> deleteAtm(@PathVariable("id") long id) {
+        if (atmService.deleteAtm(id)) {
             return new ResponseEntity<>(HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

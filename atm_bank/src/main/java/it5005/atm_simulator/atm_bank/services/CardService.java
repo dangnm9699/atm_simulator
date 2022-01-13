@@ -73,9 +73,9 @@ public class CardService implements UserDetailsService {
         }
     }
 
-    public Card depositCardBalance(String number,double money) {
+    public Card depositCardBalance(String number, double money) {
         Date localDate = new Date();
-        try{
+        try {
             Card card_old = cardRepository.findByNumber(number);
             BigDecimal balance = card_old.getBalance();
             balance.add(new BigDecimal(money));
@@ -83,15 +83,19 @@ public class CardService implements UserDetailsService {
             card_old.setGoodThru(localDate);
             cardRepository.save(card_old);
             return card_old;
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public Card saveCard(Card card){
+    public Card saveCard(Card card) {
         card.setPinHash(passwordEncoder().encode(card.getPinHash()));
         cardRepository.save(card);
         return card;
+    }
+
+    public void save(Card card) {
+        cardRepository.save(card);
     }
 
 

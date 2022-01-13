@@ -48,6 +48,7 @@ public class CardController {
         return new RandomStuff("JWT Hợp lệ mới có thể thấy được message này");
     }
 
+    // id of User need create Card
     @PostMapping("/create/{id}")
     public ResponseEntity<String> createCard(@PathVariable("id") long id, @RequestBody Card card) {
         if (cardService.createCard(id, card)) {
@@ -59,40 +60,48 @@ public class CardController {
     }
 
     @PostMapping("/deposit/{number}")
-    public ResponseEntity<Card> depositCard(@PathVariable("number") String number, String amount){
+    public ResponseEntity<Card> depositCard(@PathVariable("number") String number, String amount) {
         Double money = Double.parseDouble(amount);
-        try{
+        try {
             Card card_new = cardService.depositCardBalance(number, money);
             return new ResponseEntity<>(card_new, HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/reset/pinHash/{number}")
-    public ResponseEntity<Card> resetPinHashCard(@PathVariable("number") String number, String pinHash){
-        try{
+    public ResponseEntity<Card> resetPinHashCard(@PathVariable("number") String number, String pinHash) {
+        try {
             Card card_new = cardService.loadCardByNumber(number);
             card_new.setPinHash(pinHash);
             return new ResponseEntity<>(cardService.saveCard(card_new), HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/{number}")
+    public ResponseEntity<Card> updateCard(@PathVariable("number") String number, @RequestBody Card card){
+        if(cardService.loadCardByNumber(number) != null){
+            return new ResponseEntity<>(cardService.saveCard(card), HttpStatus.OK);
+        }else{
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
     // check Balance card
-    @GetMapping("/balance/information/{number}")
-    public ResponseEntity<BigDecimal> checkBalance(@PathVariable("number") String number){
+    @GetMapping("/balance/{number}")
+    public ResponseEntity<BigDecimal> checkBalance(@PathVariable("number") String number) {
         BigDecimal amount = new BigDecimal("0");
-        try{
+        try {
             Card card_new = cardService.loadCardByNumber(number);
             BigDecimal balance = card_new.getBalance();
             System.out.println(balance);
             return new ResponseEntity<>(balance, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(amount, HttpStatus.NOT_FOUND);
         }
-
     }
 
 

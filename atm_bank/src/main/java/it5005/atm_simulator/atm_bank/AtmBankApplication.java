@@ -20,17 +20,15 @@ public class AtmBankApplication {
 //
 //    @Autowired
 //    PasswordEncoder passwordEncoder;
-
+//
 //    @Override
 //    public void run(String... args) throws Exception {
 //        User user = new User();
-//        user.setId(3L);
 //        user.setDescription("test user");
 //        user.setName("dangnm");
 //        userRepository.save(user);
 //
 //        Card card = new Card();
-//        card.setId(3L);
 //        card.setBalance(BigDecimal.valueOf(1000000));
 //        DateFormat df = new SimpleDateFormat("MM/yyyy");
 //        try {

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface AtmRepository extends JpaRepository<Atm, Long> {
     List<Atm> findByLocation(String location);
+
+    Atm findByIp(String ip);
 }

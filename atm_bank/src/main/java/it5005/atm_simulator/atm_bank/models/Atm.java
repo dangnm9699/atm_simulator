@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 
 @Entity
@@ -25,7 +24,7 @@ public class Atm implements Serializable {
 
     @NotNull
     @Column(name = "ip")
-    private BigDecimal ip;
+    private String ip;
 
     @NotNull
     @Column(name = "location")
@@ -51,11 +50,11 @@ public class Atm implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getIp() {
+    public String getIp() {
         return ip;
     }
 
-    public void setIp(BigDecimal ip) {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 

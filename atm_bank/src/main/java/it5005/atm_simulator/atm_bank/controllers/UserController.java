@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/information/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<User> getUserById(@PathVariable("name") String name) {
         try {
             User user = userService.findByName(name);
@@ -33,7 +33,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/update/information/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
         if (userService.updateUser(user, id)) {
             User user_new = userService.findById(id);
