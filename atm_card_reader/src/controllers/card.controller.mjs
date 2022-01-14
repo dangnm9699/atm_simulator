@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt'
 import env from 'dotenv'
 import * as cardHelpers from '../helpers/card.helper.mjs'
-import { body, validationResult } from 'express-validator'
 
 
 env.config()
@@ -20,11 +19,8 @@ const encode = async (req, res) => {
 }
 
 const decode = async (req, res) => {
-    const errors = validationResult(req).errors
-    if (errors.length > 0) {
-        return res.status(400).send('Incorrect format.')
-    }
-    const { token } = req.body
+    const { buffer } = req.file
+    const token = buffer.toString().trim()
     const decoded = await cardHelpers.decodeToken(token)
     if (!decoded) {
         return res.status(400).send('Incorrect token. Try again')
@@ -43,9 +39,15 @@ const decode = async (req, res) => {
     })
 }
 
-const validCardToken = [
-    body('token').not().isEmpty().trim().escape()
-]
+const validCardToken = (req, res, next) => {
+    const { mimetype, size } = req.file
+    const types = ["application/json", "application/octet-stream", "text/plain"]
+    if (types.includes(mimetype) && size <= 1000) {
+        next()
+    } else {
+        return res.status(400).send("Only accept json, txt, stream file types. File size less than 1KB.")
+    }
+}
 
 export {
     encode,
