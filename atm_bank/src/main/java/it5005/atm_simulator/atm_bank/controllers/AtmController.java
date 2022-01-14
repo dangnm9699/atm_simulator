@@ -17,7 +17,8 @@ public class AtmController {
     private AtmService atmService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<Atm>> getListAtms(@RequestParam(required = false) String location) {
+    public ResponseEntity<List<Atm>> getListAtms(
+            @RequestParam(required = false) String location) {
         try {
             List<Atm> atms = new ArrayList<>();
 

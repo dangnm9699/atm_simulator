@@ -46,11 +46,11 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         if (userService.deleteUser(id)) {
+            System.out.println("Remove User Sucess");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 }

@@ -1,10 +1,13 @@
 package it5005.atm_simulator.atm_bank.services;
 
+import it5005.atm_simulator.atm_bank.models.Card;
 import it5005.atm_simulator.atm_bank.models.User;
+import it5005.atm_simulator.atm_bank.repositories.CardRepository;
 import it5005.atm_simulator.atm_bank.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,6 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CardRepository cardRepository;
 
     public User findById(long id) {
         Optional<User> user_new = userRepository.findById(id);
@@ -43,6 +49,11 @@ public class UserService {
 
     public Boolean deleteUser(long id) {
         try {
+            Optional<User> user_now = userRepository.findById(id);
+            List<Card> cardList = cardRepository.findByUser(user_now.get());
+            for(Card car_now : cardList){
+                cardRepository.delete(car_now);
+            }
             userRepository.deleteById(id);
             return true;
         } catch (Exception e) {

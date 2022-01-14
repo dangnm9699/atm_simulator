@@ -60,7 +60,9 @@ public class CardController {
     }
 
     @PostMapping("/deposit/{number}")
-    public ResponseEntity<Card> depositCard(@PathVariable("number") String number, String amount) {
+    public ResponseEntity<Card> depositCard(
+            @PathVariable("number") String number,
+            @RequestBody String amount) {
         Double money = Double.parseDouble(amount);
         try {
             Card card_new = cardService.depositCardBalance(number, money);
@@ -71,7 +73,9 @@ public class CardController {
     }
 
     @PostMapping("/reset/pinHash/{number}")
-    public ResponseEntity<Card> resetPinHashCard(@PathVariable("number") String number, String pinHash) {
+    public ResponseEntity<Card> resetPinHashCard(
+            @PathVariable("number") String number,
+            @RequestBody String pinHash) {
         try {
             Card card_new = cardService.loadCardByNumber(number);
             card_new.setPinHash(pinHash);
@@ -82,10 +86,10 @@ public class CardController {
     }
 
     @PutMapping("/{number}")
-    public ResponseEntity<Card> updateCard(@PathVariable("number") String number, @RequestBody Card card){
-        if(cardService.loadCardByNumber(number) != null){
+    public ResponseEntity<Card> updateCard(@PathVariable("number") String number, @RequestBody Card card) {
+        if (cardService.loadCardByNumber(number) != null) {
             return new ResponseEntity<>(cardService.saveCard(card), HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
