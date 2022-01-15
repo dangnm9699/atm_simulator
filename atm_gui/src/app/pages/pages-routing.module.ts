@@ -26,10 +26,7 @@ const routes: Routes = [
         path:'home',
         component: CheckAccountBalanceComponent
       },
-      {
-        path:'select-language',
-        component: SelectLanguageComponent
-      },
+      
       {
         path:'select-service',
         component: SelectServiceComponent
@@ -82,7 +79,7 @@ const routes: Routes = [
       },
       {
         path:'',
-        redirectTo:'home',
+        redirectTo:'select-service',
         pathMatch:'full'
       }
     ]

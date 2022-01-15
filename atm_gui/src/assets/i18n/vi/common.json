@@ -9,6 +9,7 @@
     "wrongPin":"Bạn đã nhập sai mật khẩu {{wrongTimes}} lần",
     "selectServiceTitle" : "Hãy chọn dịch vụ bạn muốn sử dụng",
     "selectMoneyTitle": "Hãy chọn số tiền cần rút\nĐơn vị tiền tệ : VND",
+    "wrongCard": "Thẻ đưa vào không hợp lệ\nHãy kiểm tra lại chiều đưa vào của thẻ\nVui lòng nhận lại thẻ",
     "cardOut": "Bạn đã hủy bỏ giao dịch\nVui lòng nhận lại thẻ",
     "accBalance": "Kiểm tra số dư tài khoản\nSố dư tài khoản hiện tại:",
     "inputMoney": "Nhập số tiền cần rút\nSố tiền nhập vào phải là bội số của",
