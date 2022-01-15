@@ -5,7 +5,7 @@
       "password": "Password here"
     },
     "footerTitle": "HPG - Shared belief in the future",
-    "validatePin":"Welcome, {{userName}}\nPlease enter your PIN",
+    "validatePin":"Welcome, {{name}}\nPlease enter your PIN",
     "selectServiceTitle": "Please select service you want to use",
     "selectMoneyTitle": "Please select amount to withdraw\nCurrency : VND",
     "cardOut": "You canceled the transaction\nPlease get your card back",

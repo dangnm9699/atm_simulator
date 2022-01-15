@@ -2,7 +2,7 @@
     <app-pending class="h-100" [textInput]="'wrongPin' | translate:wrong" [hidden]="!replaceFail" (click)="navigateToLogin()" [colorCode]="0" ></app-pending>
     <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
     <div [hidden]="replaceFail || replaceSuccess">
-        <pre>{{'validatePin' | translate:user}}</pre>
+        <pre>{{'validatePin' | translate:_userInfo}}</pre>
         <div id="inputBox">
             <div>
                 <p>{{show}}<span>{{blink}}</span><span>{{blank}}</span></p>
