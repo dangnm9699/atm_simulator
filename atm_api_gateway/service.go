@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/url"
 	"os"
 )
@@ -13,7 +12,6 @@ type Service struct {
 }
 
 func CreateAtmCashDispenserSvc() *Service {
-	log.Println("Creating service with host =", os.Getenv("ATM_CASH_DISPENSER_URL"))
 	return &Service{
 		name:   "ATM CASH DISPENSER",
 		host:   os.Getenv("ATM_CASH_DISPENSER_URL"),
@@ -26,6 +24,14 @@ func CreateAtmCardReaderSvc() *Service {
 		name:   "ATM CARD READER",
 		host:   os.Getenv("ATM_CARD_READER_URL"),
 		prefix: "/acr/",
+	}
+}
+
+func CreateAtmBankSvc() *Service {
+	return &Service{
+		name:   "ATM BANK",
+		host:   os.Getenv("ATM_BANK_URL"),
+		prefix: "/ab/",
 	}
 }
 
