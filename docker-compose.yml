@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: "mysql:latest"
+  atm_gui:
+    build: atm_gui
+    ports:
+      - "3000:3000"
+  atm_api_gateway:
+    build: atm_api_gateway
+    ports:
+      - "8080:8080"
+  atm_card_reader:
+    build: atm_card_reader
+    ports:
+      - "3001:3001"
+  atm_cash_dispenser:
+    build: atm_cash_dispenser
+    ports:
+      - "3002:3002"
+  atm_bank:
+    build: atm_bank
+    ports:
+      - "3003:3003"
