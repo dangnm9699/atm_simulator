@@ -13,14 +13,12 @@ services:
     volumes:
       - "${HOME}/mysql-persistent-volumes:/var/lib/mysql"
     restart: always
-  # atm_gui:
-  #   build: atm_gui
-  #   ports:
-  #     - "3000:3000"
-  # atm_card_reader:
-  #   build: atm_card_reader
-  #   ports:
-  #     - "3001:3001"
+  atm_card_reader:
+    build: atm_card_reader
+    container_name: atm_card_reader
+    ports:
+      - "3001:3001"
+    restart: always
   atm_cash_dispenser:
     build: atm_cash_dispenser
     container_name: atm_cash_dispenser
@@ -47,9 +45,14 @@ services:
     depends_on:
       - atm_cash_dispenser
       - atm_bank
+      - atm_card_reader
     build: atm_api_gateway
     ports:
       -  8080:8080
     expose:
       - 8080
     restart: always
+  # atm_gui:
+  #   build: atm_gui
+  #   ports:
+  #     - "3000:3000"
