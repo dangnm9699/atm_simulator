@@ -1,25 +1,55 @@
 version: "3.9"
-
 services:
-  mysql:
+  mysqldb:
     image: "mysql:latest"
-  atm_gui:
-    build: atm_gui
+    container_name: mysqldb
+    environment:
+      - MYSQL_ROOT_PASSWORD=aA123456@
+      - MYSQL_DATABASE=atm_bank
+    expose:
+      - 3306
     ports:
-      - "3000:3000"
-  atm_api_gateway:
-    build: atm_api_gateway
-    ports:
-      - "8080:8080"
-  atm_card_reader:
-    build: atm_card_reader
-    ports:
-      - "3001:3001"
+      - 3306:3306
+    volumes:
+      - "${HOME}/mysql-persistent-volumes:/var/lib/mysql"
+    restart: always
+  # atm_gui:
+  #   build: atm_gui
+  #   ports:
+  #     - "3000:3000"
+  # atm_card_reader:
+  #   build: atm_card_reader
+  #   ports:
+  #     - "3001:3001"
   atm_cash_dispenser:
     build: atm_cash_dispenser
+    container_name: atm_cash_dispenser
     ports:
-      - "3002:3002"
+      - 3002:3002
+    restart: always
   atm_bank:
+    container_name: atm_bank
+    depends_on:
+      - mysqldb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/atm_bank?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=aA123456@
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     build: atm_bank
     ports:
-      - "3003:3003"
+      - 3003:3003
+    volumes:
+      - "${HOME}/.m2:/root/.m2"
+    restart: always
+  atm_api_gateway:
+    container_name: atm_api_gateway
+    depends_on:
+      - atm_cash_dispenser
+      - atm_bank
+    build: atm_api_gateway
+    ports:
+      -  8080:8080
+    expose:
+      - 8080
+    restart: always
