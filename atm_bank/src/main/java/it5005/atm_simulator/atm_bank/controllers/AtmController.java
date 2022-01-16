@@ -1,6 +1,8 @@
 package it5005.atm_simulator.atm_bank.controllers;
 
 import it5005.atm_simulator.atm_bank.models.Atm;
+import it5005.atm_simulator.atm_bank.payload.AtmRequest;
+import it5005.atm_simulator.atm_bank.payload.AtmResponse;
 import it5005.atm_simulator.atm_bank.services.AtmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,8 @@ public class AtmController {
     @Autowired
     private AtmService atmService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Atm>> getListAtms(
+    @GetMapping("")
+    public ResponseEntity<List<AtmResponse>> getListAtms(
             @RequestParam(required = false) String location) {
         try {
             List<Atm> atms = new ArrayList<>();
@@ -31,34 +33,49 @@ public class AtmController {
             if (atms.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(atms, HttpStatus.OK);
+            List<AtmResponse> atmResponses = new ArrayList<>();
+            for(Atm atm:atms){
+                atmResponses.add(new AtmResponse(atm));
+            }
+            return new ResponseEntity<>(atmResponses, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Atm> createDataAtm(@RequestBody Atm atm) {
+    @PostMapping("")
+    public ResponseEntity<AtmResponse> createDataAtm(@RequestBody AtmRequest atmRequest) {
         try {
+            Atm atm = new Atm();
+            atm.setName(atmRequest.getName());
+            atm.setIp(atmRequest.getIp());
+            atm.setLocation(atmRequest.getLocation());
+            atm.setDescription(atmRequest.getDescription());
             Atm atm_new = atmService.createAtm(atm);
-            return new ResponseEntity<>(atm_new, HttpStatus.CREATED);
+            return new ResponseEntity<>(new AtmResponse(atm_new), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Atm> updateAtm(@PathVariable("id") long id, @RequestBody Atm atm) {
+    @PutMapping("")
+    public ResponseEntity<AtmResponse> updateAtm(@RequestParam long id, @RequestBody AtmRequest atmRequest) {
         try {
-            return new ResponseEntity<>(atmService.updateAtm(atm, id), HttpStatus.OK);
+            Atm atm = new Atm();
+            atm.setName(atmRequest.getName());
+            atm.setIp(atmRequest.getIp());
+            atm.setLocation(atmRequest.getLocation());
+            atm.setDescription(atmRequest.getDescription());
+            Atm atm_new = atmService.updateAtm(atm, id);
+            return new ResponseEntity<>(new AtmResponse(atm_new), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteAtm(@PathVariable("id") long id) {
+    @DeleteMapping("")
+    public ResponseEntity<HttpStatus> deleteAtm(@RequestParam long id) {
         if (atmService.deleteAtm(id)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {

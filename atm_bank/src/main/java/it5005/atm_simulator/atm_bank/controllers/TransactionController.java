@@ -1,6 +1,8 @@
 package it5005.atm_simulator.atm_bank.controllers;
 
 import it5005.atm_simulator.atm_bank.models.Transaction;
+import it5005.atm_simulator.atm_bank.payload.TransactionRequest;
+import it5005.atm_simulator.atm_bank.payload.TransactionResponse;
 import it5005.atm_simulator.atm_bank.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,16 +15,14 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-    @PostMapping("/withdraw/{number}/{ip}")
-    public ResponseEntity<Transaction> withDraw(
-            @PathVariable("number") String number,
-            @PathVariable("ip") String ip,
-            @RequestBody String money
+    @PostMapping("/withdraw")
+    public ResponseEntity<TransactionResponse> withDraw(
+            @RequestBody TransactionRequest transactionRequest
     ) {
-        Double amount = Double.parseDouble(money);
-        Transaction transaction_new = transactionService.withDraw(number, ip, amount);
+        Double amount = Double.parseDouble(transactionRequest.getMoney());
+        Transaction transaction_new = transactionService.withDraw(transactionRequest.getNumber(), transactionRequest.getIp(), amount);
         if (transaction_new != null) {
-            return new ResponseEntity<>(transaction_new, HttpStatus.OK);
+            return new ResponseEntity<>(new TransactionResponse(transaction_new), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }

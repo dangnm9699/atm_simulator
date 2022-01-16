@@ -2,6 +2,9 @@ package it5005.atm_simulator.atm_bank.controllers;
 
 import it5005.atm_simulator.atm_bank.jwt.JwtTokenProvider;
 import it5005.atm_simulator.atm_bank.models.*;
+import it5005.atm_simulator.atm_bank.payload.CardDepositRequest;
+import it5005.atm_simulator.atm_bank.payload.CardRequest;
+import it5005.atm_simulator.atm_bank.payload.CardResponse;
 import it5005.atm_simulator.atm_bank.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,8 +35,8 @@ public class CardController {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
+                        loginRequest.getNumber(),
+                        loginRequest.getPinHash()
                 )
         );
 
@@ -49,54 +52,70 @@ public class CardController {
     }
 
     // id of User need create Card
-    @PostMapping("/create/{id}")
-    public ResponseEntity<String> createCard(@PathVariable("id") long id, @RequestBody Card card) {
-        if (cardService.createCard(id, card)) {
+    @PostMapping("")
+    public ResponseEntity<String> createCard(@RequestParam long user_id, @RequestBody CardRequest cardRequest) {
+        Card card = new Card();
+        card.setNumber(cardRequest.getNumber());
+        card.setPinHash(cardRequest.getPinHash());
+        card.setBalance(cardRequest.getBalance());
+
+        if (cardService.createCard(user_id, card)) {
             Card card_new = cardService.loadCardByNumber(card.getNumber());
-            return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+            if (card_new == null){
+                cardService.save(card);
+                return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @PostMapping("/deposit/{number}")
-    public ResponseEntity<Card> depositCard(
-            @PathVariable("number") String number,
-            @RequestBody String amount) {
-        Double money = Double.parseDouble(amount);
+    @PostMapping("/deposit")
+    public ResponseEntity<CardResponse> depositCard(
+            @RequestBody CardDepositRequest cardDepositRequest) {
+        Double money = Double.parseDouble(cardDepositRequest.getAmount());
         try {
-            Card card_new = cardService.depositCardBalance(number, money);
-            return new ResponseEntity<>(card_new, HttpStatus.OK);
+            Card card_new = cardService.depositCardBalance(cardDepositRequest.getNumber(), money);
+            return new ResponseEntity<>(new CardResponse(card_new), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/reset/pinHash/{number}")
-    public ResponseEntity<Card> resetPinHashCard(
-            @PathVariable("number") String number,
-            @RequestBody String pinHash) {
+    @PostMapping("/pinHash")
+    public ResponseEntity<String> resetPinHashCard(
+            @RequestBody LoginRequest loginRequest) {
         try {
-            Card card_new = cardService.loadCardByNumber(number);
-            card_new.setPinHash(pinHash);
-            return new ResponseEntity<>(cardService.saveCard(card_new), HttpStatus.OK);
+            Card card_new = cardService.loadCardByNumber(loginRequest.getNumber());
+            card_new.setPinHash(loginRequest.getPinHash());
+            cardService.saveCard(card_new);
+            return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/{number}")
-    public ResponseEntity<Card> updateCard(@PathVariable("number") String number, @RequestBody Card card) {
+    @PutMapping("")
+    public ResponseEntity<CardResponse> updateCard(@RequestBody CardRequest cardRequest) {
+        String number = cardRequest.getNumber();
+        Card card = new Card();
+        card.setNumber(cardRequest.getNumber());
+        card.setPinHash(cardRequest.getPinHash());
+        card.setBalance(cardRequest.getBalance());
         if (cardService.loadCardByNumber(number) != null) {
-            return new ResponseEntity<>(cardService.saveCard(card), HttpStatus.OK);
+            cardService.saveCard(card);
+            return new ResponseEntity<>(new CardResponse(card), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
     // check Balance card
-    @GetMapping("/balance/{number}")
-    public ResponseEntity<BigDecimal> checkBalance(@PathVariable("number") String number) {
+    @GetMapping("/balance")
+    public ResponseEntity<BigDecimal> checkBalance(@RequestParam String number) {
         BigDecimal amount = new BigDecimal("0");
         try {
             Card card_new = cardService.loadCardByNumber(number);
@@ -105,6 +124,16 @@ public class CardController {
             return new ResponseEntity<>(balance, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(amount, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("")
+    public ResponseEntity<CardResponse> getCardDetail(@RequestParam String number){
+        try {
+            Card card_new = cardService.loadCardByNumber(number);
+            return new ResponseEntity<>(new CardResponse(card_new), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
