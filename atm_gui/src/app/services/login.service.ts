@@ -16,32 +16,32 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(login: any): Observable<EntityResponseType> {
-    return this.http.post<LoginProgramModel>(`${environment.apiUrl}/login`, login, { observe: 'response' });
+    return this.http.post<LoginProgramModel>(`${environment.ATM_API_GATEWAY}/login`, login, { observe: 'response' });
   }
 
   authenticationcate(authenticationcate: any): Observable<EntityResponseType> {
-    return this.http.post<LoginProgramModel>(`${environment.apiUrl}/authenticationcate`, authenticationcate, { observe: 'response' });
+    return this.http.post<LoginProgramModel>(`${environment.ATM_API_GATEWAY}/authenticationcate`, authenticationcate, { observe: 'response' });
   }
 
   changePass(changePass: LoginProgramModel): Observable<EntityResponseType> {
-    return this.http.post<LoginProgramModel>(`${environment.apiUrl}/changePass`, changePass, { observe: 'response' });
+    return this.http.post<LoginProgramModel>(`${environment.ATM_API_GATEWAY}/changePass`, changePass, { observe: 'response' });
   }
   getUserLogin() {
-    return this.http.get<any>(`${environment.apiUrl}/getUserName`, { observe: 'response' })
+    return this.http.get<any>(`${environment.ATM_API_GATEWAY}/getUserName`, { observe: 'response' })
   }
   getTenant() {
-    return this.http.get<any>(`${environment.apiUrl}/get-tenant`, { observe: 'response' })
+    return this.http.get<any>(`${environment.ATM_API_GATEWAY}/get-tenant`, { observe: 'response' })
   }
   sendSimpleEmail(sendSimpleEmail: LoginProgramModel): Observable<EntityResponseType> {
-    return this.http.post<LoginProgramModel>(`${environment.apiUrl}/sendSimpleEmail`, sendSimpleEmail, { observe: 'response' });
+    return this.http.post<LoginProgramModel>(`${environment.ATM_API_GATEWAY}/sendSimpleEmail`, sendSimpleEmail, { observe: 'response' });
   }
 
   delete(id: any) {
-    return this.http.delete(`${environment.apiUrl}/config-menu-items/${id}`);
+    return this.http.delete(`${environment.ATM_API_GATEWAY}/config-menu-items/${id}`);
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<any>(`${environment.apiUrl}/config-menu-items/allInfo/${id}`, { observe: 'response' });
+    return this.http.get<any>(`${environment.ATM_API_GATEWAY}/config-menu-items/allInfo/${id}`, { observe: 'response' });
   }
   fakeApiPending(ms: number): Observable<any> {
     if (ms <= 5000) {
@@ -62,7 +62,7 @@ export class LoginService {
   getUserInfo(file: File){
     let formData: FormData = new FormData()
     formData.append('token', file, file.name)
-    return this.http.post<any>(`${environment.apiUrl}/read_card/decode`, formData, { observe: 'response' }).pipe(map(e => {console.log(e); return e}))
+    return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_CARD_READER}/read_card/decode`, formData, { observe: 'response' })
   }
 }
 
