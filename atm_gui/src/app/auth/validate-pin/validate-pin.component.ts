@@ -18,15 +18,14 @@ export class ValidatePinComponent implements OnInit {
   blank: String = "-----"
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
-  user = {
-    userName: "Phạm Văn Chung"
-  }
+  _userInfo: Object;
   constructor(
     private router: Router,
     private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
+    this._userInfo = JSON.parse(localStorage.getItem('_userInfo'));
   }
 
   async numpadTrigger(value) {

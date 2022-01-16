@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { concatMap, timeout, catchError, delay } from 'rxjs/operators';
+import { concatMap, timeout, catchError, delay, map } from 'rxjs/operators';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { LoginProgramModel } from '../models/login-program.model';
@@ -45,7 +45,7 @@ export class LoginService {
   }
   fakeApiPending(ms: number): Observable<any> {
     if (ms <= 5000) {
-      return this.getUserInfo().pipe(delay(ms))
+      // return this.getUserInfo().pipe(delay(ms))
     }
     return of(ms).pipe(delay(ms)).pipe(()=>throwError('123'))
   }
@@ -59,13 +59,10 @@ export class LoginService {
     })
   }
 
-  getUserInfo(){
-    // let formData: FormData = new FormData()
-    // formData.append('uploadFile', file, file.name)
-    // return this.http.post<any>(`${environment.apiUrl}/read_card/decode`, formData, { observe: 'response' })
-    let fakeObj = { token : "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImNhcmROdW1iZXIiOiIxNzUwNTEyOTc1NzMyOTA3NTMyNDAwMyIsIm5hbWUiOiJQSEFNIFZBTiBDSFVORyIsImdlbmRlciI6Im1hbGUiLCJjaXRpemVuSWQiOiIxNjQ2NDU3NzQifSwiaWF0IjoxNjQwMDk0MDE3LCJleHAiOjQ3OTU4NTQwMTd9.9f6x7wjIYYs5dbRyDm_cwiWYFknjGgyeYbzkpV_hnc21mv_HDrKpfEHBv9JlphdciW5pdrZ27OrUdm-SNCFyIA" }
-    console.log(JSON.stringify( fakeObj ))
-    return this.http.post<any>(`${environment.apiUrl}/read_card/decode`, fakeObj, { observe: 'response' })
+  getUserInfo(file: File){
+    let formData: FormData = new FormData()
+    formData.append('token', file, file.name)
+    return this.http.post<any>(`${environment.apiUrl}/read_card/decode`, formData, { observe: 'response' }).pipe(map(e => {console.log(e); return e}))
   }
 }
 

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -10,7 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class SelectLanguageComponent implements OnInit {
 
   title = "Chọn ngôn ngữ của bạn\nChoose your language\n选择你的语言"
+  _userInfo: Object;
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private translateService: TranslateService
   ) { }

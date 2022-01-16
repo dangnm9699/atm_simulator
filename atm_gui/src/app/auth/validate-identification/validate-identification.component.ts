@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject, interval, timer, throwError } from 'rxjs';
+import { Subject, interval, timer, throwError, of } from 'rxjs';
 import { catchError, delay, takeUntil } from 'rxjs/operators';
 import { LoginService } from '../../services/login.service'
 
@@ -63,21 +63,37 @@ export class ValidateIdentificationComponent implements OnInit {
   //   // this.router.navigate(["/auth/select-language"])
   // }
 
+  redirectTo(uri:string){
+    console.log(123,uri);
+    
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+ }
+
   onSelect(event) {
     this.file = event.addedFiles[0];
     this.replace = true;
-    if (this.file && this.file.type == "application/pdf") {
+    if (this.file) {
       console.log(2);
       
-      this.loginService.fakeApi(6000).pipe(delay(6000)).subscribe(res => {
-        console.log(1);
+      this.loginService.getUserInfo(this.file).pipe(delay(1000)).subscribe(res => {
+        if(res.body && res.body["cardNumber"] && res.body["name"]){
+          localStorage.setItem('_userInfo', JSON.stringify(res.body));
+          this.router.navigate(["/auth/select-language"])
+        } else {
+          console.log(12312);
+          this.replace=false
+          this.replaceFail=true
+        }
         
-        this.router.navigate(["/auth/select-language"])
       }, err => {
-        console.log(3);
-        
+        console.log(1231232);
         this.replace=false
         this.replaceFail=true
+        // of().pipe(delay(1000)).subscribe(()=>this.redirectTo("/auth"));
+        setTimeout(() =>{
+          this.redirectTo("auth")
+        },3000);
       });
       return ;
     }
@@ -88,6 +104,8 @@ export class ValidateIdentificationComponent implements OnInit {
     })
     // this.router.navigate(["/auth/select-language"])
   }
+
+  
 
   onRemove(event) {
     this.file = null;
