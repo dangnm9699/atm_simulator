@@ -78,7 +78,7 @@ public class CardService implements UserDetailsService {
         try {
             Card card_old = cardRepository.findByNumber(number);
             BigDecimal balance = card_old.getBalance();
-            balance.add(new BigDecimal(money));
+            balance = balance.add(new BigDecimal(money));
             card_old.setBalance(balance);
             card_old.setGoodThru(localDate);
             cardRepository.save(card_old);

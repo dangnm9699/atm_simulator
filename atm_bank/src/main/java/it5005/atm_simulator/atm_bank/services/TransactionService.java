@@ -35,7 +35,7 @@ public class TransactionService {
                 cardService.save(card);
                 System.out.println("Transaction Success");
                 Transaction transaction_new = new Transaction();
-                transaction_new.setName(card.getNumber() + "withDraw" + money);
+                transaction_new.setName(card.getNumber() + " withDraw " + money);
                 transaction_new.setAmount(new BigDecimal(money));
                 transaction_new.setCreated_at(localDate);
                 transaction_new.setDescription("Success");
