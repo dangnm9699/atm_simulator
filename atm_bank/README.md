@@ -1,5 +1,5 @@
 # atm_bank
-InInformation Systems Design Project / SoICT / HUST / 20211
+Information Systems Design Project / SoICT / HUST / 20211
 
 ## Frameworks and Libraries
 * Spring Boot
