@@ -1,6 +1,8 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-check-account-balance',
@@ -9,14 +11,31 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class CheckAccountBalanceComponent implements OnInit {
 
-  accountBalance : Number = 12450000;
+  accountBalance : Number;
   replaceFail: boolean = false;
   constructor(
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    let _userInfo = JSON.parse(localStorage.getItem('_userInfo'))
+    let bearer = localStorage.getItem('httpHeaders')
+    let headers = new HttpHeaders()
+    console.log(bearer, _userInfo, _userInfo["cardNumber"]);
+    if(bearer && _userInfo && _userInfo["cardNumber"]){
+      this.userService.getCardDetail(_userInfo["cardNumber"], {Authorization: bearer}).subscribe(e =>{
+        if(e.body["balance"]){
+          this.accountBalance = e.body["balance"]
+        } else {
+          this.router.navigate["/404"];
+        }
+      });
+    }else{
+      this.router.navigate["/404"];
+    }
+    
   }
 
   navigateSelectMoney() {
@@ -24,9 +43,7 @@ export class CheckAccountBalanceComponent implements OnInit {
 
   select(choice: boolean) {
     if (choice) {
-      this.loginService.fakeApiPending(0).subscribe(e => {
-        this.router.navigate(['/pages/select-service']);
-      })
+      this.router.navigate(['/pages/select-service']);
       return;
     }
     this.replaceFail = true;

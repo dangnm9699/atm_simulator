@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { concatMap, timeout, catchError, delay, map } from 'rxjs/operators';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { LoginProgramModel } from '../models/login-program.model';
 import * as EventEmitter from 'events';
@@ -47,7 +47,7 @@ export class LoginService {
     if (ms <= 5000) {
       // return this.getUserInfo().pipe(delay(ms))
     }
-    return of(ms).pipe(delay(ms)).pipe(()=>throwError('123'))
+    return of(ms).pipe(delay(ms))
   }
 
   fakeApi(ms: number): Observable<any> {
@@ -63,6 +63,13 @@ export class LoginService {
     let formData: FormData = new FormData()
     formData.append('token', file, file.name)
     return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_CARD_READER}/read_card/decode`, formData, { observe: 'response' })
+  }
+
+  authenticate(loginForm: any){
+    console.log(loginForm);
+    
+    return this.http.post<any>(`http://localhost:8080${environment.ATM_BANK}/card/login`, loginForm, { observe: 'response' })
+    // return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_BANK}/card/login`, loginForm, { observe: 'response' })
   }
 }
 

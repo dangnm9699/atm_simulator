@@ -28,6 +28,7 @@ import {LocalStorageService, SessionStorageService} from "ngx-webstorage";
 import {AuthInterceptor} from './interceptor/auth.interceptor'
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from './shared/shared.module';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,6 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
     UsersComponent,
     CreateUserComponent,
     EditUserComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

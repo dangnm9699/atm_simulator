@@ -15,6 +15,9 @@ pre {
 
 #inputBox {
     height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #inputBox > div {
@@ -37,6 +40,6 @@ p{
 //     border-left: 5px solid;
 // }
 
-app-numpad {
-    height: 55%;
-}
+// app-numpad {
+//     height: 55%;
+// }
