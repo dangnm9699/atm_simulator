@@ -13,18 +13,18 @@ services:
     restart: always
   atm_card_reader:
     build: atm_card_reader
-    container_name: atm_card_reader
+    container_name: atm-card-reader
     ports:
       - 3001:3001
     restart: always
   atm_cash_dispenser:
     build: atm_cash_dispenser
-    container_name: atm_cash_dispenser
+    container_name: atm-cash-dispenser
     ports:
       - 3002:3002
     restart: always
   atm_bank:
-    container_name: atm_bank
+    container_name: atm-bank
     depends_on:
       - mysqldb
     environment:
@@ -39,7 +39,7 @@ services:
       - "${HOME}/.m2:/root/.m2"
     restart: always
   atm_api_gateway:
-    container_name: atm_api_gateway
+    container_name: atm-api-gateway
     depends_on:
       - atm_cash_dispenser
       - atm_bank
