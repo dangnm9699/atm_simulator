@@ -1,5 +1,7 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs/operators';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -26,6 +28,8 @@ export class ValidatePinComponent implements OnInit {
 
   ngOnInit(): void {
     this._userInfo = JSON.parse(localStorage.getItem('_userInfo'));
+    console.log(this._userInfo);
+    
   }
 
   async numpadTrigger(value) {
@@ -34,7 +38,7 @@ export class ValidatePinComponent implements OnInit {
     }
     
     this.blink = String(value)
-    await this.timeout(500)
+    // await this.timeout(500)
     this.blink = "_"
     this.amount = this.amount + String(value)
     this.show = '*'.repeat(this.amount.length)
@@ -65,11 +69,23 @@ export class ValidatePinComponent implements OnInit {
   submitTrigger(value) {
     if (this.amount.length != 6) {
       return;
-    } else if(this.amount.trim() == "123456"){
-      localStorage.setItem('httpHeaders', "123");
+    }
+    if(this._userInfo["cardNumber"]){    
       this.replaceSuccess = true;
-      this.loginService.fakeApiPending(5000).subscribe(e => {
+      this.loginService.authenticate({number:this._userInfo["cardNumber"], pinHash:this.amount}).pipe(delay(4000)).subscribe(e =>{       
+        localStorage.setItem('httpHeaders', e.body["tokenType"] + " " + e.body["accessToken"]);
         this.router.navigate(['/pages/select-service']);
+      }, err =>{
+        this.replaceSuccess = true;
+        setTimeout(()=>{
+          this.replaceSuccess = false;
+          this.replaceFail = true;
+          setTimeout(() => {
+            console.log(123123);
+            localStorage.clear();
+            this.router.navigate(["/auth/login"])
+          },3000);
+        }, 4000);
       })
     }else{
       this.replaceSuccess = true;
