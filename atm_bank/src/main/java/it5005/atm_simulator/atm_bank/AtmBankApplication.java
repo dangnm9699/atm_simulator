@@ -37,8 +37,8 @@ public class AtmBankApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user = new User();
-        user.setDescription("test user");
-        user.setName("dangnm");
+        user.setDescription("test user2");
+        user.setName("dangnm2");
         if(userRepository.findByName(user.getName()) != null){
             System.out.println("User already exists ");
             return;
@@ -56,9 +56,9 @@ public class AtmBankApplication implements CommandLineRunner {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        card.setNumber("1234567890913345");
+        card.setNumber("789788488912345");
         card.setStatus(true);
-        card.setPinHash(passwordEncoder.encode("password"));
+        card.setPinHash(passwordEncoder.encode("123456"));
         card.setUser(user);
 
         if(cardRepository.findByNumber(card.getNumber()) != null){

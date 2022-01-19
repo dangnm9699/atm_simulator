@@ -38,7 +38,7 @@ export class ValidatePinComponent implements OnInit {
     }
     
     this.blink = String(value)
-    await this.timeout(500)
+    // await this.timeout(500)
     this.blink = "_"
     this.amount = this.amount + String(value)
     this.show = '*'.repeat(this.amount.length)
@@ -72,9 +72,20 @@ export class ValidatePinComponent implements OnInit {
     }
     if(this._userInfo["cardNumber"]){    
       this.replaceSuccess = true;
-      this.loginService.authenticate({number:this._userInfo["cardNumber"], pinHash:"password"}).pipe(delay(4000)).subscribe(e =>{       
+      this.loginService.authenticate({number:this._userInfo["cardNumber"], pinHash:this.amount}).pipe(delay(4000)).subscribe(e =>{       
         localStorage.setItem('httpHeaders', e.body["tokenType"] + " " + e.body["accessToken"]);
         this.router.navigate(['/pages/select-service']);
+      }, err =>{
+        this.replaceSuccess = true;
+        setTimeout(()=>{
+          this.replaceSuccess = false;
+          this.replaceFail = true;
+          setTimeout(() => {
+            console.log(123123);
+            localStorage.clear();
+            this.router.navigate(["/auth/login"])
+          },3000);
+        }, 4000);
       })
     }else{
       this.replaceSuccess = true;
