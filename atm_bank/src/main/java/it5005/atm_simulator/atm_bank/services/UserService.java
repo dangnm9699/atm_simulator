@@ -51,7 +51,7 @@ public class UserService {
         try {
             Optional<User> user_now = userRepository.findById(id);
             List<Card> cardList = cardRepository.findByUser(user_now.get());
-            for(Card car_now : cardList){
+            for (Card car_now : cardList) {
                 cardRepository.delete(car_now);
             }
             userRepository.deleteById(id);

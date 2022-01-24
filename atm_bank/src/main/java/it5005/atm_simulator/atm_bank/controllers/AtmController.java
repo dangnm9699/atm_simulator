@@ -34,7 +34,7 @@ public class AtmController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             List<AtmResponse> atmResponses = new ArrayList<>();
-            for(Atm atm:atms){
+            for (Atm atm : atms) {
                 atmResponses.add(new AtmResponse(atm));
             }
             return new ResponseEntity<>(atmResponses, HttpStatus.OK);
@@ -46,6 +46,9 @@ public class AtmController {
 
     @PostMapping("")
     public ResponseEntity<AtmResponse> createDataAtm(@RequestBody AtmRequest atmRequest) {
+        if (atmService.findByIp(atmRequest.getIp()) != null) {
+            return new ResponseEntity<>(null, HttpStatus.ALREADY_REPORTED);
+        }
         try {
             Atm atm = new Atm();
             atm.setName(atmRequest.getName());
@@ -61,6 +64,9 @@ public class AtmController {
 
     @PutMapping("")
     public ResponseEntity<AtmResponse> updateAtm(@RequestParam long id, @RequestBody AtmRequest atmRequest) {
+        if (atmService.findByIp(atmRequest.getIp()) == null) {
+            return new ResponseEntity<>(null, HttpStatus.ALREADY_REPORTED);
+        }
         try {
             Atm atm = new Atm();
             atm.setName(atmRequest.getName());

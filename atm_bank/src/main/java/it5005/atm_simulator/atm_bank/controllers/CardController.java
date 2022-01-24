@@ -59,18 +59,15 @@ public class CardController {
         card.setPinHash(cardRequest.getPinHash());
         card.setBalance(cardRequest.getBalance());
 
-        if (cardService.createCard(user_id, card)) {
-            Card card_new = cardService.loadCardByNumber(card.getNumber());
-            if (card_new == null){
-                cardService.save(card);
+        if (cardService.loadCardByNumber(cardRequest.getNumber()) == null){
+            if (cardService.createCard(user_id, card)){
                 return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-            }else {
-                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-
-        } else {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+
     }
 
     @PostMapping("/deposit")
@@ -128,11 +125,11 @@ public class CardController {
     }
 
     @GetMapping("")
-    public ResponseEntity<CardResponse> getCardDetail(@RequestParam String number){
+    public ResponseEntity<CardResponse> getCardDetail(@RequestParam String number) {
         try {
             Card card_new = cardService.loadCardByNumber(number);
             return new ResponseEntity<>(new CardResponse(card_new), HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }

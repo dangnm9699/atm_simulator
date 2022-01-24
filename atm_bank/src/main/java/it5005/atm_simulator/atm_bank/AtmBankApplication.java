@@ -36,36 +36,38 @@ public class AtmBankApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        String Descrition = "Init user";
+        String Name = "Hoang Manh Hung";
+        String Number = "111222333888";
+        String password = "123456";
+
         User user = new User();
-        user.setDescription("test user");
-        user.setName("dangnm");
-        if(userRepository.findByName(user.getName()) != null){
+        user.setDescription(Descrition);
+        user.setName(Name);
+        if (userRepository.findByName(user.getName()) != null) {
             System.out.println("User already exists ");
             return;
         }
-
-
         Card card = new Card();
         card.setBalance(BigDecimal.valueOf(1000000));
         DateFormat df = new SimpleDateFormat("MM/yyyy");
         try {
-            Date goodThru = df.parse("06/25");
+            Date goodThru = df.parse("01/25");
             card.setGoodThru(goodThru);
-            Date validFrom = df.parse("06/20");
+            Date validFrom = df.parse("01/20");
             card.setValidFrom(validFrom);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        card.setNumber("1234567890913345");
+        card.setNumber(Number);
         card.setStatus(true);
-        card.setPinHash(passwordEncoder.encode("password"));
+        card.setPinHash(passwordEncoder.encode(password));
         card.setUser(user);
 
-        if(cardRepository.findByNumber(card.getNumber()) != null){
+        if (cardRepository.findByNumber(card.getNumber()) != null) {
             System.out.println("Card already exists ");
             return;
         }
-
         userRepository.save(user);
         cardRepository.save(card);
         System.out.println(user);

@@ -98,5 +98,21 @@ public class CardService implements UserDetailsService {
         cardRepository.save(card);
     }
 
+    public boolean checkStatusCard(String number) {
+        Card card_now = cardRepository.findByNumber(number);
+
+        if (card_now != null) {
+            if (card_now.getStatus()) {
+                System.out.println("Card is action");
+                return true;
+            } else {
+                System.out.println("Card is not action");
+                return false;
+            }
+        }
+        System.out.println("Card is not exit");
+        return false;
+    }
+
 
 }

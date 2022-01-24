@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
     Card findByNumber(String number);
+
     List<Card> findByUser(User user);
 }

@@ -21,7 +21,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserById(@RequestBody String name) {
         try {
             User user = userService.findByName(name);
-            return new ResponseEntity<>( new UserResponse(user), HttpStatus.OK);
+            return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -10,18 +10,18 @@ public class AtmResponse {
     private String location;
     private String description;
 
-    public AtmResponse(){
+    public AtmResponse() {
 
     }
 
-    public AtmResponse(Atm atm){
+    public AtmResponse(Atm atm) {
         this.name = atm.getName();
         this.ip = atm.getIp();
         this.location = atm.getLocation();
         this.description = atm.getDescription();
     }
 
-    public AtmResponse AtmResponseList(Atm atm){
+    public AtmResponse AtmResponseList(Atm atm) {
         AtmResponse atmResponse = new AtmResponse();
         atmResponse.name = atm.getName();
         atmResponse.ip = atm.getIp();
