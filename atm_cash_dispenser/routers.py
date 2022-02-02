@@ -1,17 +1,16 @@
+from datetime import datetime
+import json
+import os
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+import urllib.request
 import database
 import middlewares
-from repositories import system, change
+from repositories import system
 import helpers
 import schemas
 
 router = APIRouter(prefix="/api/v1")
-
-
-@router.get("/")
-async def root():
-    return {"message": "Hello World! This is ATM Cash Dispenser!"}
 
 
 @router.get("/health")
@@ -20,22 +19,20 @@ async def health_check():
 
 
 @router.post(
-    "/withdrawals",
+    "/withdraw",
     dependencies=[Depends(middlewares.validate_token)],
     response_model=schemas.WithdrawalResponse,
 )
 async def widthdrawal(
     request: schemas.WithdrawalRequest, db: Session = Depends(database.get)
 ):
-
     # Check available cash
-    request_dict = request.dict()
     available_cash = system.get(db)
     if len(available_cash) == 0:
         return {"status": 500, "message": "Some errors occured", "payload": None}
     available_cash = available_cash[0]
     # If requested amount is greater than available
-    if (request_dict["amount"]) > available_cash.total:
+    if (request.amount) > available_cash.total:
         return {
             "status": 400,
             "message": "The ATM cannot accommodate the amount you requested",
@@ -50,36 +47,33 @@ async def widthdrawal(
         20000: available_cash.n_20,
         10000: available_cash.n_10,
     }
-    cashes = helpers.check_withdrawal(amount=request_dict["amount"], limits=limits)
-    response_cashes = {
-        "amount": request_dict["amount"],
-    }
+    cashes = helpers.check_withdrawal(amount=request.amount, limits=limits)
+    item = schemas.Transaction(amount=request.amount, card=request.card)
     ok = False
     for key in cashes.keys():
         if key == 500000:
-            response_cashes["n_500"] = cashes[key]
+            item.n_500 = cashes[key]
             ok = True
         if key == 200000:
-            response_cashes["n_200"] = cashes[key]
+            item.n_200 = cashes[key]
             ok = True
         if key == 100000:
-            response_cashes["n_100"] = cashes[key]
+            item.n_100 = cashes[key]
             ok = True
         if key == 50000:
-            response_cashes["n_50"] = cashes[key]
+            item.n_50 = cashes[key]
             ok = True
         if key == 20000:
-            response_cashes["n_20"] = cashes[key]
+            item.n_20 = cashes[key]
             ok = True
         if key == 10000:
-            response_cashes["n_10"] = cashes[key]
+            item.n_10 = cashes[key]
             ok = True
-
     if ok:
         # call bank service
 
-        # apply change to atm database
-        pass
+        item.created_at = datetime.utcnow()
+        return {"status": 200, "message": "OK", "payload": item}
     else:
         return {
             "status": 400,
@@ -87,4 +81,29 @@ async def widthdrawal(
             "payload": None,
         }
 
-    return {"status": 200, "message": "OK", "payload": response_cashes}
+
+@router.post(
+    "/receipt",
+    dependencies=[Depends(middlewares.validate_token)],
+    response_model=schemas.ReceiptResponse,
+)
+async def receipt(
+    request: schemas.ReceiptRequest
+):
+    RECEIPT_URL = os.getenv("RECEIPT_APP")
+    query = urllib.parse.urlencode(query={
+        "receipt_type": request.receipt_type,
+        "amount": request.amount,
+        "atm_id": "09061999",
+        "created_at": request.created_at,
+        "card": request.src_card,
+        "src_card": request.src_card,
+        "dst_card": request.dst_card
+    })
+    RECEIPT_URL = RECEIPT_URL + f"?{query}"
+    print(RECEIPT_URL)
+    response = urllib.request.urlopen(RECEIPT_URL)
+    data = json.loads(response.read())
+    return {
+        "receipt_link": data["download_link"]
+    }

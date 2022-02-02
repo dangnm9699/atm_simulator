@@ -12,7 +12,10 @@ Information Systems Design Project / SoICT / HUST / 20211
 - Create `src/main/resources/application.properties` with below contents:
 
 ```
-jwt.secret =  javainuse
+## App Properties
+app.jwtSecret= JWTSuperSecretKey
+app.jwtExpirationInMs = 604800000
+
 server.port = 8080
 server.servlet.context-path=/api/v1
 spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect

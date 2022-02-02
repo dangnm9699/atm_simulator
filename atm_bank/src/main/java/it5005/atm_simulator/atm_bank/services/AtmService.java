@@ -61,4 +61,14 @@ public class AtmService {
         }
     }
 
+    public Boolean checkAtm(String ip) {
+        Atm atm_now = atmRepository.findByIp(ip);
+        if (atm_now != null) {
+            System.out.println("Exits");
+            return true;
+        }
+        System.out.println("Atm is not exit");
+        return false;
+    }
+
 }

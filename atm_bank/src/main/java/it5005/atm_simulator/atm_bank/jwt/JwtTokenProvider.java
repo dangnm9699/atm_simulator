@@ -3,6 +3,7 @@ package it5005.atm_simulator.atm_bank.jwt;
 import io.jsonwebtoken.*;
 import it5005.atm_simulator.atm_bank.models.CardDetails;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,9 +11,11 @@ import java.util.Date;
 @Component
 @Slf4j
 public class JwtTokenProvider {
-    private final String JWT_SECRET = "lodaaaaaa";
+    @Value("${app.jwtSecret}")
+    private String JWT_SECRET;
 
-    private final long JWT_EXPIRATION = 604800000L;
+    @Value("${app.jwtExpirationInMs}")
+    private long JWT_EXPIRATION;
 
     public String generateToken(CardDetails cardDetails) {
         Date now = new Date();

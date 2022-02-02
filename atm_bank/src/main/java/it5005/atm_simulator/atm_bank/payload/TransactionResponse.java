@@ -16,7 +16,7 @@ public class TransactionResponse {
     private String number;
     private String ip;
 
-    public TransactionResponse(Transaction transaction){
+    public TransactionResponse(Transaction transaction) {
         this.name = transaction.getName();
         this.amount = transaction.getAmount();
         this.created_at = transaction.getCreated_at();

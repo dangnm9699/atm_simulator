@@ -8,7 +8,7 @@ public class UserResponse {
     private String name;
     private String description;
 
-    public UserResponse(User user){
+    public UserResponse(User user) {
         this.name = user.getName();
         this.description = user.getDescription();
     }

@@ -11,7 +11,7 @@ public class CardResponse {
     private String pinHash;
     private BigDecimal balance;
 
-    public CardResponse(Card card){
+    public CardResponse(Card card) {
         this.number = card.getNumber();
         this.balance = card.getBalance();
     }
