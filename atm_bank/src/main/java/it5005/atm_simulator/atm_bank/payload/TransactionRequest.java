@@ -13,5 +13,5 @@ public class TransactionRequest {
     private String ip;
 
     @NotBlank
-    private String money;
+    private Double money;
 }

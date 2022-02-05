@@ -13,10 +13,10 @@ public class TransferRequest {
     private String transferToNumber;
 
     @NotBlank
-    private String money;
+    private Double money;
 
     @NotBlank
-    private String ipAtm;
+    private String ID;
 
 
 }

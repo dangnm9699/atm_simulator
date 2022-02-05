@@ -26,7 +26,7 @@ public class TransactionController {
     public ResponseEntity<TransactionResponse> withDraw(
             @RequestBody TransactionRequest transactionRequest
     ) {
-        Double amount = Double.parseDouble(transactionRequest.getMoney());
+        Double amount = transactionRequest.getMoney();
         Transaction transaction_new = transactionService.withDraw(transactionRequest.getNumber(), transactionRequest.getIp(), amount);
         if (transaction_new != null) {
             return new ResponseEntity<>(new TransactionResponse(transaction_new), HttpStatus.OK);
@@ -35,14 +35,14 @@ public class TransactionController {
         }
     }
 
-    @PostMapping("/betweenAccounts")
+    @PostMapping("/transfer")
     public ResponseEntity<TransferResponse> betweenAccounts(
             @RequestBody TransferRequest transferRequest
     ) {
-        Double amount = Double.parseDouble(transferRequest.getMoney());
+        Double amount = transferRequest.getMoney();
         String fromNumber = transferRequest.getTransferFromNumber();
         String toNumber = transferRequest.getTransferToNumber();
-        String ip = transferRequest.getIpAtm();
+        String ip = transferRequest.getID();
         if (fromNumber == toNumber) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
