@@ -1,7 +1,8 @@
 from datetime import datetime
+from typing import Optional
 import json
 import os
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Header
 from sqlalchemy.orm import Session
 import urllib.request
 import database
@@ -24,7 +25,7 @@ async def health_check():
     response_model=schemas.WithdrawalResponse,
 )
 async def widthdrawal(
-    request: schemas.WithdrawalRequest, db: Session = Depends(database.get)
+    request: schemas.WithdrawalRequest, authorization: Optional[str] = Header(None), db: Session = Depends(database.get)
 ):
     # Check available cash
     available_cash = system.get(db)
@@ -71,8 +72,22 @@ async def widthdrawal(
             ok = True
     if ok:
         # call bank service
-
-        item.created_at = datetime.utcnow()
+        json_data_bytes = json.dumps({
+            "number": request.card,
+            "ip": "172.92.16.42",
+            "money": str(request.amount)
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            url=os.getenv("BANK_API") + "/transaction/withdraw",
+            method="POST")
+        req.add_header("Content-Type", "application/json")
+        req.add_header("Content-Length", len(json_data_bytes))
+        req.add_header("Authorization", authorization)
+        res = urllib.request.urlopen(req, json_data_bytes)
+        resJson = json.loads(res.read())
+        # execute transaction at atm
+        udpated_item = system.update(db=db, transaction=item)
+        item.created_at = datetime.fromisoformat(resJson["created_at"])
         return {"status": 200, "message": "OK", "payload": item}
     else:
         return {
@@ -94,7 +109,7 @@ async def receipt(
     query = urllib.parse.urlencode(query={
         "receipt_type": request.receipt_type,
         "amount": request.amount,
-        "atm_id": "09061999",
+        "atm_ip": request.atm_ip,
         "created_at": request.created_at,
         "card": request.src_card,
         "src_card": request.src_card,

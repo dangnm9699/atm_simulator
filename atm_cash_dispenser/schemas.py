@@ -44,6 +44,7 @@ class WithdrawalResponse(BaseModel):
 class ReceiptRequest(BaseModel):
     receipt_type: int
     amount: int
+    atm_ip: str
     created_at: datetime
     src_card: str
     dst_card: Optional[str]
