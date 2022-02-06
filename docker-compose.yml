@@ -11,18 +11,6 @@ services:
     volumes:
       - "${HOME}/mysql-persistent-volumes:/var/lib/mysql"
     restart: always
-  atm_card_reader:
-    build: atm_card_reader
-    container_name: atm-card-reader
-    ports:
-      - 3001:3001
-    restart: always
-  atm_cash_dispenser:
-    build: atm_cash_dispenser
-    container_name: atm-cash-dispenser
-    ports:
-      - 3002:3002
-    restart: always
   atm_bank:
     container_name: atm-bank
     depends_on:
@@ -31,12 +19,27 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/atm_bank?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=aA123456@
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     build: atm_bank
     ports:
       - 3003:3003
     volumes:
       - "${HOME}/.m2:/root/.m2"
+    restart: always
+  atm_card_reader:
+    container_name: atm-card-reader
+    build: atm_card_reader
+    ports:
+      - 3001:3001
+    restart: always
+  atm_cash_dispenser:
+    container_name: atm-cash-dispenser
+    depends_on:
+      - atm_bank
+    environment:
+      - BANK_API=http://atm-bank:3003/api/v1
+    build: atm_cash_dispenser
+    ports:
+      - 3002:3002
     restart: always
   atm_api_gateway:
     container_name: atm-api-gateway
@@ -44,6 +47,11 @@ services:
       - atm_cash_dispenser
       - atm_bank
       - atm_card_reader
+    environment:
+      - ATM_CARD_READER_URL=http://atm-card-reader:3001
+      - ATM_CASH_DISPENSER_URL=http://atm-cash-dispenser:3002
+      - ATM_BANK_URL=http://atm-bank:3003
+      - PORT=:8080
     build: atm_api_gateway
     ports:
       -  8080:8080
