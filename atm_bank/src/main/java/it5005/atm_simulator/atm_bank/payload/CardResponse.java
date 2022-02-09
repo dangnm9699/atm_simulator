@@ -10,6 +10,13 @@ public class CardResponse {
     private String number;
     private String pinHash;
     private BigDecimal balance;
+    private String name;
+
+    public CardResponse(Card card, String name) {
+        this.number = card.getNumber();
+        this.balance = card.getBalance();
+        this.name = name;
+    }
 
     public CardResponse(Card card) {
         this.number = card.getNumber();

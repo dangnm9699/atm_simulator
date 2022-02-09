@@ -128,11 +128,11 @@ public class CardController {
     public ResponseEntity<CardResponse> getCardDetail(@RequestParam String number) {
         try {
             Card card_new = cardService.loadCardByNumber(number);
-            return new ResponseEntity<>(new CardResponse(card_new), HttpStatus.OK);
+            String name = card_new.getUser().getName();
+            return new ResponseEntity<>(new CardResponse(card_new, name), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
-
 
 }
