@@ -36,8 +36,6 @@ class WithdrawalRequest(BaseModel):
 
 
 class WithdrawalResponse(BaseModel):
-    status: int
-    message: str
     payload: Transaction
 
 
@@ -52,3 +50,7 @@ class ReceiptRequest(BaseModel):
 
 class ReceiptResponse(BaseModel):
     receipt_link: str
+
+
+class Message(BaseModel):
+    message: str

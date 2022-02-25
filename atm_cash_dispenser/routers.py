@@ -3,6 +3,7 @@ from typing import Optional
 import json
 import os
 from fastapi import APIRouter, Depends, Header
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 import urllib.request
 import database
@@ -23,6 +24,9 @@ async def health_check():
     "/withdraw",
     dependencies=[Depends(middlewares.validate_token)],
     response_model=schemas.WithdrawalResponse,
+    status_code=200,
+    responses={400: {"model": schemas.Message},
+               500: {"model": schemas.Message}}
 )
 async def widthdrawal(
     request: schemas.WithdrawalRequest, authorization: Optional[str] = Header(None), db: Session = Depends(database.get)
@@ -30,15 +34,12 @@ async def widthdrawal(
     # Check available cash
     available_cash = system.get(db)
     if len(available_cash) == 0:
-        return {"status": 500, "message": "Some errors occured", "payload": None}
+        return JSONResponse(status_code=500, content={"message": "interal server error"})
     available_cash = available_cash[0]
     # If requested amount is greater than available
     if (request.amount) > available_cash.total:
-        return {
-            "status": 400,
-            "message": "The ATM cannot accommodate the amount you requested",
-            "payload": None,
-        }
+        raise JSONResponse(
+            status_code=400, content={"message": "requested amount is greater than available amount"})
     # Calculate cashes to return
     limits = {
         500000: available_cash.n_500,
@@ -83,28 +84,32 @@ async def widthdrawal(
         req.add_header("Content-Type", "application/json")
         req.add_header("Content-Length", len(json_data_bytes))
         req.add_header("Authorization", authorization)
-        res = urllib.request.urlopen(req, json_data_bytes)
-        resJson = json.loads(res.read())
-        # execute transaction at atm
-        udpated_item = system.update(db=db, transaction=item)
-        item.created_at = datetime.fromisoformat(resJson["created_at"])
-        return {"status": 200, "message": "OK", "payload": item}
+        try:
+            res = urllib.request.urlopen(req, json_data_bytes)
+            resJson = json.loads(res.read())
+            # execute transaction at atm
+            _ = system.update(db=db, transaction=item)
+            item.created_at = datetime.fromisoformat(resJson["created_at"])
+            return {"payload": item}
+        except Exception:
+            raise JSONResponse(
+                status_code=500, content={"message": "bank api error"})
     else:
-        return {
-            "status": 400,
-            "message": "The ATM cannot accommodate the amount you requested",
-            "payload": None,
-        }
+        raise JSONResponse(
+            status_code=400, content={"message": "available cashes cannot serve"})
 
 
 @router.post(
     "/receipt",
     dependencies=[Depends(middlewares.validate_token)],
     response_model=schemas.ReceiptResponse,
+    status_code=200,
+    responses={500: {"model": schemas.Message}}
 )
 async def receipt(
     request: schemas.ReceiptRequest
 ):
+
     RECEIPT_URL = os.getenv("RECEIPT_APP")
     query = urllib.parse.urlencode(query={
         "receipt_type": request.receipt_type,
@@ -117,8 +122,12 @@ async def receipt(
     })
     RECEIPT_URL = RECEIPT_URL + f"?{query}"
     print(RECEIPT_URL)
-    response = urllib.request.urlopen(RECEIPT_URL)
-    data = json.loads(response.read())
-    return {
-        "receipt_link": data["download_link"]
-    }
+    try:
+        response = urllib.request.urlopen(RECEIPT_URL)
+        data = json.loads(response.read())
+        return {
+            "receipt_link": data["download_link"]
+        }
+    except:
+        raise JSONResponse(status_code=500, content={
+                           "message": "some errors occured"})
