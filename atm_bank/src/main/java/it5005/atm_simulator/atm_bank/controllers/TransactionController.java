@@ -35,6 +35,18 @@ public class TransactionController {
         }
     }
 
+    @PostMapping("/withdraw/check")
+    public ResponseEntity<String> withDrawCheck(@RequestBody TransactionRequest transactionRequest){
+        Double amount = transactionRequest.getMoney();
+        String number = transactionRequest.getNumber();
+
+        if (transactionService.checkBalance(number, amount)){
+            return new ResponseEntity<>(""+transactionService.checkRemainingBalance(number, amount), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Account is not enough money", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping("/transfer")
     public ResponseEntity<TransferResponse> betweenAccounts(
             @RequestBody TransferRequest transferRequest
@@ -69,7 +81,7 @@ public class TransactionController {
         }
 
         if (transactionService.checkBalance(fromNumber, amount)){
-            return new ResponseEntity<>("Remaining balance if transfer is: "+transactionService.checkRemainingBalance(fromNumber, amount), HttpStatus.OK);
+            return new ResponseEntity<>(""+transactionService.checkRemainingBalance(fromNumber, amount), HttpStatus.OK);
         }else {
             return new ResponseEntity<>("Account is not enough money", HttpStatus.BAD_REQUEST);
         }
