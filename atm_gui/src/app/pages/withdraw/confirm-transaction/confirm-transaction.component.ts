@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-confirm-transaction',
@@ -14,18 +15,24 @@ import { LoginService } from 'src/app/services/login.service';
 export class ConfirmTransactionComponent implements OnInit {
 
   amount = {
-    'withdrawAmount': this.currencyPipe.transform(1550000, 'VND'),
-    'leftAmount': this.currencyPipe.transform(12450000, 'VND')
+    withdrawAmount: this.currencyPipe.transform(1550000, 'VND'),
+    leftAmount: this.currencyPipe.transform(12450000, 'VND')
   }
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
+  bearer
   constructor(
     private currencyPipe: CurrencyPipe,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.amount = JSON.parse(localStorage.getItem('_withdrawInfoConfirm'))
+    this.amount.withdrawAmount = this.currencyPipe.transform(this.amount.withdrawAmount, 'VND')
+    this.amount.leftAmount = this.currencyPipe.transform(this.amount.leftAmount, 'VND')
+    this.bearer = localStorage.getItem('httpHeaders')
   }
 
   navigateSelectMoney() {
@@ -34,15 +41,29 @@ export class ConfirmTransactionComponent implements OnInit {
   select(choice: boolean) {
     if (choice) {
       this.replaceSuccess = true;
-      this.loginService.fakeApiPending(5000).subscribe(e => {
-        this.router.navigate(['/pages/transaction-result']);
+      const withdrawInfo = JSON.parse(localStorage.getItem('_withdrawInfoConfirm'))
+      if( ! withdrawInfo["cardNumber"] && withdrawInfo["withdrawAmount"]){
+        this.router.navigate(['/404']);
+      }
+      this.loginService.fakeApiPending(500).subscribe(e => {
+        this.userService.withdrawATM(withdrawInfo["cardNumber"], withdrawInfo["withdrawAmount"], { Authorization: this.bearer }).subscribe(e =>{
+          this.userService.withdraw(withdrawInfo["cardNumber"], withdrawInfo["withdrawAmount"], { Authorization: this.bearer }).subscribe(() =>{
+            localStorage.setItem('_withdrawATMInfo', JSON.stringify(e.body))
+            this.router.navigate(['/pages/transaction-result']);            
+          },
+          () => {
+            this.replaceSuccess = false
+            this.replaceFail = true
+          })
+        },
+        () => {
+          this.replaceSuccess = false
+          this.replaceFail = true
+        })
+        
       })
       return;
     }
-    this.replaceFail = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
-      localStorage.clear();
-      this.router.navigate(['/auth/login']);
-    })
+    this.router.navigate(['/pages/another-service']);
   }
 }

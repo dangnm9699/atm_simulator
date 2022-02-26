@@ -2,6 +2,10 @@
 // margin: 100px auto;
 // width: 760px;
 // }
+
+:host{
+    margin-bottom: 15px;
+}
 #container{
     display: flex;
     justify-content: center;

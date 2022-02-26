@@ -7,7 +7,8 @@
     "selectService":{
         "withdrawMoney": "退出",
         "viewBalance": "查看余额",
-        "changePassword":"更改密码"
+        "changePassword":"更改密码",
+        "transferMoney":"划款"
     },
     "selectMoney":{
         "otherAmount":"其他金额"
@@ -19,5 +20,9 @@
     "confirm":{
         "yes": "是的",
         "no": "不"
+    },
+    "confirmButton":{
+        "yes": "确认",
+        "no": "取消"
     }
 }

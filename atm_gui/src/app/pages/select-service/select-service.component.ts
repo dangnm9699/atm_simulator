@@ -18,20 +18,27 @@ export class SelectServiceComponent implements OnInit {
   }
 
   navigateSelectMoney() {
-
-    this.router.navigate(["/pages/select-money"])
+    this.replace = true;
+    this.loginService.fakeApiPending(1000).subscribe(e => {
+      this.router.navigate(['/pages/select-money']);
+    })
   }
 
   navigateCheckAccountBalance() {
     this.replace = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(1000).subscribe(e => {
       this.router.navigate(['/pages/check-account-balance']);
+    })
+  }
+
+  navigateTransfer() {
+    this.replace = true;
+    this.loginService.fakeApiPending(1000).subscribe(e => {
+      this.router.navigate(['/pages/transfer']);
     })
   }
 
   select() {
 
   }
-
-
 }

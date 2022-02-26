@@ -7,7 +7,8 @@
     "selectService":{
         "withdrawMoney": "Withdrawal",
         "viewBalance": "View Balance",
-        "changePassword":"Change PIN"
+        "changePassword":"Change PIN",
+        "transferMoney":"Transfer Money"
     },
     "selectMoney":{
         "otherAmount":"Other Amount"
@@ -19,5 +20,9 @@
     "confirm":{
         "yes": "Yes",
         "no": "No"
+    },
+    "confirmButton":{
+        "yes": "Confirm",
+        "no": "Cancel"
     }
 }

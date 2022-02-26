@@ -17,10 +17,13 @@ import { AnotherServiceComponent } from './another-service/another-service.compo
 import { PrintInvoiceComponent } from './withdraw/print-invoice/print-invoice.component';
 import { CheckAccountBalanceComponent } from './check-amount-money/check-account-balance/check-account-balance.component';
 import { TransactionFailComponent } from './withdraw/transaction-fail/transaction-fail.component';
+import { TransferComponent } from './transfer/transfer/transfer.component';
+import { ConfirmTransferComponent } from './transfer/confirm-transfer/confirm-transfer.component';
+import { InputAmountTransferComponent } from './transfer/input-amount-transfer/input-amount-transfer.component';
 
 
 @NgModule({
-  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent, ConfirmTransactionComponent, AnotherServiceComponent, PrintInvoiceComponent, CheckAccountBalanceComponent, TransactionFailComponent],
+  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent, ConfirmTransactionComponent, AnotherServiceComponent, PrintInvoiceComponent, CheckAccountBalanceComponent, TransactionFailComponent, TransferComponent, ConfirmTransferComponent, InputAmountTransferComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

@@ -1,6 +1,6 @@
 <div id="container">
-    <pre id="title" [hidden]="replace" >{{'selectMoneyTitle' | translate}}</pre>
-    <div class="noselect" [hidden]="replace">
+    <pre id="title" [hidden]="replace || replaceFail" >{{'selectMoneyTitle' | translate}}</pre>
+    <div class="noselect" [hidden]="replace || replaceFail">
         <div (click) = "selectMoney(100000)">
             <p>100,000</p>
         </div>
@@ -27,4 +27,5 @@
         </div>
     </div>
     <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replace"></app-pending>
+    <app-notification-screen class="h-100 w-100" [hidden]="!replaceFail" [textInput]="'failedTransaction' | translate" [colorCode]="0" (clickEvent)="handleClickEvent($event)" ></app-notification-screen>
 </div>

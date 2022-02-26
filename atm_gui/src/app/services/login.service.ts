@@ -68,7 +68,7 @@ export class LoginService {
   authenticate(loginForm: any){
     console.log(loginForm);
     
-    return this.http.post<any>(`http://localhost:8080${environment.ATM_BANK}/card/login`, loginForm, { observe: 'response' })
+    return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_BANK}/card/login`, loginForm, { observe: 'response' })
     // return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_BANK}/card/login`, loginForm, { observe: 'response' })
   }
 }

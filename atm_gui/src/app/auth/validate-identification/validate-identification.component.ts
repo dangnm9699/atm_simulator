@@ -73,21 +73,17 @@ export class ValidateIdentificationComponent implements OnInit {
   onSelect(event) {
     this.file = event.addedFiles[0];
     this.replace = true;
-    if (this.file) {
-      console.log(2);
-      
+    if (this.file) {      
       this.loginService.getUserInfo(this.file).pipe(delay(1000)).subscribe(res => {
         if(res.body && res.body["cardNumber"] && res.body["name"]){
           localStorage.setItem('_userInfo', JSON.stringify(res.body));
           this.router.navigate(["/auth/select-language"])
         } else {
-          console.log(12312);
           this.replace=false
           this.replaceFail=true
         }
         
       }, err => {
-        console.log(1231232);
         this.replace=false
         this.replaceFail=true
         // of().pipe(delay(1000)).subscribe(()=>this.redirectTo("/auth"));

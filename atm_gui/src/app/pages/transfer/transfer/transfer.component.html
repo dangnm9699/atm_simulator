@@ -1,0 +1,14 @@
+<div id="container">
+    <app-pending class="h-100" [textInput]="'cardOut' | translate" [colorCode]="0" [hidden]="!replaceFail" ></app-pending>
+    <app-notification-screen class="h-100 w-100" [hidden]="!replaceSuccess2" [textInput]="'accountNotExists' | translate:title" [colorCode]="1" ></app-notification-screen>
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
+    <div [hidden]="replaceFail || replaceSuccess || replaceSuccess2">
+        <pre>{{'receiverBankAccount' | translate}}</pre>
+        <div id="inputBox">
+            <div>
+                <p> {{amount}} </p>
+            </div>
+            <app-numpad (numpadSignal)="numpadTrigger($event)" (deleteSignal)="deleteTrigger($event)" (cancelSignal)="cancelTrigger($event)" (submitSignal)="submitTrigger($event)"></app-numpad>
+        </div>
+    </div>
+</div>

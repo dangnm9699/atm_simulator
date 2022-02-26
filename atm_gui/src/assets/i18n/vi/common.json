@@ -13,11 +13,17 @@
     "cardOut": "Bạn đã hủy bỏ giao dịch\nVui lòng nhận lại thẻ",
     "accBalance": "Kiểm tra số dư tài khoản\nSố dư tài khoản hiện tại:",
     "inputMoney": "Nhập số tiền cần rút\nSố tiền nhập vào phải là bội số của",
+    "confirmTransaction": "Bạn có muốn thực hiện giao dịch ?",
     "failedTransaction": "Giao dịch thất bại\nTài khoản của bạn không có đủ số dư",
     "transactionProcessing" : "Hệ thống đang xử lý giao dịch",
     "transactionConfirm" : "Xác nhận giao dịch\nSố tiền giao dịch: {{withdrawAmount}}\nSố tiền còn lại trong tài khoản: {{leftAmount}}\nBạn có muốn tiếp tục giao dịch ?",
     "printInvoice": "Bạn có muốn in hóa đơn ?",
     "anotherService": "Bạn có muốn thực hiện dịch vụ khác ?",
     "thankYou": "Cảm ơn bạn đã sử dụng dịch vụ của ngân hàng IT5005.",
-    "getCardFirst": "Giao dịch rút tiền thành công\nVui lòng nhận thẻ trước khi nhận tiền"
+    "getCardFirst": "Giao dịch rút tiền thành công\nVui lòng nhận thẻ trước khi nhận tiền",
+    "receiverBankAccount" : "Nhập vào số tài khoản người nhận",
+    "accountNotExists": "Tài khoản {{accNumber}} không tồn tại trong hệ thống\nVui lòng nhập lại!",
+    "inputAmountTransferTitle" : "Người nhận tiền: {{name}}\nHãy nhập số tiền bạn muốn chuyển",
+    "enterWrongNTimes": "Bạn đã nhập sai {{times}} lần\nVui lòng nhận lại thẻ",
+    "transferConfirm": "Giao dịch chuyển tiền tới tài khoản {{transferTo}}\nSố tài khoản: {{transferToAcc}}\nSố tiền giao dịch chuyển khoản: {{transferAmount}}\nSố dư tài khoản sau giao dịch: {{remainingAmount}}"
 }

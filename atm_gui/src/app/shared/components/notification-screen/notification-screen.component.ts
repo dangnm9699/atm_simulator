@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-notification-screen',
@@ -9,9 +9,13 @@ export class NotificationScreenComponent implements OnInit {
 
   @Input() textInput: string ;
   @Input() colorCode: Number = 1; //1 ma xanh, 0 ma do  
+  @Output() clickEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onScreenClick(){
+    this.clickEvent.emit()
+  }
 }

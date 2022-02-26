@@ -7,7 +7,8 @@
     "selectService":{
         "withdrawMoney": "Rút tiền",
         "viewBalance": "Xem số dư",
-        "changePassword":"Đổi mã PIN"
+        "changePassword":"Đổi mã PIN",
+        "transferMoney":"Chuyển tiền"
     },
     "selectMoney":{
         "otherAmount":"Số khác"
@@ -19,5 +20,9 @@
     "confirm":{
         "yes": "Có",
         "no": "Không"
+    },
+    "confirmButton":{
+        "yes": "Xác nhận",
+        "no": "Hủy bỏ"
     }
 }

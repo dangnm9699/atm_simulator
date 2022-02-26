@@ -1,0 +1,14 @@
+<div id="container">
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
+    <app-notification-screen class="h-100 w-100" [hidden]="!replaceSuccess2" [textInput]="'thankYou' | translate" [colorCode]="1" (clickEvent)="handleClickEvent($event)" ></app-notification-screen>
+    <p id="title" [hidden]="replaceSuccess || replaceSuccess2">{{'transferConfirm' | translate:transferInfo}}</p>
+    <div [hidden]="replaceSuccess || replaceSuccess2">
+        <p>{{'confirmTransaction' | translate}}</p>
+        <div (click) = "select(true)" class="background-green noselect">
+            <p>{{'confirmButton.yes' |translate}}</p>
+        </div>
+        <div (click) = "select(false)" class="background-red noselect">
+            <p>{{'confirmButton.no' |translate}}</p>
+        </div>
+    </div>
+</div>

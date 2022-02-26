@@ -27,9 +27,7 @@ export class ValidatePinComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._userInfo = JSON.parse(localStorage.getItem('_userInfo'));
-    console.log(this._userInfo);
-    
+    this._userInfo = JSON.parse(localStorage.getItem('_userInfo'));    
   }
 
   async numpadTrigger(value) {

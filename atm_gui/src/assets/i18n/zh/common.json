@@ -11,11 +11,17 @@
     "cardOut": "您取消了交易\n请取回您的卡",
     "accBalance": "检查帐户余额\n账户余额:",
     "inputMoney": "输入要提取的金额\n输入的金额必须是",
+    "confirmTransaction": "Bạn có muốn thực hiện giao dịch ?",
     "failedTransaction": "交易失败\n您的账户余额不足",
     "transactionConfirm" : "交易确认\n交易金额: {{withdrawAmount}}\n账户余额: {{leftAmount}}\n你要继续吗 ?",
     "transactionProcessing" : "系统正在处理交易",
     "printInvoice": "您要打印发票吗 ?",
     "anotherService": "您想制作其他服务吗 ?",
     "thankYou": "感谢您使用银行的服务 IT5005.",
-    "getCardFirst": "提现成功\n收款前请先收到卡"
+    "getCardFirst": "提现成功\n收款前请先收到卡",
+    "receiverBankAccount" : "收款人的银行账户",
+    "accountNotExists": "帐户 {{accNumber}} 在我们的系统中不存在\n请重新输入 !",
+    "inputAmountTransferTitle" : "接收者: {{name}}\n请输入您要转账的金额",
+    "enterWrongNTimes": "你输入错误 {{times}} 次\n请取回你的卡 !",
+    "transferConfirm": "账户 {{transferTo}}\n的转账交易账号：{{transferToAcc}}\n交易金额：{{transferAmount}}\n交易后的账户余额：{{remainingAmount}}"
 }

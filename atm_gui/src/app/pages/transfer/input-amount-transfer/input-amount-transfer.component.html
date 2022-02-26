@@ -1,0 +1,13 @@
+<div id="container">
+    <app-pending class="h-100" [textInput]="'failedTransaction' | translate" [hidden]="!replaceFail" ></app-pending>
+    <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
+    <div [hidden]="replaceFail || replaceSuccess">
+        <pre>{{'inputAmountTransferTitle' | translate:_transferInfo}}</pre>
+        <div id="inputBox">
+            <div>
+                <p> {{amount | currency:'VND'}} <span>VND</span></p>
+            </div>
+            <app-numpad (numpadSignal)="numpadTrigger($event)" (deleteSignal)="deleteTrigger($event)" (cancelSignal)="cancelTrigger($event)" (submitSignal)="submitTrigger($event)"></app-numpad>
+        </div>
+    </div>
+</div>

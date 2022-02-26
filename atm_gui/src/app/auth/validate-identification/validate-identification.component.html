@@ -5,7 +5,7 @@
     <p [hidden]="replace || replaceFail">{{'welcomeMessage' | translate}}</p>
     <div [hidden]="replace || replaceFail">
         <ngx-dropzone class="w-25 h-75" (change)="onSelect($event)" [multiple]="false">
-            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+            <ngx-dropzone-label>Đưa vào thẻ ngân hàng của bạn</ngx-dropzone-label>
             <ngx-dropzone-preview *ngIf="file" [removable]="true" (removed)="onRemove(file)" class="w-100 h-100">
                 <ngx-dropzone-label >{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
             </ngx-dropzone-preview>

@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 export class TransactionResultComponent implements OnInit {
 
   amount = {
-    "m500": 5,
-    "m200": 1,
-    "m100": 2,
-    "m50": 1,
-    "m20": 4,
-    "m10": 3
+    "n_500": 0,
+    "n_200": 0,
+    "n_100": 0,
+    "n_50": 0,
+    "n_20": 0,
+    "n_10": 0
   }
   money: Array<string> = []
   animation: Array<string> = []
@@ -23,31 +23,35 @@ export class TransactionResultComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.amount = JSON.parse(localStorage.getItem('_withdrawATMInfo'))
+    if( ! this.amount["payload"] ){
+      this.router.navigate(['/404']);
+    }
+    this.amount = this.amount["payload"]
+    console.log(this.amount);
+    
     for (let i of Object.keys(this.amount)) {
       switch (i) {
-        case "m500":
+        case "n_500":
           this.money = this.money.concat([...Array(Number(this.amount[i])).fill("500k")]);
           break;
-        case "m200":
+        case "n_200":
           this.money = this.money.concat([...Array(Number(this.amount[i])).fill("200k")]);
           break;
-        case "m100":
+        case "n_100":
           this.money = this.money.concat([...Array(Number(this.amount[i])).fill("100k")]);
           break;
-        case "m50":
+        case "n_50":
           this.money = this.money.concat([...Array(Number(this.amount[i])).fill("50k")]);
           break;
-        case "m20":
+        case "n_20":
           this.money = this.money.concat([...Array(Number(this.amount[i])).fill("20k")]);
           break;
-        case "m10":
+        case "n_10":
           this.money = this.money.concat([...Array(Number(this.amount[i])).fill("10k")]);
           break;
       }
     }
-
-    console.log(this.money);
-
     this.money.forEach((obj, index) => {
       setTimeout(() => {
         this.animation.push(obj)
