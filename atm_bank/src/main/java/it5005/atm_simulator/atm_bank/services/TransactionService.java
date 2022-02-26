@@ -122,5 +122,14 @@ public class TransactionService {
 
     }
 
+    public BigDecimal checkRemainingBalance(String fromNumber,double money ){
+        Card card_fromNumber = cardService.loadCardByNumber(fromNumber);
+        BigDecimal amount = new BigDecimal(money);
+
+        return card_fromNumber.getBalance().subtract(amount);
+    }
+
+
+
 
 }

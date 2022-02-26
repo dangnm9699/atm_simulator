@@ -57,4 +57,21 @@ public class TransactionController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/transfer/check")
+    public ResponseEntity<String> checkAccounts(@RequestBody TransferRequest transferRequest){
+        Double amount = transferRequest.getMoney();
+        String fromNumber = transferRequest.getTransferFromNumber();
+        String toNumber = transferRequest.getTransferToNumber();
+        String ip = transferRequest.getID();
+        if (fromNumber == toNumber){
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+
+        if (transactionService.checkBalance(fromNumber, amount)){
+            return new ResponseEntity<>("Remaining balance if transfer is: "+transactionService.checkRemainingBalance(fromNumber, amount), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Account is not enough money", HttpStatus.BAD_REQUEST);
+        }
+    }
 }
