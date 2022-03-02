@@ -47,14 +47,8 @@ export class ConfirmTransactionComponent implements OnInit {
       }
       this.loginService.fakeApiPending(500).subscribe(e => {
         this.userService.withdrawATM(withdrawInfo["cardNumber"], withdrawInfo["withdrawAmount"], { Authorization: this.bearer }).subscribe(e =>{
-          this.userService.withdraw(withdrawInfo["cardNumber"], withdrawInfo["withdrawAmount"], { Authorization: this.bearer }).subscribe(() =>{
-            localStorage.setItem('_withdrawATMInfo', JSON.stringify(e.body))
-            this.router.navigate(['/pages/transaction-result']);            
-          },
-          () => {
-            this.replaceSuccess = false
-            this.replaceFail = true
-          })
+          localStorage.setItem('_withdrawATMInfo', JSON.stringify(e.body))
+          this.router.navigate(['/pages/transaction-result']); 
         },
         () => {
           this.replaceSuccess = false

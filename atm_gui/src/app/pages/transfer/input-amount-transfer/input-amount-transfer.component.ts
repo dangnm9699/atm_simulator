@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class InputAmountTransferComponent implements OnInit {
 
   amount: Number = 0;
-  minAmount: Number = 50000;
+  minAmount: Number = 30000;
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
   _userInfo = {}
@@ -58,7 +58,7 @@ export class InputAmountTransferComponent implements OnInit {
 
   cancelTrigger(value) {
     this.replaceFail = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       localStorage.clear();
       this.router.navigate(['auth/login']);
     })
@@ -70,8 +70,6 @@ export class InputAmountTransferComponent implements OnInit {
     }
     this.replaceSuccess = true;
     this.userService.checkTransfer(this._userInfo["cardNumber"], this._transferInfo["number"], this.amount, { Authorization: this.bearer }).subscribe(e => {
-      console.log(e.body);
-      
       let transferInfo = {
         transferTo: this._transferInfo["name"],
         transferToAcc: this._transferInfo["number"],
@@ -80,19 +78,14 @@ export class InputAmountTransferComponent implements OnInit {
         remainingAmount: e.body
       }
       localStorage.setItem('_transferInfoConfirm', JSON.stringify(transferInfo))
-      this.loginService.fakeApiPending(5000).subscribe(() => {
+      this.loginService.fakeApiPending(3000).subscribe(() => {
         this.router.navigate(['/pages/confirm-transfer']);
-      }),
+      })
+    },
       () => {
-        // this.replaceSuccess = false;
-        // this.replaceFail = true;
-        // this.loginService.fakeApiPending(3000).subscribe(e => {
-        //   this.router.navigate(['/pages/confirm-transfer']);
-        // })
         this.loginService.fakeApiPending(3000).subscribe(e => {
           this.router.navigate(['/pages/transaction-fail']);
         })
-      }
     })
   }
 

@@ -18,6 +18,7 @@ export class ConfirmTransferComponent implements OnInit {
   replaceSuccess2: boolean = false;
   bearer
   transferInfo
+  _printInfo
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -32,10 +33,6 @@ export class ConfirmTransferComponent implements OnInit {
     this.bearer = localStorage.getItem('httpHeaders')
   }
 
-  handleClickEvent($event) {
-    this.router.navigate(['/pages/another-service']);
-  }
-
   select(choice: boolean) {
     if (choice) {
       this.replaceSuccess = true;
@@ -43,15 +40,24 @@ export class ConfirmTransferComponent implements OnInit {
       if( ! transferInfo["transferFromAcc"] && transferInfo["transferToAcc"] && this.transferInfo["transferAmount"]){
         this.router.navigate(['/404']);
       }
-      this.userService.transfer(transferInfo["transferFromAcc"], transferInfo["transferToAcc"], transferInfo["transferAmount"], { Authorization: this.bearer }).subscribe(() => {
-        this.loginService.fakeApiPending(5000).subscribe(e => {
+      this.userService.transfer(transferInfo["transferFromAcc"], transferInfo["transferToAcc"], transferInfo["transferAmount"], { Authorization: this.bearer }).subscribe(res => {
+        this._printInfo = {
+          amount: res.body['amount'],
+          src_card: res.body['transferFromNumber'],
+          dst_card: res.body['transferToNumber'],
+          created_at: res.body['created_at']
+        }        
+        localStorage.setItem('_printInfo',  JSON.stringify(this._printInfo))
+        this.loginService.fakeApiPending(3000).subscribe(e => {
           this.replaceSuccess = false;
           this.replaceSuccess2 = true;
+          this.loginService.fakeApiPending(3000).subscribe(e => {
+            this.router.navigate(['/pages/print-invoice']);
+          })
         })
       })
       return;
-    }
-    this.router.navigate(['/pages/another-service']);
+    } 
+    this.router.navigate(['/pages/another-service'])
   }
-
 }

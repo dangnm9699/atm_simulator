@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   selectMoney(amount: Number){
     this.replace = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       localStorage.clear();
       this.router.navigate(['/pages/transaction-result']);
     })
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   selectOtherAmount(amount: Number){
     this.replace = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       localStorage.clear();
       this.router.navigate(['/pages/input-money']);
     })

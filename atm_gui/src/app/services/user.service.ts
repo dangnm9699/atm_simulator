@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import { LoginProgramModel } from '../models/login-program.model';
+import { map } from 'rxjs/operators';
 
 type EntityResponseType = HttpResponse<LoginProgramModel>;
 
@@ -64,5 +65,20 @@ export class UserService {
       "card":card
     }
     return this.http.post(`${environment.ATM_API_GATEWAY}${environment.ATM_CARD_DISPENSER}/withdraw`, body, {headers: headers, observe: 'response' })
+  }
+
+  printInvoice(amount: any, created_at: any, src_card: any, dst_card: any,  headers: any){
+    const body = {
+      "receipt_type": dst_card ? 1 : 0,
+      "amount": amount,
+      "atm_ip": "172.92.16.42",
+      "created_at": created_at,
+      "src_card": src_card,
+      "dst_card": dst_card
+    }
+    return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_CARD_DISPENSER}/receipt`, body, {headers: headers, observe: 'response' })
+  }
+  downloadInvoice(url:any,  headers: any){
+    return this.http.get(url, {headers: headers, responseType: 'blob' })
   }
 }

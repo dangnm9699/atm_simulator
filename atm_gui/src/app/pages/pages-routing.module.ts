@@ -18,6 +18,9 @@ import { SelectMoneyComponent } from './withdraw/select-money/select-money.compo
 import { TransactionFailComponent } from './withdraw/transaction-fail/transaction-fail.component';
 import { TransactionResultComponent } from './withdraw/transaction-result/transaction-result.component';
 import { InputAmountTransferComponent } from './transfer/input-amount-transfer/input-amount-transfer.component';
+import { OldPasswordComponent } from './change-password/old-password/old-password.component';
+import { NewPasswordComponent } from './change-password/new-password/new-password.component';
+import { AgainPasswordComponent } from './change-password/again-password/again-password.component';
 
 
 const routes: Routes = [
@@ -77,6 +80,18 @@ const routes: Routes = [
       {
         path:'input-amount-transfer',
         component: InputAmountTransferComponent
+      },
+      {
+        path:'old-password',
+        component: OldPasswordComponent
+      },
+      {
+        path:'new-password',
+        component: NewPasswordComponent
+      },
+      {
+        path:'again-password',
+        component: AgainPasswordComponent
       },
       {
         path:'users',

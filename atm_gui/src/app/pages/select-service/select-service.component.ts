@@ -38,7 +38,10 @@ export class SelectServiceComponent implements OnInit {
     })
   }
 
-  select() {
-
+  navigateChangepassword() {
+    this.replace = true;
+    this.loginService.fakeApiPending(1000).subscribe(e => {
+      this.router.navigate(['/pages/old-password']);
+    })
   }
 }

@@ -23,5 +23,12 @@
     "accountNotExists": "Account {{accNumber}} not exists in our system\nPlease enter again!",
     "inputAmountTransferTitle" : "Receiver: {{name}}\nPlease enter the amount you want to transfer",
     "enterWrongNTimes": "You entered wrong {{times}} times\nPlease get your card back",
-    "transferConfirm": "Transfer transaction for account {{transferTo}}\nAccount number: {{transferToAcc}}\nTransaction amount: {{transferAmount}}\nAccount balance after transaction: {{remainingAmount}}"
+    "transferConfirm": "Transfer transaction for account {{transferTo}}\nAccount number: {{transferToAcc}}\nTransaction amount: {{transferAmount}}\nAccount balance after transaction: {{remainingAmount}}",
+    "transferSuccess": "Money transfer to account {{transferTo}} - {{transferToAcc}} was successful",
+    "oldPassword":"Please enter your PIN",
+    "newPassword":"Enter a new PIN",
+    "againPassword":"Reconfirm PIN",
+    "againPasswordFail":"PIN does not match\nPlease try again",
+    "againPasswordSuccess":"Password change successful\nPlease get your card back",
+    "notFoundTitle": "Có lỗi xảy ra !\nSomething went wrong !"
 }

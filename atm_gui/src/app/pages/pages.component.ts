@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
     </div>
   </div>
   `,
-  styles:["#motherBox{height: 100%} #body {margin: 0;box-sizing: border-box; height: 100%; overflow: hidden; background: #b0bec5; font-size:3vw; font-weight: bold} "]
+  styles:["#motherBox{height: 100%} #body {margin: 0;box-sizing: border-box; height: 100%; overflow: hidden; background: #4abdac; font-size:3vw; font-weight: bold} "]
 })
 export class PagesComponent implements OnInit {
 

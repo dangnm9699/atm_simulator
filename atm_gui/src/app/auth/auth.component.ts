@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
       <app-footer></app-footer>
     </div>
   `,
-  styles:["#body {margin: 0;box-sizing: border-box; height: 100%; overflow: hidden; background: #b0bec5; font-size:3vw; font-weight: bold} "]
+  styles:["#body {margin: 0;box-sizing: border-box; height: 100%; overflow: hidden; background: #4abdac; font-size:3vw; font-weight: bold} "]
 })
 export class AuthComponent implements OnInit {
 

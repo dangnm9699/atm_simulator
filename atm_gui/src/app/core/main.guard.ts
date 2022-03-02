@@ -20,7 +20,6 @@ export class MainGuard implements CanActivate {
       return false;
     }
     
-    console.log(token, state.url);
     try {
       if (this.router.url === '/') {    
         localStorage.clear()

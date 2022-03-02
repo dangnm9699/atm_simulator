@@ -1,6 +1,6 @@
 <div id="container">
     <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
-    <app-notification-screen class="h-100 w-100" [hidden]="!replaceSuccess2" [textInput]="'thankYou' | translate" [colorCode]="1" (clickEvent)="handleClickEvent($event)" ></app-notification-screen>
+    <app-notification-screen class="h-100 w-100" [hidden]="!replaceSuccess2" [textInput]="'transferSuccess' | translate:transferInfo" [colorCode]="1" ></app-notification-screen>
     <p id="title" [hidden]="replaceSuccess || replaceSuccess2">{{'transferConfirm' | translate:transferInfo}}</p>
     <div [hidden]="replaceSuccess || replaceSuccess2">
         <p>{{'confirmTransaction' | translate}}</p>

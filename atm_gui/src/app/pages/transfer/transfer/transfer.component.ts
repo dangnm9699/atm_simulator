@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class TransferComponent implements OnInit {
 
   amount: String = "9704220123456789";
-  minAmount: Number = 50000;
+  minAmount: Number = 30000;
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
   replaceSuccess2: boolean = false;
@@ -42,7 +42,7 @@ export class TransferComponent implements OnInit {
 
   cancelTrigger(value) {
     this.replaceFail = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       localStorage.clear();
       this.router.navigate(['auth/login']);
     })

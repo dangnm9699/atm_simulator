@@ -29,7 +29,7 @@ export class TransactionFailComponent implements OnInit {
       return;
     }
     this.replaceFail = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       localStorage.clear();
       this.router.navigate(['/auth/login']);
     })

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class TransactionResultComponent implements OnInit {
 
-  amount = {
+  _withdrawATMInfo = {
     "n_500": 0,
     "n_200": 0,
     "n_100": 0,
@@ -23,32 +23,31 @@ export class TransactionResultComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.amount = JSON.parse(localStorage.getItem('_withdrawATMInfo'))
-    if( ! this.amount["payload"] ){
+    this._withdrawATMInfo = JSON.parse(localStorage.getItem('_withdrawATMInfo'))
+    if( ! this._withdrawATMInfo["payload"] ){
       this.router.navigate(['/404']);
     }
-    this.amount = this.amount["payload"]
-    console.log(this.amount);
+    this._withdrawATMInfo = this._withdrawATMInfo["payload"]
     
-    for (let i of Object.keys(this.amount)) {
+    for (let i of Object.keys(this._withdrawATMInfo)) {
       switch (i) {
         case "n_500":
-          this.money = this.money.concat([...Array(Number(this.amount[i])).fill("500k")]);
+          this.money = this.money.concat([...Array(Number(this._withdrawATMInfo[i])).fill("500k")]);
           break;
         case "n_200":
-          this.money = this.money.concat([...Array(Number(this.amount[i])).fill("200k")]);
+          this.money = this.money.concat([...Array(Number(this._withdrawATMInfo[i])).fill("200k")]);
           break;
         case "n_100":
-          this.money = this.money.concat([...Array(Number(this.amount[i])).fill("100k")]);
+          this.money = this.money.concat([...Array(Number(this._withdrawATMInfo[i])).fill("100k")]);
           break;
         case "n_50":
-          this.money = this.money.concat([...Array(Number(this.amount[i])).fill("50k")]);
+          this.money = this.money.concat([...Array(Number(this._withdrawATMInfo[i])).fill("50k")]);
           break;
         case "n_20":
-          this.money = this.money.concat([...Array(Number(this.amount[i])).fill("20k")]);
+          this.money = this.money.concat([...Array(Number(this._withdrawATMInfo[i])).fill("20k")]);
           break;
         case "n_10":
-          this.money = this.money.concat([...Array(Number(this.amount[i])).fill("10k")]);
+          this.money = this.money.concat([...Array(Number(this._withdrawATMInfo[i])).fill("10k")]);
           break;
       }
     }
@@ -59,7 +58,13 @@ export class TransactionResultComponent implements OnInit {
     });
   }
 
-  getOut(){
-    this.router.navigate(["/pages/another-service"])
+  handleClickEvent(){
+    const _printInfo = {
+      amount: this._withdrawATMInfo['amount'],
+      src_card: this._withdrawATMInfo['card'],
+      created_at: this._withdrawATMInfo['created_at']
+    }
+    localStorage.setItem('_printInfo',  JSON.stringify(_printInfo))
+    this.router.navigate(["/pages/print-invoice"])
   }
 }

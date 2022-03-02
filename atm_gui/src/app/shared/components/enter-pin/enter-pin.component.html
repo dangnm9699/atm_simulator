@@ -1,0 +1,7 @@
+<div id="inputBox">
+    <div>
+        <p>{{show}}<span>{{blink}}</span><span>{{blank}}</span></p>
+    </div>
+    <app-numpad (numpadSignal)="numpadTrigger($event)" (deleteSignal)="deleteTrigger($event)"
+        (cancelSignal)="cancelTrigger($event)" (submitSignal)="submitTrigger($event)"></app-numpad>
+</div>

@@ -6,7 +6,7 @@
     },
     "footerTitle": "HPG - Chung niềm tin vững tương lai",
     "validatePin":"Xin chào, {{name}}\nHãy nhập mã PIN",
-    "wrongPin":"Bạn đã nhập sai mật khẩu {{wrongTimes}} lần",
+    "wrongPin":"Bạn đã nhập sai mật khẩu ",
     "selectServiceTitle" : "Hãy chọn dịch vụ bạn muốn sử dụng",
     "selectMoneyTitle": "Hãy chọn số tiền cần rút\nĐơn vị tiền tệ : VND",
     "wrongCard": "Thẻ đưa vào không hợp lệ\nHãy kiểm tra lại chiều đưa vào của thẻ\nVui lòng nhận lại thẻ",
@@ -25,5 +25,12 @@
     "accountNotExists": "Tài khoản {{accNumber}} không tồn tại trong hệ thống\nVui lòng nhập lại!",
     "inputAmountTransferTitle" : "Người nhận tiền: {{name}}\nHãy nhập số tiền bạn muốn chuyển",
     "enterWrongNTimes": "Bạn đã nhập sai {{times}} lần\nVui lòng nhận lại thẻ",
-    "transferConfirm": "Giao dịch chuyển tiền tới tài khoản {{transferTo}}\nSố tài khoản: {{transferToAcc}}\nSố tiền giao dịch chuyển khoản: {{transferAmount}}\nSố dư tài khoản sau giao dịch: {{remainingAmount}}"
+    "transferConfirm": "Giao dịch chuyển tiền tới tài khoản {{transferTo}}\nSố tài khoản: {{transferToAcc}}\nSố tiền giao dịch chuyển khoản: {{transferAmount}}\nSố dư tài khoản sau giao dịch: {{remainingAmount}}",
+    "transferSuccess": "Giao dịch chuyển tiền tới tài khoản {{transferTo}} - {{transferToAcc}} thành công",
+    "oldPassword":"Hãy nhập mã PIN",
+    "newPassword":"Nhập vào mã PIN mới",
+    "againPassword":"Xác nhận lại mã PIN",
+    "againPasswordFail":"Mã PIN không khớp\nHãy thực hiện lại",
+    "againPasswordSuccess":"Giao dịch đổi mật khẩu thành công\nVui lòng nhận lại thẻ",
+    "notFoundTitle": "Có lỗi xảy ra !\nSomething went wrong !"
 }

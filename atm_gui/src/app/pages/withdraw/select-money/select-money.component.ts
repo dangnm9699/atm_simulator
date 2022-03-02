@@ -31,7 +31,7 @@ export class SelectMoneyComponent implements OnInit {
 
   selectMoney(amount: Number){
     this.replace = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       this.userService.checkWithdraw(this._userInfo["cardNumber"], amount, { Authorization: this.bearer }).subscribe(e =>{
         let withdraw = {
           withdrawAmount: amount,

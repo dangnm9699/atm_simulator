@@ -93,7 +93,7 @@ export class ValidateIdentificationComponent implements OnInit {
       });
       return ;
     }
-    this.loginService.fakeApiPending(5000).subscribe((e) =>{
+    this.loginService.fakeApiPending(3000).subscribe((e) =>{
       console.log(e.body);
       
       this.router.navigate(["/auth/select-language"])

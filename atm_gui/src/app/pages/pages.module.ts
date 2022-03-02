@@ -20,10 +20,13 @@ import { TransactionFailComponent } from './withdraw/transaction-fail/transactio
 import { TransferComponent } from './transfer/transfer/transfer.component';
 import { ConfirmTransferComponent } from './transfer/confirm-transfer/confirm-transfer.component';
 import { InputAmountTransferComponent } from './transfer/input-amount-transfer/input-amount-transfer.component';
+import { OldPasswordComponent } from './change-password/old-password/old-password.component';
+import { NewPasswordComponent } from './change-password/new-password/new-password.component';
+import { AgainPasswordComponent } from './change-password/again-password/again-password.component';
 
 
 @NgModule({
-  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent, ConfirmTransactionComponent, AnotherServiceComponent, PrintInvoiceComponent, CheckAccountBalanceComponent, TransactionFailComponent, TransferComponent, ConfirmTransferComponent, InputAmountTransferComponent],
+  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent, ConfirmTransactionComponent, AnotherServiceComponent, PrintInvoiceComponent, CheckAccountBalanceComponent, TransactionFailComponent, TransferComponent, ConfirmTransferComponent, InputAmountTransferComponent, OldPasswordComponent, NewPasswordComponent, AgainPasswordComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

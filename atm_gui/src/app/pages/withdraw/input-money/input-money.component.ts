@@ -11,8 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class InputMoneyComponent implements OnInit {
 
-  amount: Number = 0;
-  minAmount: Number = 50000;
+  amount: number = 0;
+  minAmount: number = 30000;
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
   bearer
@@ -29,28 +29,31 @@ export class InputMoneyComponent implements OnInit {
   }
 
   numpadTrigger(value) {
-    if (Number(value) != value || this.getLength(Number(String(this.amount) + String(value))) > 8) {
+    if (parseInt(value) != value || this.getLength(parseInt(String(this.amount) + String(value))) > 8) {
       return;
     }
-    this.amount = Number(String(this.amount) + String(value))
+    this.amount = parseInt(String(this.amount) + String(value))
     return;
   }
 
   deleteTrigger(value) {
-    this.amount = Number(String(this.amount).slice(1))
+    this.amount = parseInt(String(this.amount).slice(1))
   }
 
   cancelTrigger(value) {
     this.replaceFail = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       localStorage.clear();
       this.router.navigate(['auth/login']);
     })
   }
 
   submitTrigger(value) {
+    if(this.amount % 30000 != 0 ){
+      return ;
+    }
     this.replaceSuccess = true;
-    this.loginService.fakeApiPending(5000).subscribe(e => {
+    this.loginService.fakeApiPending(3000).subscribe(e => {
       this.userService.checkWithdraw(this._userInfo["cardNumber"], this.amount, { Authorization: this.bearer }).subscribe(e =>{
         let withdraw = {
           withdrawAmount: this.amount,
@@ -61,8 +64,7 @@ export class InputMoneyComponent implements OnInit {
         this.router.navigate(['/pages/confirm-transaction']);
       },
       () => {
-        this.replaceSuccess = false
-        this.replaceFail = true
+        this.router.navigate(['/pages/transaction-fail']);
       })
     })
 
@@ -72,7 +74,8 @@ export class InputMoneyComponent implements OnInit {
     return number.toString().length;
   }
 
-  navigateToFailScreen() {
-    this.router.navigate(['/pages/transaction-fail']);
+  navigateToLogin(){
+    localStorage.clear();
+    this.router.navigate(['auth/login']);
   }
 }

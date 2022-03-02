@@ -1,0 +1,20 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+#title{
+    height: 25%;
+    padding: 10px 0 10px 0;
+    text-align: center;
+    white-space: pre-line;
+    font-size:3vw; 
+    font-weight: bold
+}
+
+#container > img{
+    width: 40vw;
+}

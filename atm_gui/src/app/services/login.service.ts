@@ -44,9 +44,6 @@ export class LoginService {
     return this.http.get<any>(`${environment.ATM_API_GATEWAY}/config-menu-items/allInfo/${id}`, { observe: 'response' });
   }
   fakeApiPending(ms: number): Observable<any> {
-    if (ms <= 5000) {
-      // return this.getUserInfo().pipe(delay(ms))
-    }
     return of(ms).pipe(delay(ms))
   }
 
@@ -66,10 +63,16 @@ export class LoginService {
   }
 
   authenticate(loginForm: any){
-    console.log(loginForm);
-    
     return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_BANK}/card/login`, loginForm, { observe: 'response' })
     // return this.http.post<any>(`${environment.ATM_API_GATEWAY}${environment.ATM_BANK}/card/login`, loginForm, { observe: 'response' })
+  }
+
+  changePassword(number: any, pin: any,  headers: any){
+    const body = {
+      "number":number,
+      "pinHash":pin
+    }
+    return this.http.post(`${environment.ATM_API_GATEWAY}${environment.ATM_BANK}/card/pinHash`, body, {headers: headers, observe: 'response', responseType: 'text' })
   }
 }
 

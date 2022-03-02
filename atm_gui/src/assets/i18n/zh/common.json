@@ -23,5 +23,12 @@
     "accountNotExists": "帐户 {{accNumber}} 在我们的系统中不存在\n请重新输入 !",
     "inputAmountTransferTitle" : "接收者: {{name}}\n请输入您要转账的金额",
     "enterWrongNTimes": "你输入错误 {{times}} 次\n请取回你的卡 !",
-    "transferConfirm": "账户 {{transferTo}}\n的转账交易账号：{{transferToAcc}}\n交易金额：{{transferAmount}}\n交易后的账户余额：{{remainingAmount}}"
+    "transferConfirm": "账户 {{transferTo}}\n的转账交易账号：{{transferToAcc}}\n交易金额：{{transferAmount}}\n交易后的账户余额：{{remainingAmount}}",
+    "transferSuccess": "汇款到账户 {{transferTo}} - {{transferToAcc}} 成功",
+    "oldPassword":"请输入您的密码",
+    "newPassword":"输入新密码",
+    "againPassword":"重新确认 PIN",
+    "againPasswordFail":"PIN 不匹配\n请重试",
+    "againPasswordSuccess":"密码修改成功\n请取回您的卡",
+    "notFoundTitle": "Có lỗi xảy ra !\nSomething went wrong !"
 }

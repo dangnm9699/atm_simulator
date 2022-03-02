@@ -1,16 +1,16 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs/operators';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
-  selector: 'app-validate-pin',
-  templateUrl: './validate-pin.component.html',
-  styleUrls: ['./validate-pin.component.scss']
+  selector: 'app-enter-pin',
+  templateUrl: './enter-pin.component.html',
+  styleUrls: ['./enter-pin.component.scss']
 })
-export class ValidatePinComponent implements OnInit {
+export class EnterPinComponent implements OnInit {
 
+  @Output() cancelEvent = new EventEmitter();
+  @Output() submitEvent = new EventEmitter();
   wrong={
     wrongTimes: 1
   }
@@ -19,14 +19,13 @@ export class ValidatePinComponent implements OnInit {
   blink: String = "_"
   blank: String = "-----"
   replaceFail: boolean = false;
-  replaceFail2: boolean = false;
   replaceSuccess: boolean = false;
   _userInfo: Object;
+  
   constructor(
     private router: Router,
     private loginService: LoginService
   ) { }
-
   ngOnInit(): void {
     this._userInfo = JSON.parse(localStorage.getItem('_userInfo'));    
   }
@@ -57,41 +56,15 @@ export class ValidatePinComponent implements OnInit {
     this.blink = "_"
   }
 
-  cancelTrigger(value) {
-    this.replaceFail = true;
-    this.loginService.fakeApiPending(3000).subscribe(e => {
-      localStorage.clear();
-      this.router.navigate(['auth/login']);
-    })
-  }
-
   submitTrigger(value) {
     if (this.amount.length != 6) {
       return;
     }
-    if(this._userInfo["cardNumber"]){    
-      this.replaceSuccess = true;
-      this.loginService.authenticate({number:this._userInfo["cardNumber"], pinHash:this.amount}).pipe(delay(4000)).subscribe(e =>{       
-        localStorage.setItem('httpHeaders', e.body["tokenType"] + " " + e.body["accessToken"]);
-        this.router.navigate(['/pages/select-service']);
-      }, err =>{
-        this.replaceSuccess = true;
-        setTimeout(()=>{
-          this.replaceSuccess = false;
-          this.replaceFail2 = true;
-          setTimeout(() => {
-            localStorage.clear();
-            this.router.navigate(["/auth/login"])
-          },3000);
-        }, 4000);
-      })
-    }else{
-      this.replaceSuccess = true;
-      this.loginService.fakeApiPending(3000).subscribe(() =>{
-        this.replaceSuccess = false;
-        this.replaceFail = true;
-      })
-    }
+    this.submitEvent.emit(this.amount);
+  }
+
+  cancelTrigger(value) {
+    this.cancelEvent.emit();
   }
 
   navigateToLogin(){
@@ -101,4 +74,5 @@ export class ValidatePinComponent implements OnInit {
   timeout(ms){
     return new Promise(resolve => setTimeout(resolve, ms))
   }
+
 }

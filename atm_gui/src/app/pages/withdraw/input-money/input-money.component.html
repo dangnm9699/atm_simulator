@@ -1,7 +1,7 @@
 <div id="container">
-    <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replaceFail" ></app-pending>
     <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replaceSuccess" ></app-pending>
-    <div [hidden]="replaceFail || replaceSuccess">
+    <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replaceFail" (click)="navigateToLogin()" [colorCode]="0" ></app-pending>
+    <div [hidden]="replaceSuccess || replaceFail">
         <pre>{{'inputMoney' | translate}} {{minAmount | currency :'VND'}}</pre>
         <div id="inputBox">
             <div>
