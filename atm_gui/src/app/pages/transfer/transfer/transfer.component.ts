@@ -12,7 +12,6 @@ export class TransferComponent implements OnInit {
 
   // amount: String = "9704220123456789";
   amount: String = "";
-  minAmount: Number = 30000;
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
   replaceSuccess2: boolean = false;

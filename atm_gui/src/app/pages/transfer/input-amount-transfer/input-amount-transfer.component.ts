@@ -12,7 +12,6 @@ import { UserService } from 'src/app/services/user.service';
 export class InputAmountTransferComponent implements OnInit {
 
   amount: Number = 0;
-  minAmount: Number = 30000;
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
   _userInfo = {}
@@ -28,20 +27,6 @@ export class InputAmountTransferComponent implements OnInit {
     this._userInfo = JSON.parse(localStorage.getItem('_userInfo'))
     this._transferInfo = JSON.parse(localStorage.getItem('_transferInfo'))
     this.bearer = localStorage.getItem('httpHeaders')
-    let headers = new HttpHeaders()
-    // console.log(bearer, _userInfo, _userInfo["cardNumber"]);
-    // if(bearer && _userInfo && _userInfo["cardNumber"]){
-    //   this.userService.getCardDetail(_userInfo["cardNumber"], {Authorization: bearer}).subscribe(e =>{
-    //     if(e.body["balance"]){
-    //       this.accountBalance = e.body["balance"]
-    //     } else {
-    //       this.router.navigate["/404"];
-    //     }
-    //   });
-    // }else{
-    //   this.router.navigate["/404"];
-    // }
-
   }
 
   numpadTrigger(value) {

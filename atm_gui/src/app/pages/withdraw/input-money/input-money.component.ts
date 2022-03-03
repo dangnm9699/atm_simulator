@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class InputMoneyComponent implements OnInit {
 
   amount: number = 0;
-  minAmount: number = 30000;
+  minAmount: number = 10000;
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
   bearer
@@ -49,7 +49,7 @@ export class InputMoneyComponent implements OnInit {
   }
 
   submitTrigger(value) {
-    if(this.amount % 30000 != 0 ){
+    if(this.amount % 10000 != 0 ){
       return ;
     }
     this.replaceSuccess = true;
