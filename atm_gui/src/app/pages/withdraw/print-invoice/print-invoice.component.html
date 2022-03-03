@@ -1,7 +1,8 @@
 <div id="container">
     <app-pending class="h-100" [textInput]="'cardOut' | translate" [hidden]="!replaceFail" ></app-pending>
-    <p id="title" [hidden]="replaceFail">{{'printInvoice' | translate}}</p>
-    <div [hidden]="replaceFail">
+    <app-pending class="h-100 w-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replace" ></app-pending>
+    <p id="title" [hidden]="replaceFail || replace">{{'printInvoice' | translate}}</p>
+    <div [hidden]="replaceFail || replace">
         <div (click) = "select(true)" class="background-green noselect">
             <p>{{'confirm.yes' |translate}}</p>
         </div>

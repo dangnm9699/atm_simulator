@@ -37,7 +37,7 @@ export class InputMoneyComponent implements OnInit {
   }
 
   deleteTrigger(value) {
-    this.amount = parseInt(String(this.amount).slice(1))
+    this.amount = parseInt( String(this.amount).length == 1 ? '0' : String(this.amount).slice(1))
   }
 
   cancelTrigger(value) {

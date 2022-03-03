@@ -44,7 +44,6 @@ export class AgainPasswordComponent implements OnInit {
       },3000);
       return;
     }
-    console.log(this._userInfo["cardNumber"]);
     
     if(this._userInfo["cardNumber"]){    
       this.replaceSuccess = true;

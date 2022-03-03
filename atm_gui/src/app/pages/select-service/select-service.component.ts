@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class SelectServiceComponent implements OnInit {
 
   replace: boolean = false
+  replaceFail: boolean = false
   constructor(
     private router: Router,
     private loginService: LoginService) { }
@@ -42,6 +43,14 @@ export class SelectServiceComponent implements OnInit {
     this.replace = true;
     this.loginService.fakeApiPending(1000).subscribe(e => {
       this.router.navigate(['/pages/old-password']);
+    })
+  }
+
+  navigateLogin(){
+    this.replaceFail = true;
+    localStorage.clear();
+    this.loginService.fakeApiPending(2000).subscribe(e => {
+      this.router.navigate(["/auth/login"]);
     })
   }
 }

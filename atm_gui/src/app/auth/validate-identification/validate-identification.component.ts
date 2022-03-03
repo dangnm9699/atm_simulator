@@ -64,8 +64,6 @@ export class ValidateIdentificationComponent implements OnInit {
   // }
 
   redirectTo(uri:string){
-    console.log(123,uri);
-    
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
     this.router.navigate([uri]));
  }
@@ -93,9 +91,7 @@ export class ValidateIdentificationComponent implements OnInit {
       });
       return ;
     }
-    this.loginService.fakeApiPending(3000).subscribe((e) =>{
-      console.log(e.body);
-      
+    this.loginService.fakeApiPending(3000).subscribe((e) =>{      
       this.router.navigate(["/auth/select-language"])
     })
     // this.router.navigate(["/auth/select-language"])
@@ -108,7 +104,8 @@ export class ValidateIdentificationComponent implements OnInit {
   }
 
   navigateToLogin(){
-    this.router.navigate(["/auth/login"]);
+    this.file = null;
+    this.replaceFail=false;
   }
 
   ngOnDestroy(): void {

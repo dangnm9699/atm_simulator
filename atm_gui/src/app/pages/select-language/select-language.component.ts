@@ -25,7 +25,6 @@ export class SelectLanguageComponent implements OnInit {
       this.translateService.setDefaultLang(lang);
       this.router.navigate(['/auth/pin'])
     } catch (err){
-      console.log(err);
       this.translateService.setDefaultLang('vi');
     }
   }

@@ -23,7 +23,6 @@ export class CheckAccountBalanceComponent implements OnInit {
     let _userInfo = JSON.parse(localStorage.getItem('_userInfo'))
     let bearer = localStorage.getItem('httpHeaders')
     let headers = new HttpHeaders()
-    console.log(bearer, _userInfo, _userInfo["cardNumber"]);
     if(bearer && _userInfo && _userInfo["cardNumber"]){
       this.userService.getCardDetail(_userInfo["cardNumber"], {Authorization: bearer}).subscribe(e =>{
         if(e.body["balance"]){

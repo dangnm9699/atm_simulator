@@ -1,7 +1,8 @@
 <div id="container">
     <app-pending class="h-100" [textInput]="'transactionProcessing' | translate" [hidden]="!replace" ></app-pending>
-    <p id="title" [hidden]="replace">{{'selectServiceTitle' | translate}}</p>
-    <div [hidden]="replace" class="noselect">
+    <app-pending class="h-100 w-100" [textInput]="'cardOut' | translate" [colorCode]="0" [hidden]="!replaceFail" ></app-pending>
+    <p id="title" [hidden]="replace || replaceFail">{{'selectServiceTitle' | translate}}</p>
+    <div [hidden]="replace || replaceFail" class="noselect">
         <div (click) = "navigateSelectMoney()">
             <p>{{'selectService.withdrawMoney' |translate}}</p>
         </div>
@@ -17,8 +18,8 @@
         <div (click) = "navigateTransfer()">
             <p>{{'selectService.transferMoney' |translate}}</p>
         </div>
-        <div>
-            <p></p>
+        <div (click) = "navigateLogin()">
+            <p>{{'numpad.cancel'|translate}}</p>
         </div>
     </div>
 </div>

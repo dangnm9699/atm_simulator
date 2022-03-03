@@ -13,6 +13,7 @@ import { saveAs } from "file-saver";
 export class PrintInvoiceComponent implements OnInit {
   
   replaceFail: boolean = false;
+  replace: boolean = false;
   bearer
   constructor(
     private router: Router,
@@ -29,6 +30,7 @@ export class PrintInvoiceComponent implements OnInit {
 
   select(choice: boolean) {
     if (choice) {
+      this.replace = true
       const _printInfo = JSON.parse(localStorage.getItem("_printInfo"))
       if(_printInfo['amount'] || _printInfo['created_at'] || _printInfo['src_card']){
         localStorage.setItem("_printInfo",null)
