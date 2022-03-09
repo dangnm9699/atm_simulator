@@ -1,10 +1,12 @@
-# ATM Cash Dispenser module
+# ATM Cash Dispenser
 
 **Prerequisite**
 
 - Python: 3.8.8
 
-1. Create venv
+## How to run
+
+### 1. Create venv
 
 - Change directory into project
 - Execute below command:
@@ -23,7 +25,7 @@ source ./venv/bin/activate
 ./.venv/Scripts/Activate.ps1
 ```
 
-2. Install requirements
+### 2. Install requirements
 
 - Execute below command:
 
@@ -31,15 +33,20 @@ source ./venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Setup env file
+### 3. Setup env file
 
 - Copy `.env.example` to `.env`
 - Edit `.env` if necessary
 
-4. Run API
+### 4. Run API
 
 - Execute below command:
 
 ```bash
 python main.py
 ```
+
+## API Description
+
+- Open browser
+- Access `http://localhost:3002/documentation`

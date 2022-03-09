@@ -1,33 +1,42 @@
-# atm_bank
-Information Systems Design Project / SoICT / HUST / 20211
+# ATM Bank
 
-## Frameworks and Libraries
-* Spring Boot
-* MySQL
-* JWT
-* Lombok
+**Prerequisite**
 
-## ATM Bank Setup
+- JDK 17
+- MySQL
+- Maven
 
-- Create `src/main/resources/application.properties` with below contents:
+## How to run
+
+- Create file `src/main/resources/application.properties` and edit if necessary
 
 ```
-## App Properties
-app.jwtSecret= JWTSuperSecretKey
-app.jwtExpirationInMs = 604800000
-
-server.port = 8080
+app.jwtSecret=information-systems-design-project-it5005-soict-hust-20211
+app.jwtExpirationInMs=604800000
+server.port=3003
 server.servlet.context-path=/api/v1
 spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
-spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.ddl-auto=create
 spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/atm_bank
+spring.datasource.url=jdbc:mysql://localhost:3306/atm_bank?createDatabaseIfNotExist=true
 spring.datasource.username=root
-spring.datasource.password= 
+spring.datasource.password=root
 ```
 
-# API Documentation
+- Run MySQL
+- Build app
+
+```bash
+./mvnw package
 ```
-    get: /api/v1/swagger-ui.html
+
+- Run app
+
+```bash
+java -jar target/atm_bank-0.0.1-SNAPSHOT.jar
 ```
-## Authenication
+
+## API Definition
+
+- Open browser
+- Access `http://localhost:3003/api/v1/swagger-ui.html`
