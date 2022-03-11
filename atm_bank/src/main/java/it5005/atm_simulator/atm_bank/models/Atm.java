@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @Entity
@@ -33,6 +34,23 @@ public class Atm implements Serializable {
     @NotNull
     @Column(name = "description")
     private String description;
+
+    @NotNull
+    @Column(name = "fee")
+    private Double fee;
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Double getFee() {
+        return fee;
+    }
+
+    public void setFee(Double fee) {
+        this.fee = fee;
+    }
 
     public Long getId() {
         return id;

@@ -9,10 +9,7 @@ import it5005.atm_simulator.atm_bank.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +24,7 @@ public class TransactionController {
             @RequestBody TransactionRequest transactionRequest
     ) {
         Double amount = transactionRequest.getMoney();
+
         Transaction transaction_new = transactionService.withDraw(transactionRequest.getNumber(), transactionRequest.getIp(), amount);
         if (transaction_new != null) {
             return new ResponseEntity<>(new TransactionResponse(transaction_new), HttpStatus.OK);
@@ -35,13 +33,14 @@ public class TransactionController {
         }
     }
 
-    @PostMapping("/withdraw/check")
+    @GetMapping("/withdraw/check")
     public ResponseEntity<String> withDrawCheck(@RequestBody TransactionRequest transactionRequest){
         Double amount = transactionRequest.getMoney();
         String number = transactionRequest.getNumber();
+        String ip = transactionRequest.getIp();
 
-        if (transactionService.checkBalance(number, amount)){
-            return new ResponseEntity<>(""+transactionService.checkRemainingBalance(number, amount), HttpStatus.OK);
+        if (transactionService.checkBalance(number, amount, ip)){
+            return new ResponseEntity<>(""+transactionService.checkRemainingBalance(number, amount,ip), HttpStatus.OK);
         }else {
             return new ResponseEntity<>("Account is not enough money", HttpStatus.BAD_REQUEST);
         }
@@ -55,6 +54,7 @@ public class TransactionController {
         String fromNumber = transferRequest.getTransferFromNumber();
         String toNumber = transferRequest.getTransferToNumber();
         String ip = transferRequest.getID();
+
         if (fromNumber == toNumber) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
@@ -70,18 +70,19 @@ public class TransactionController {
         }
     }
 
-    @PostMapping("/transfer/check")
+    @GetMapping("/transfer/check")
     public ResponseEntity<String> checkAccounts(@RequestBody TransferRequest transferRequest){
         Double amount = transferRequest.getMoney();
         String fromNumber = transferRequest.getTransferFromNumber();
         String toNumber = transferRequest.getTransferToNumber();
         String ip = transferRequest.getID();
+
         if (fromNumber == toNumber){
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
 
-        if (transactionService.checkBalance(fromNumber, amount)){
-            return new ResponseEntity<>(""+transactionService.checkRemainingBalance(fromNumber, amount), HttpStatus.OK);
+        if (transactionService.checkBalance(fromNumber, amount, ip)){
+            return new ResponseEntity<>(""+transactionService.checkRemainingBalance(fromNumber, amount,ip), HttpStatus.OK);
         }else {
             return new ResponseEntity<>("Account is not enough money", HttpStatus.BAD_REQUEST);
         }

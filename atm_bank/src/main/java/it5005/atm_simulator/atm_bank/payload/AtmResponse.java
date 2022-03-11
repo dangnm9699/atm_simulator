@@ -9,6 +9,7 @@ public class AtmResponse {
     private String ip;
     private String location;
     private String description;
+    private Double fee;
 
     public AtmResponse() {
 
@@ -19,6 +20,7 @@ public class AtmResponse {
         this.ip = atm.getIp();
         this.location = atm.getLocation();
         this.description = atm.getDescription();
+        this.fee = atm.getFee();
     }
 
     public AtmResponse AtmResponseList(Atm atm) {
@@ -27,6 +29,7 @@ public class AtmResponse {
         atmResponse.ip = atm.getIp();
         atmResponse.location = atm.getLocation();
         atmResponse.description = atm.getDescription();
+        atmResponse.fee = atm.getFee();
         return atmResponse;
     }
 

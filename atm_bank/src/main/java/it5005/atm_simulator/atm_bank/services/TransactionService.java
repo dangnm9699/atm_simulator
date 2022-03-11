@@ -25,23 +25,32 @@ public class TransactionService {
 
     private final List<Transaction> transactions = new ArrayList<Transaction>();
 
+    // fee of atm
+    public Double feeTransaction(double fee, double money){
+        return Math.min(50000,Math.max(3000,money*fee/100));
+    }
 
     public Transaction withDraw(String number, String ip, double money) {
         Date localDate = new Date();
-        double check_balance = money + 50000;
+
         try {
             Atm atm = atmService.findByIp(ip);
             Card card = cardService.loadCardByNumber(number);
+
+            double fee_transaction = feeTransaction(atm.getFee(),money);
+            double check_balance = money + fee_transaction +50000;
+
             BigDecimal amount = new BigDecimal(check_balance);
             BigDecimal balance = card.getBalance();
 
             if (balance.compareTo(amount) == 1) {
-                card.setBalance(balance.subtract(new BigDecimal(money)));
+                card.setBalance(balance.subtract(new BigDecimal(money+fee_transaction)));
                 cardService.save(card);
                 System.out.println("Transaction Success");
                 Transaction transaction_new = new Transaction();
                 transaction_new.setName(card.getNumber() + " withDraw " + money);
                 transaction_new.setAmount(new BigDecimal(money));
+                transaction_new.setFee_detail(new BigDecimal(fee_transaction));
                 transaction_new.setCreated_at(localDate);
                 transaction_new.setDescription("Success");
                 transaction_new.setCard(card);
@@ -57,10 +66,12 @@ public class TransactionService {
         return null;
     }
 
-    public Boolean checkBalance(String number, double money) {
-        double check_balance = money + 50000;
+    public Boolean checkBalance(String number, double money, String ip) {
         Card card = cardService.loadCardByNumber(number);
+        Atm atm = atmService.findByIp(ip);
 
+        double fee_transaction = feeTransaction(atm.getFee(),money);
+        double check_balance = money + fee_transaction +50000;
         BigDecimal amount = new BigDecimal(check_balance);
         BigDecimal balance = card.getBalance();
 
@@ -81,14 +92,17 @@ public class TransactionService {
         // check information card
         // check information Account fromNumber
         if (cardService.checkStatusCard(fromNumber) && cardService.checkStatusCard(toNumber)
-                && atmService.checkAtm(ip) && checkBalance(fromNumber, money)) {
+                && atmService.checkAtm(ip) && checkBalance(fromNumber, money,ip)) {
 
-            Atm atm = atmService.findByIp(ip);
             Card card_fromNumber = cardService.loadCardByNumber(fromNumber);
             Card card_toNumber = cardService.loadCardByNumber(toNumber);
+            Atm atm = atmService.findByIp(ip);
+
+            double fee_transaction = feeTransaction(atm.getFee(),money);
+            BigDecimal amount_fee = new BigDecimal(money + fee_transaction);
             BigDecimal amount = new BigDecimal(money);
 
-            card_fromNumber.setBalance(card_fromNumber.getBalance().subtract(amount));
+            card_fromNumber.setBalance(card_fromNumber.getBalance().subtract(amount_fee));
             card_toNumber.setBalance(card_toNumber.getBalance().add(amount));
 
             cardService.save(card_fromNumber);
@@ -101,6 +115,7 @@ public class TransactionService {
             transfer_fromNumber.setCreated_at(localDate);
             transfer_fromNumber.setDescription("Transfer Between Account");
             transfer_fromNumber.setAmount(amount);
+            transfer_fromNumber.setFee_detail(new BigDecimal(fee_transaction));
 
             transfer_toNumber.setName("Account number " + card_fromNumber.getNumber() + " transfer: " + money + "to Account " + card_toNumber.getUser().getName());
             transfer_toNumber.setAtm(atm);
@@ -108,6 +123,7 @@ public class TransactionService {
             transfer_toNumber.setCreated_at(localDate);
             transfer_toNumber.setDescription("Transfer Between Account");
             transfer_toNumber.setAmount(amount);
+            transfer_toNumber.setAmount(new BigDecimal(0));
 
             transactionRepository.save(transfer_fromNumber);
             transactionRepository.save(transfer_toNumber);
@@ -122,9 +138,12 @@ public class TransactionService {
 
     }
 
-    public BigDecimal checkRemainingBalance(String fromNumber,double money ){
+    public BigDecimal checkRemainingBalance(String fromNumber,double money, String ip){
+        Atm atm = atmService.findByIp(ip);
+
+        double fee_transaction = feeTransaction(atm.getFee(),money);
         Card card_fromNumber = cardService.loadCardByNumber(fromNumber);
-        BigDecimal amount = new BigDecimal(money);
+        BigDecimal amount = new BigDecimal(money+fee_transaction);
 
         return card_fromNumber.getBalance().subtract(amount);
     }

@@ -22,7 +22,7 @@ public class AtmService {
     }
 
     public Atm createAtm(Atm atm) {
-        atm.setIp(atm.getIp());
+//        atm.setIp(atm.getIp());
         atmRepository.save(atm);
         return atm;
     }
@@ -45,6 +45,7 @@ public class AtmService {
             _atm.setDescription(atm.getDescription());
             _atm.setLocation(atm.getLocation());
             _atm.setIp(atm.getIp());
+            _atm.setFee(atm.getFee());
             atmRepository.save(_atm);
             return _atm;
         } else {
@@ -70,5 +71,7 @@ public class AtmService {
         System.out.println("Atm is not exit");
         return false;
     }
+
+
 
 }

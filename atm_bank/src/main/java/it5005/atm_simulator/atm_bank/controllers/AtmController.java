@@ -55,6 +55,7 @@ public class AtmController {
             atm.setIp(atmRequest.getIp());
             atm.setLocation(atmRequest.getLocation());
             atm.setDescription(atmRequest.getDescription());
+            atm.setFee(atmRequest.getFee());
             Atm atm_new = atmService.createAtm(atm);
             return new ResponseEntity<>(new AtmResponse(atm_new), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -73,6 +74,7 @@ public class AtmController {
             atm.setIp(atmRequest.getIp());
             atm.setLocation(atmRequest.getLocation());
             atm.setDescription(atmRequest.getDescription());
+            atm.setFee(atmRequest.getFee());
             Atm atm_new = atmService.updateAtm(atm, id);
             return new ResponseEntity<>(new AtmResponse(atm_new), HttpStatus.OK);
         } catch (Exception e) {

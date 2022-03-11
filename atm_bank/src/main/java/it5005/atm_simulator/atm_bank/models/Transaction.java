@@ -35,6 +35,18 @@ public class Transaction implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @NotNull
+    @Column(name = "fee_detail")
+    private BigDecimal fee_detail;
+
+    public BigDecimal getFee_detail() {
+        return fee_detail;
+    }
+
+    public void setFee_detail(BigDecimal fee_detail) {
+        this.fee_detail = fee_detail;
+    }
+
     public Long getId() {
         return id;
     }

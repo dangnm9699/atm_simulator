@@ -17,4 +17,7 @@ public class AtmRequest {
 
     @NotBlank
     private String description;
+
+    @NotBlank
+    private Double fee;
 }

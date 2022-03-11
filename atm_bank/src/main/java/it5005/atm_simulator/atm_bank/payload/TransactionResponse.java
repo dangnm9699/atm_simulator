@@ -15,12 +15,14 @@ public class TransactionResponse {
 
     private String number;
     private String ip;
+    private BigDecimal fee_detail;
 
     public TransactionResponse(Transaction transaction) {
         this.name = transaction.getName();
         this.amount = transaction.getAmount();
         this.created_at = transaction.getCreated_at();
         this.description = transaction.getDescription();
+        this.fee_detail = transaction.getFee_detail();
 
         this.number = transaction.getCard().getNumber();
         this.ip = transaction.getAtm().getIp();

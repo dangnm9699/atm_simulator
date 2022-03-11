@@ -15,6 +15,7 @@ public class TransferResponse {
     private Date created_at;
     private String description;
     private String ip;
+    private BigDecimal fee_detail;
 
     public TransferResponse(Transaction transferFrom, Transaction transferTo) {
         this.name = transferFrom.getName();
@@ -22,6 +23,7 @@ public class TransferResponse {
         this.transferFromNumber = transferFrom.getCard().getNumber();
         this.transferToNumber = transferTo.getCard().getNumber();
         this.amount = transferFrom.getAmount();
+        this.fee_detail = transferFrom.getFee_detail();
 
         this.created_at = transferFrom.getCreated_at();
         this.description = transferFrom.getDescription();
