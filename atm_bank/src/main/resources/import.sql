@@ -11,4 +11,4 @@ INSERT INTO `cards` (`id`, `number`, `pin_hash`, `balance`, `valid_from`, `good_
 INSERT INTO `cards` (`id`, `number`, `pin_hash`, `balance`, `valid_from`, `good_thru`, `status`, `user_id`) VALUE (4, '9704225647382910', '$2a$10$zVpEn9583NCZvDZqymu5veqEUzhJA4YKGX5qnHnJRRa.Kzrh6a49O', 22000000, '2021-12-21 00:00:00', '2026-12-21 00:00:00', 1, 4);
 
 -- seed `atms` table
-INSERT INTO `atms` (`id`, `name`, `ip`, `location`, `description`) VALUE (1, 'ATM IT5005', '172.92.16.42', '1st Dai Co Viet street', 'In use');
+INSERT INTO `atms` (`id`, `name`, `ip`, `location`, `description`, `fee`) VALUE (1, 'ATM IT5005', '172.92.16.42', '1st Dai Co Viet street', 'In use',0.1);
