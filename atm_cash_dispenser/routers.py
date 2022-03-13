@@ -89,6 +89,7 @@ async def widthdrawal(
             resJson = json.loads(res.read())
             # execute transaction at atm
             _ = system.update(db=db, transaction=item)
+            item.fee = resJson["fee_detail"]
             item.created_at = datetime.fromisoformat(resJson["created_at"])
             return {"payload": item}
         except Exception:

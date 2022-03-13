@@ -1,3 +1,4 @@
+from lib2to3.pgen2.token import OP
 from typing import Optional
 from datetime import datetime
 
@@ -20,6 +21,7 @@ class System(BaseModel):
 
 class Transaction(BaseModel):
     amount: Optional[int]
+    fee: Optional[float]
     card: Optional[str]
     n_500: Optional[int] = 0
     n_200: Optional[int] = 0
