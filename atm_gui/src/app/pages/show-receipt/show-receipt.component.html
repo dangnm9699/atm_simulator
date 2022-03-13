@@ -1,0 +1,30 @@
+<div class="invoice-box" (click)="handleClickEvent()">
+    <div class="receipt-header">
+        <img src="assets/images/logo.svg" alt="">
+        <p>ATM<br /> Receipt #123 <br/> Location: 01 Dai Co Viet<br/> Terminal: 172.92.16.42</p>
+    </div>
+    
+    <hr>
+
+    <div class="receipt-body">
+        <p>Date: {{created_at.split('T')[0]}}</p>
+        <p>Time: {{created_at.split('T')[1]}}</p>
+        <p>Card #: {{src_card}}</p>
+        <p>Card holder #: {{name}}</p>
+        <p *ngIf="receipt_type" style="font-size: 1.5em; text-align: center;">TRANSFER TRANSACTION </p>
+        
+        <p *ngIf="!receipt_type" style="font-size: 1.5em; text-align: center;"> WITHDRAW TRANSACTION </p>
+        <p *ngIf="!receipt_type">Withdrawn From: {{src_card}}</p>
+        <p *ngIf="receipt_type">Transfer From: {{src_card}}</p>
+        <p *ngIf="receipt_type">Transfer To: {{dst_card}}</p>
+        <p>Amount : {{amount}}</p>
+        <p>ATM Fee: {{fee}}</p>
+        <p>Account Balance: {{balance}}</p>
+    </div>  
+
+    <hr>
+
+    <div class="receipt-footer">
+        <p>Thank you for banking with us!<br/>Visit us online<br/>or<br/>Call our Customer Service line</p>
+    </div>
+</div>

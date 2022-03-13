@@ -23,10 +23,11 @@ import { InputAmountTransferComponent } from './transfer/input-amount-transfer/i
 import { OldPasswordComponent } from './change-password/old-password/old-password.component';
 import { NewPasswordComponent } from './change-password/new-password/new-password.component';
 import { AgainPasswordComponent } from './change-password/again-password/again-password.component';
+import { ShowReceiptComponent } from './show-receipt/show-receipt.component';
 
 
 @NgModule({
-  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent, ConfirmTransactionComponent, AnotherServiceComponent, PrintInvoiceComponent, CheckAccountBalanceComponent, TransactionFailComponent, TransferComponent, ConfirmTransferComponent, InputAmountTransferComponent, OldPasswordComponent, NewPasswordComponent, AgainPasswordComponent],
+  declarations: [PagesComponent, HomeComponent, InputMoneyComponent, SelectLanguageComponent, SelectServiceComponent, SelectMoneyComponent, TransactionResultComponent, ConfirmTransactionComponent, AnotherServiceComponent, PrintInvoiceComponent, CheckAccountBalanceComponent, TransactionFailComponent, TransferComponent, ConfirmTransferComponent, InputAmountTransferComponent, OldPasswordComponent, NewPasswordComponent, AgainPasswordComponent, ShowReceiptComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

@@ -33,15 +33,22 @@ export class PrintInvoiceComponent implements OnInit {
       this.replace = true
       const _printInfo = JSON.parse(localStorage.getItem("_printInfo"))
       if(_printInfo['amount'] || _printInfo['created_at'] || _printInfo['src_card']){
-        localStorage.setItem("_printInfo",null)
-        this.userService.printInvoice(_printInfo['amount'], _printInfo['created_at'], _printInfo['src_card'], _printInfo['dst_card'], {Authorization: this.bearer}).subscribe( e => {
-          if(e.body['receipt_link']){
-            this.userService.downloadInvoice(e.body['receipt_link'], {Authorization: this.bearer}).subscribe(blob =>{
-              saveAs(blob, "invoice.pdf")
-              this.router.navigate(["/pages/another-service"])
-            })
-          }
-        })
+        // localStorage.setItem("_printInfo",null)
+        // this.userService.printInvoice(_printInfo['amount'], _printInfo['created_at'], _printInfo['src_card'], _printInfo['dst_card'], {Authorization: this.bearer}).subscribe( e => {
+        //   if(e.body['receipt_link']){
+        //     this.userService.downloadInvoice(e.body['receipt_link'], {Authorization: this.bearer}).subscribe(blob =>{
+        //       saveAs(blob, "invoice.pdf")
+        //       this.router.navigate(["/pages/another-service"])
+        //     })
+        //   }
+        // })
+        this.router.navigate(["/pages/show-receipt", {
+          receipt_type: _printInfo['dst_card'] ? 1 : 0,
+          amount: _printInfo['amount'],
+          created_at: _printInfo['created_at'],
+          src_card:  _printInfo['src_card'],
+          dst_card: _printInfo['dst_card']
+        }])
       }
       return ;
     }

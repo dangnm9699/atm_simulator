@@ -11,34 +11,34 @@ export class MainGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const token = localStorage.getItem('httpHeaders');
+    // const token = localStorage.getItem('httpHeaders');
     
-    if (token === undefined || token === null || token === 'null' || token === '') {
-      console.log('3.auth-guard');
-      localStorage.clear();
-      this.router.navigate(['/auth/login']);
-      return false;
-    }
+    // if (token === undefined || token === null || token === 'null' || token === '') {
+    //   console.log('3.auth-guard');
+    //   localStorage.clear();
+    //   this.router.navigate(['/auth/login']);
+    //   return false;
+    // }
     
-    try {
-      if (this.router.url === '/') {    
-        localStorage.clear()
-        this.router.navigate(['/auth']);
-        return false;
-      }
-      if (state.url === '/pages' || state.url === '/pages/report/manager' ||
-        state.url === '/pages/sys-config/sys-home' || state.url === '/pages/404' || state.url === '/404' ||
-        state.url.indexOf('assets/i18n/') > -1) {
-        return true;
-      }
-      // }
-    } catch (e) {
-      // console.log('exception:', checkRole)
-      console.log('4.auth-guard');
-      localStorage.clear();
-      this.router.navigate(['/auths/login']);
-      return false;
-    }
+    // try {
+    //   if (this.router.url === '/') {    
+    //     localStorage.clear()
+    //     this.router.navigate(['/auth']);
+    //     return false;
+    //   }
+    //   if (state.url === '/pages' || state.url === '/pages/report/manager' ||
+    //     state.url === '/pages/sys-config/sys-home' || state.url === '/pages/404' || state.url === '/404' ||
+    //     state.url.indexOf('assets/i18n/') > -1) {
+    //     return true;
+    //   }
+    //   // }
+    // } catch (e) {
+    //   // console.log('exception:', checkRole)
+    //   console.log('4.auth-guard');
+    //   localStorage.clear();
+    //   this.router.navigate(['/auths/login']);
+    //   return false;
+    // }
     return true;
   }
 }

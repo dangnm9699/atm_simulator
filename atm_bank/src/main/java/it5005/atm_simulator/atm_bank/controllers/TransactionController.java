@@ -33,7 +33,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/withdraw/check")
+    @PostMapping("/withdraw/check")
     public ResponseEntity<String> withDrawCheck(@RequestBody TransactionRequest transactionRequest){
         Double amount = transactionRequest.getMoney();
         String number = transactionRequest.getNumber();
@@ -70,7 +70,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transfer/check")
+    @PostMapping("/transfer/check")
     public ResponseEntity<String> checkAccounts(@RequestBody TransferRequest transferRequest){
         Double amount = transferRequest.getMoney();
         String fromNumber = transferRequest.getTransferFromNumber();

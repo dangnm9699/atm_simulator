@@ -21,6 +21,7 @@ import { InputAmountTransferComponent } from './transfer/input-amount-transfer/i
 import { OldPasswordComponent } from './change-password/old-password/old-password.component';
 import { NewPasswordComponent } from './change-password/new-password/new-password.component';
 import { AgainPasswordComponent } from './change-password/again-password/again-password.component';
+import { ShowReceiptComponent } from './show-receipt/show-receipt.component';
 
 
 const routes: Routes = [
@@ -92,6 +93,10 @@ const routes: Routes = [
       {
         path:'again-password',
         component: AgainPasswordComponent
+      },
+      {
+        path:'show-receipt',
+        component: ShowReceiptComponent
       },
       {
         path:'users',

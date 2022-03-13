@@ -10,16 +10,16 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.router.url === '/') {    
-      if (state.url === '/auth/login') {
-        console.log('vao auth guard/auth/login');
-        localStorage.clear()
-        return true;
-      } 
-      this.router.navigate(['/auth']);
-      return false;
-    }
-    return true;
+    // if (this.router.url === '/') {    
+    //   if (state.url === '/auth/login') {
+    //     console.log('vao auth guard/auth/login');
+    //     localStorage.clear()
+    //     return true;
+    //   } 
+    //   this.router.navigate(['/auth']);
+    //   return false;
+    // }
     // return true;
+    return true;
   }
 }

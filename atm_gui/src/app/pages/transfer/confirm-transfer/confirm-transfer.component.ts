@@ -28,8 +28,10 @@ export class ConfirmTransferComponent implements OnInit {
 
   ngOnInit(): void {
     this.transferInfo = JSON.parse(localStorage.getItem('_transferInfoConfirm'))
+    this.transferInfo.fee = Math.min(50000, Math.max(3000, Number.parseFloat(this.transferInfo.transferAmount) / 1000)).toString()
     this.transferInfo.transferAmount = this.currencyPipe.transform(this.transferInfo.transferAmount, 'VND')
     this.transferInfo.remainingAmount = this.currencyPipe.transform(this.transferInfo.remainingAmount, 'VND')
+    this.transferInfo.fee = this.currencyPipe.transform(this.transferInfo.fee, 'VND')
     this.bearer = localStorage.getItem('httpHeaders')
   }
 

@@ -16,7 +16,8 @@ export class ConfirmTransactionComponent implements OnInit {
 
   amount = {
     withdrawAmount: this.currencyPipe.transform(1550000, 'VND'),
-    leftAmount: this.currencyPipe.transform(12450000, 'VND')
+    leftAmount: this.currencyPipe.transform(12450000, 'VND'),
+    fee: ''
   }
   replaceFail: boolean = false;
   replaceSuccess: boolean = false;
@@ -30,8 +31,10 @@ export class ConfirmTransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.amount = JSON.parse(localStorage.getItem('_withdrawInfoConfirm'))
+    this.amount.fee = Math.min(50000, Math.max(3000, Number.parseFloat(this.amount.withdrawAmount) / 1000)).toString()
     this.amount.withdrawAmount = this.currencyPipe.transform(this.amount.withdrawAmount, 'VND')
     this.amount.leftAmount = this.currencyPipe.transform(this.amount.leftAmount, 'VND')
+    this.amount.fee = this.currencyPipe.transform(this.amount.fee, 'VND')
     this.bearer = localStorage.getItem('httpHeaders')
   }
 
